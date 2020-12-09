@@ -25,6 +25,10 @@ export class GiangVienService {
     private urlGetGVByHoTenOrMaGV = SERVER_API_URL + "api/giangvienByHoTenOrMaGV";
     private urlGetPageGiangVienPhanCong = SERVER_API_URL + "api/giangvien-phanbo";
 
+    private urlNgoaiNgu = SERVER_API_URL + "api/ngoaingu";
+    private urlQTNN =SERVER_API_URL+"api/getQTNNByLatestDay";
+    private urlsaveQTNN=SERVER_API_URL+"api/quatrinhngoaingu";
+
 
     constructor(private http:HttpClient) {}
 
@@ -69,4 +73,17 @@ export class GiangVienService {
             params: param
         })
     }
+
+    getAllNgoaiNgu(): Observable<any> {
+        return this.http.get(this.urlNgoaiNgu, httpOptions);
+    }
+
+    getQTNN_NearestDayByGiangVienId(id: number): Observable<any> {
+        return this.http.get(`${this.urlQTNN}/${id}`, { headers: httpOptions.headers});
+    }
+
+    saveQuaTrinhNgoaiNgu(qtnn: Object): Observable<Object> {
+        return  this.http.post(this.urlsaveQTNN, qtnn, {headers: httpOptions.headers});
+    }
+
 }
