@@ -52,6 +52,9 @@ export const AppRoutes: Routes = [
           },{
               path: 'quanlygiangvien',
               loadChildren: './quanlygiangvien/giangvien.module#GiangVienModule'
+          },{
+              path: 'qlmonhocphancong',
+              loadChildren: './quanlymonhoc-phancong/monhocphancong.modul#MonhocphancongModul'
           }
   ]}, {
       path: '',

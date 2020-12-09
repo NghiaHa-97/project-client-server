@@ -190,7 +190,7 @@ export  class NguoiDungComponent implements OnInit{
                 this.toastr.success("Xóa thành công");
                 this.getPageUserDetails();
             },error =>{
-                this.toastr.success("Xóa thất bại");
+                this.toastr.error("Xóa thất bại");
             })
         }
         console.log("DELETE");
