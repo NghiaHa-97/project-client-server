@@ -49,6 +49,18 @@ export const ROUTES: RouteInfo[] = [
         ]
     },
     {
+        path: '/quanlygiangvien',
+        title: 'Quản Lý Giảng Viên',
+        type: 'sub',
+        icontype: 'dashboard',
+        collapse: 'quanlygiangvien',
+        children: [
+            {path: 'giangvien', title: 'giảng viên', ab:'GV'}
+            // {path: 'extended', title: 'Extended Tables', ab:'ET'},
+            // {path: 'datatables.net', title: 'Danh sách giảng viên', ab:'DT'}
+        ]
+    },
+    {
         path: '/components',
         title: 'Components',
         type: 'sub',

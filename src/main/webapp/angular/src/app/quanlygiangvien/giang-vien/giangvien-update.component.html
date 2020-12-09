@@ -1,0 +1,264 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <form [formGroup]="type" class="form-horizontal">
+                        <div class="card-header card-header-rose card-header-text">
+                            <div class="card-text">
+                                <h4 class="card-title">Thông tin giảng viên</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row">
+
+                                        <label class="col-sm-4 col-form-label">Mã giảng viên</label>
+
+                                        <div class="col-sm-7">
+                                            <mat-form-field class="example-full-width"
+                                                            [ngClass]="{'has-success':validTextType===true}">
+                                                <input
+                                                        type="text"
+                                                        matInput
+                                                        formControlName="maGV"
+                                                        (ngModelChange)="textValidationType($event)">
+                                                <app-field-error-display [displayError]="isFieldValid(type, 'maGV')" errorMsg="Bắt buộc nhập">
+                                                </app-field-error-display>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="col-sm-4 col-form-label">Học vị</label>
+
+                                        <div class="col-sm-7">
+                                            <mat-form-field class="example-full-width"
+                                                            [ngClass]="{'has-success':validTextType===true}">
+                                                <input
+                                                        type="text"
+                                                        matInput
+                                                        formControlName="hocVi"
+                                                        (ngModelChange)="textValidationType($event)">
+                                                <app-field-error-display [displayError]="isFieldValid(type, 'hocVi')" errorMsg="Bắt buộc nhập">
+                                                </app-field-error-display>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="col-sm-4 col-form-label">Chức vụ</label>
+
+                                        <div class="col-sm-7">
+                                            <mat-form-field class="example-full-width"
+                                                            [ngClass]="{'has-success':validTextType===true}">
+                                                <input
+                                                        type="text"
+                                                        matInput
+                                                        formControlName="chucVu"
+                                                        (ngModelChange)="textValidationType($event)">
+                                                <app-field-error-display [displayError]="isFieldValid(type, 'chucVu')" errorMsg="Bắt buộc nhập">
+                                                </app-field-error-display>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="col-sm-4 col-form-label">Dân tộc</label>
+
+                                        <div class="col-sm-7">
+                                            <mat-form-field class="example-full-width"
+                                                            [ngClass]="{'has-success':validTextType===true}">
+                                                <input
+                                                        type="text"
+                                                        matInput
+                                                        formControlName="danToc"
+                                                        (ngModelChange)="textValidationType($event)">
+                                                <app-field-error-display [displayError]="isFieldValid(type, 'danToc')" errorMsg="Bắt buộc nhập">
+                                                </app-field-error-display>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="col-sm-4 col-form-label">Điện thoại</label>
+
+                                        <div class="col-sm-7">
+                                            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'dienThoai')">
+                                                <input type="text"
+                                                       matInput
+                                                       (ngModelChange)="textValidationType($event)"
+                                                       formControlName="dienThoai">
+                                                <app-field-error-display [displayError]="isFieldValid(type, 'dienThoai')" errorMsg="Bắt buộc nhập">
+                                                </app-field-error-display>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="col-sm-4 col-form-label">Email</label>
+
+                                        <div class="col-sm-7">
+                                            <mat-form-field class="example-full-width" [ngClass]="{'has-success':validEmailType===true}">
+                                                <input
+                                                        type="email"
+                                                        matInput
+                                                        [errorStateMatcher]="matcher"
+                                                        (ngModelChange)="emailValidationType($event)"
+                                                        formControlName="email">
+<!--                                                <mat-error *ngIf=" !validEmailType && !emailFormControl.hasError('required')">-->
+<!--                                                    Vui lòng nhập một địa chỉ email hợp lệ-->
+<!--                                                </mat-error>-->
+                                                <mat-error *ngIf="emailFormControl.hasError('required')">
+                                                     <strong>Vui lòng nhập một địa chỉ email hợp lệ</strong>
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <label class="col-sm-2 col-form-label">Họ và tên</label>
+                                        <div class="col-sm-7">
+                                            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'hoTen')">
+                                                <input type="text"
+                                                       matInput
+                                                       id="hoTen"
+                                                       (ngModelChange)="textValidationType($event)"
+                                                       formControlName="hoTen">
+                                                <app-field-error-display [displayError]="isFieldValid(type, 'hoTen')" errorMsg="Bắt buộc nhập">
+                                                </app-field-error-display>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <label class="col-sm-2 col-form-label">Nơi Sinh</label>
+
+                                        <div class="col-sm-7">
+                                            <mat-form-field class="example-full-width" [ngClass]="{'has-success':validEmailType===true}">
+                                                <input
+                                                        type="text"
+                                                        matInput
+                                                        [errorStateMatcher]="matcher"
+                                                        (ngModelChange)="emailValidationType($event)"
+                                                        formControlName="noiSinh">
+                                                <app-field-error-display [displayError]="isFieldValid(type, 'queQuan')" errorMsg="Bắt buộc nhập">
+                                               </app-field-error-display>
+<!--                                                <mat-error *ngIf=" !validEmailType && !emailFormControl.hasError('required')">-->
+<!--                                                    Vui lòng nhập một địa chỉ email hợp lệ-->
+<!--                                                </mat-error>-->
+                                                <!-- <mat-error *ngIf="emailFormControl.hasError('required')">
+                                                     <strong>Vui lòng nhập một địa chỉ email hợp lệ</strong>
+                                                </mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="col-sm-2 col-form-label">Quê Quán</label>
+                                        <div class="col-sm-7">
+                                            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'chucVu')">
+                                                <input type="text"
+                                                       matInput
+                                                       (ngModelChange)="textValidationType($event)"
+                                                       formControlName="queQuan">
+                                                <app-field-error-display [displayError]="isFieldValid(type, 'queQuan')" errorMsg="Bắt buộc nhập">
+                                                </app-field-error-display>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <!-- gioi tinh -->
+                                    <div class="row">
+                                        <label class="col-sm-2 col-form-label">Giới tính</label>
+                                        <div class="col-sm-7">
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input formControlName="gioiTinh"
+                                                           class="form-check-input"
+                                                           type="radio"
+                                                           name="gioiTinh"
+                                                           value="true" checked> Nam
+                                                    <span class="circle">
+                                                    <span class="check"></span>
+                                                  </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input"
+                                                           type="radio"
+                                                           name="gioiTinh"
+                                                           value="false"
+                                                           formControlName="gioiTinh"> Nữ
+                                                    <span class="circle">
+                                                    <span class="check"></span>
+                                                  </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--  ngay sinh -->
+                                    <div class="row">
+                                        <label class="col-sm-2 col-form-label">Ngày sinh</label>
+                                        <div class="col-sm-7">
+                                            <mat-form-field >
+                                                <input formControlName="ngaySinhDate"
+                                                       matInput [matDatepicker]="picker"
+                                                       placeholder="Chọn 1 ngày" (click)="picker.open()">
+                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="col-sm-2 col-form-label">Địa chỉ</label>
+                                        <div class="col-sm-7">
+                                            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'diaChi')">
+                                                <input type="text"
+                                                       matInput
+                                                       (ngModelChange)="textValidationType($event)"
+                                                       formControlName="diaChi">
+                                                <app-field-error-display [displayError]="isFieldValid(type, 'diaChi')" errorMsg="Bắt buộc nhập">
+                                                </app-field-error-display>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="col-sm-2 col-form-label">Đơn vị công tác</label>
+                                        <div class="col-sm-7">
+                                            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'donViCongTac')">
+                                                <input type="text"
+                                                       matInput
+                                                       (ngModelChange)="textValidationType($event)"
+                                                       formControlName="donViCongTac">
+                                                <app-field-error-display [displayError]="isFieldValid(type, 'donViCongTac')" errorMsg="Bắt buộc nhập">
+                                                </app-field-error-display>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card-footer">
+                                <button mat-raised-button class="btn btn-rose btn-fill" (click)="back()">Quay Lại</button>
+                            </div>
+                            <div class="card-footer text-right col-md-3 ml-auto">
+                                <button mat-raised-button type="submit" class="btn btn-rose btn-fill" (click)="onType()">Lưu</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface SanPhamService {
 
-    Page<SanPhamDTO> getPageSanPham(Pageable pageable, String search);
-    public List<SanPhamDTO> getListSanPhamByListId(List<Integer> ids);
+//    Page<SanPhamDTO> getPageSanPham(Pageable pageable, String search);
+//    public List<SanPhamDTO> getListSanPhamByListId(List<Integer> ids);
 }

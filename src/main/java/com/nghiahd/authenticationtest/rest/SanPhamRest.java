@@ -36,40 +36,40 @@ public class SanPhamRest {
     @Autowired
     FileService fileService;
 
-    @GetMapping(value = "/sanpham/get-page-san-pham")
-    public ResponseEntity<List<SanPhamDTO>> getAllUserDetails(Pageable pageable, @RequestParam(required = false) String search){
-
-
-//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
-//                .getPrincipal();
-//        String username = userDetails.getUsername();
+//    @GetMapping(value = "/sanpham/get-page-san-pham")
+//    public ResponseEntity<List<SanPhamDTO>> getAllUserDetails(Pageable pageable, @RequestParam(required = false) String search){
 //
-//        System.out.println("username:"+username);
-
-        Page<SanPhamDTO> page=sanPhamService.getPageSanPham(pageable,search);
-        HttpHeaders headers = new HttpHeaders();
-
-        Common.setHeaders(headers,page);
-
-        return new ResponseEntity<>(page.getContent(),headers, HttpStatus.OK);
-    }
-
-
-    @PostMapping(value = "/sanpham/get-data-gio-hang")
-    public ResponseEntity<List<SanPhamDTO>> getListSanPhamByListId( @RequestBody List<ShoppingCartDTO> shoppingCartDTO){
-
-
-//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
-//                .getPrincipal();
-//        String username = userDetails.getUsername();
 //
-//        System.out.println("username:"+username);
-        List<Integer> ids=shoppingCartDTO.stream().map(x->x.getIdSp()).collect(Collectors.toList());
-        List<SanPhamDTO> list=sanPhamService.getListSanPhamByListId(ids);
-
-
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
+////        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+////                .getPrincipal();
+////        String username = userDetails.getUsername();
+////
+////        System.out.println("username:"+username);
+//
+//        Page<SanPhamDTO> page=sanPhamService.getPageSanPham(pageable,search);
+//        HttpHeaders headers = new HttpHeaders();
+//
+//        Common.setHeaders(headers,page);
+//
+//        return new ResponseEntity<>(page.getContent(),headers, HttpStatus.OK);
+//    }
+//
+//
+//    @PostMapping(value = "/sanpham/get-data-gio-hang")
+//    public ResponseEntity<List<SanPhamDTO>> getListSanPhamByListId( @RequestBody List<ShoppingCartDTO> shoppingCartDTO){
+//
+//
+////        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+////                .getPrincipal();
+////        String username = userDetails.getUsername();
+////
+////        System.out.println("username:"+username);
+//        List<Integer> ids=shoppingCartDTO.stream().map(x->x.getIdSp()).collect(Collectors.toList());
+//        List<SanPhamDTO> list=sanPhamService.getListSanPhamByListId(ids);
+//
+//
+//        return new ResponseEntity<>(list, HttpStatus.OK);
+//    }
 
 
     //tett file

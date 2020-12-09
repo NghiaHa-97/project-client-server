@@ -49,6 +49,9 @@ export const AppRoutes: Routes = [
         },{
               path: 'quanlynguoidung',
               loadChildren: './quanlynguoidung/quan-ly-nguoi-dung.module#QuanLyNguoiDungModule'
+          },{
+              path: 'quanlygiangvien',
+              loadChildren: './quanlygiangvien/giangvien.module#GiangVienModule'
           }
   ]}, {
       path: '',
