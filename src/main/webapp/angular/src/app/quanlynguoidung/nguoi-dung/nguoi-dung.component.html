@@ -1,0 +1,252 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- alert delete  -->
+            <app-alert
+                    [message]="message"
+                    *ngIf="showAlert"
+                    (close)="onCloseAlert()"
+                    (ok)="onDelete()"
+            ></app-alert>
+            <div class="col-md-12" >
+                <div class="card height-card">
+                    <div class="card-header card-header-primary card-header-icon height-card-header">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Người dùng</h4>
+
+                            <div class="input-group no-border col-md-4 ml-auto">
+
+                                <input [(ngModel)]="searchText"
+                                       type="text"
+                                       name="search"
+                                       class="form-control"
+                                       placeholder="Tìm kiếm..."
+                                (keydown.enter)="search()" >
+                                <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon" (click)="search()">
+                                    <i class="material-icons">search</i>
+                                    <div class="ripple-container"></div>
+                                </button>
+                                |
+                                <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon" title="Thêm mới" (click)="new()">
+                                    <i class="material-icons">add_circle_outline</i>
+                                    <div class="ripple-container"></div>
+                                </button>
+                            </div>
+
+                    </div>
+                    <div class="card-body height-card-body" style="margin-top: 5px">
+                        <div class="material-datatables " style="height: 550px !important;">
+                            <table id="datatables"
+                                   class="table  table-hover cell-border table-bordered"
+                                   cellspacing="0" width="100%" style="width:100%" >
+                                <thead>
+                                <tr>
+                                    <th  class="text-center">{{ headerRow[10]}}</th>
+                                    <th  class="text-center">{{ headerRow[0]}}</th>
+                                    <th class="text-left"  >{{ headerRow[1] }}</th>
+                                    <th class="text-center">{{ headerRow[2] }}</th>
+                                    <th class="text-center" >{{ headerRow[3] }}</th>
+                                    <th class="text-center">{{ headerRow[4] }}</th>
+                                    <th class="text-center">{{ headerRow[5] }}</th>
+                                    <th class="text-center">{{ headerRow[6] }}</th>
+                                    <th class="text-center">{{ headerRow[7] }}</th>
+                                    <th class="text-center">{{ headerRow[8] }}</th>
+                                    <th class="text-center">{{ headerRow[9] }}</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr *ngFor="let item of nguoiDungCts ; let i=index" (click)="getRoleByUserId(item.userId,item.userName)">
+                                        <td class="text-center">
+                                            {{(page-1)*itemsPerPage + i+1}}</td>
+                                        <td style= "white-space: normal ;">
+                                            {{item.userName!==null?item.userName.trim():''}}</td>
+                                        <td  class="text-left">
+
+                                            <div class="form-check text-center" disabled="true" >
+                                                <label class="form-check-label text-center">
+                                                    <input class="form-check-input text-center" type="checkbox" [checked]="item.admin">
+                                                    <span class="form-check-sign text-center">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+
+<!--                                            <label class="form-check-label " disabled="true">-->
+<!--                                            <input class="form-check-input" type="checkbox" value=""  [checked]="item.admin">-->
+<!--                                            </label>-->
+                                        </td>
+                                        <td style=" white-space: normal ;">{{item.hoTen!==null?item.hoTen.trim():''}}</td>
+                                        <td class="text-center" >{{item.gioiTinh?'Nam':'Nữ'}}</td>
+                                        <td class="text-center">{{item.ngaySinh!==null?item.nngaySinhFormat:''}}</td>
+                                        <td>{{item.diaChi}}</td>
+                                        <td class="text-right">{{item.taiKhoan!==null?item.taiKhoan:'0'}}</td>
+                                        <td>{{item.sdt!==null?item.sdt.trim():''}}</td>
+                                        <td>{{item.email!==null?item.email.trim():''}}</td>
+
+
+                                        <td class="text-center">
+                                            <a  class="btn btn-link btn-info btn-just-icon " title="Thêm vai trò"  (click)="editRole(item.userId,item.userName)" ><i class="material-icons md-10">add_box</i></a>
+                                            <a class="btn btn-link btn-warning btn-just-icon "
+                                               title="Sửa"
+                                               *ngIf="item.userId"
+                                               (click)="viewDetail(item.userId)" ><i class="material-icons">visibility</i></a>
+                                            <a  class="btn btn-link btn-danger btn-just-icon remove" title="Xóa" (click)="deleteUser(item.userId,item.userDetailId)"><i class="material-icons">close</i></a>
+                                        </td>
+                                    </tr>
+
+                                    <tr *ngFor="let item of newArr(itemsPerPage-nguoiDungCts?.length)">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><a  class="btn btn-link  btn-just-icon " ></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                        <div class="row justify-content-end" style="height: 50px !important; margin-top: 0px">
+                            <div class="col-md-3 ml-auto">
+                                <div class="form-group row">
+                                    <label class="col-sm-7 col-form-label pt-1 pr-0 text-right" for="itemsPerPage" >Tổng số</label>
+                                    <label class="col-sm-1 col-form-label total pt-1 pl-1 pr-0">{{totalItems}}</label>
+                                    <div class="col-sm-4 pd-l-0">
+                                        <select class="form-control form-control-sm pt-1 pb-1" name="itemsPerPage"
+                                                id="itemsPerPage"
+                                                [(ngModel)]="itemsPerPage"
+                                                (ngModelChange)="selectedItemPerPage()">
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="justify-content-end" style="padding-top: 8px; padding-right: 5px">
+                                <ngb-pagination [size]="'sm'" [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage"
+                                                [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                                                (pageChange)="loadPage(page)"></ngb-pagination>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- end content-->
+                </div>
+                <!--  end card  -->
+                <div class="card height-card-role">
+                    <div class="card-header card-header-primary card-header-icon height-card-header-role">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Chức vụ - Vai trò {{userName}}</h4>
+                    </div>
+                    <div class="card-body height-card-body-role" style="margin-top: 5px">
+                        <div class="material-datatables " >
+                            <table id="datatablesRole"
+                                   class="table  table-hover cell-border table-bordered"
+                                   cellspacing="0" width="100%" style="width:100%" >
+                                <thead>
+                                <tr>
+                                    <th  class="text-center">STT</th>
+                                    <th  class="text-center">Tên chưc vụ - vai trò</th>
+
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr *ngFor="let item of rolesById ; let i=index">
+                                    <td class="text-center">
+                                        {{ i+1}}</td>
+                                    <td class="text-center" style= "white-space: normal ;">
+                                        {{item.roleName?item.roleName.trim():''}}</td>
+
+                                </tr>
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+
+                    </div>
+                    <!-- end content-->
+                </div>
+                <!--  end card  -->
+            </div>
+            <!-- end col-md-12 -->
+        </div>
+        <!-- end row -->
+    </div>
+</div>
+
+<ng-template #test>
+<!--    <div class="row">-->
+<!--        <div class="col-md-12" >-->
+    <div class="card height-card-popup">
+                <div class="card-header card-header-primary card-header-icon height-card-header-popup">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h4 class="card-title">Thêm Chức vụ - Vai trò {{userName}}</h4>
+                </div>
+                <div class="card-body height-card-body-popup" style="margin-top: 5px">
+                    <div class="material-datatables height-card-body-popup" >
+                        <table id="datatablesAddRole"
+                               class="table  table-hover cell-border table-bordered "
+                               cellspacing="0" style="width: 758px" >
+                            <thead>
+                            <tr>
+                                <th  class="text-center" style="width: 252px">STT</th>
+                                <th  class="text-left" style="width: 252px">STT</th>
+                                <th  class="text-center" style="width: 252px">Tên chưc vụ</th>
+
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr *ngFor="let item of rolesTemp ; let i=index">
+                                <td class="text-center">
+                                    {{ i+1}}</td>
+                                <td class="text-center">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox"
+                                                   [checked]="item.check"
+                                                    (click)="changeRole(item)">
+                                            <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                  </span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="text-center" style= "white-space: normal ;">
+                                    {{item.roleName?item.roleName.trim():''}}</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- end content-->
+            </div>
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+    <div class="input-group no-border col-md-3 ml-auto">
+        <button class="btn btn-success" (click)="saveRole()"> Lưu </button>
+        <button class="btn btn-success" (click)="closePopup()">Đóng</button>
+    </div>
+<!--    </div>-->
+
+</ng-template>

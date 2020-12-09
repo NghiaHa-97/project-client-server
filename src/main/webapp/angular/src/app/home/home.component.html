@@ -1,0 +1,415 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <legend>Chọn chủ đề</legend>
+        <div class="col-md-6">
+
+            <div class="row">
+                <div class="col-lg-5 col-md-8 col-sm-4">
+                    <mat-form-field>
+                        <mat-select multiple placeholder="Chủ đề" [(ngModel)]="currentCity" name="Paris" ariaLabel="cities[0]">
+                            <mat-option *ngFor="let city of cities" [value]="city.value">
+                                {{ city.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+
+        <h3>Sản phẩm</h3>
+
+        <div class="row">
+            <div class="col-lg-5 col-md-8 col-sm-4">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label pt-1 pr-0 text-left" for="itemsPerPage" >Tổng số {{totalItems}}</label>
+                    <div class="col-sm-4 pd-l-0">
+                        <select class="form-control form-control-sm pt-1 pb-1" name="itemsPerPage"
+                                id="itemsPerPage"
+                                [(ngModel)]="itemsPerPage"
+                                (ngModelChange)="selectedItemPerPage()">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5 pd-l-0">
+                        <ngb-pagination [size]="'sm'" [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage"
+                                        [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                                        (pageChange)="loadPage(page)"></ngb-pagination>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-3" *ngFor="let item of sanPhamDTOs">
+                <div class="card card-product">
+                    <div class="card-header card-header-image" data-header-animation="true">
+                        <a >
+                            <img class="img" src="./assets/img/card-2.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions text-center">
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
+<!--                                <i class="material-icons">build</i> Fix Header!-->
+<!--                            </button>-->
+                            <button mat-raised-button type="button"
+                                    class="btn btn-default btn-link"
+                                    matTooltip="Xem chi tiết" [matTooltipPosition]="'below'">
+                                <i class="material-icons">art_track</i>
+                            </button>
+<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">edit</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">close</i>-->
+<!--                            </button>-->
+                            <button mat-raised-button type="button"
+                                    class="btn btn-danger btn-link"
+                                    matTooltip="Thêm vào giỏ hàng"
+                                    [matTooltipPosition]="'below'"
+                                    (click)="addShoppingCart(item.idSp)">
+                                <i class="material-icons">local_grocery_store</i>
+                            </button>
+                        </div>
+                        <h4 class="card-title">
+                            <a >{{item.tenSanPham}}</a>
+                        </h4>
+                        <div class="card-description">
+                            {{item.mota}}
+                            <br>
+                            {{item.ngaySxFormat? 'Ngày sx: ' +item.ngaySxFormat: ''}}
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="price">
+                            <h4>{{item.gia}}.đ</h4>
+                        </div>
+                        <div class="stats">
+                            <p class="card-category"><i class="material-icons">place</i> {{item.username}} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+<!--            <div class="col-md-3">-->
+<!--                <div class="card card-product">-->
+<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
+<!--                        <a href="#pablo">-->
+<!--                            <img class="img" src="./assets/img/card-3.jpg">-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="card-actions text-center">-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
+<!--                                <i class="material-icons">build</i> Fix Header!-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">art_track</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">edit</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">close</i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <h4 class="card-title">-->
+<!--                            <a href="#pablo">Office Studio</a>-->
+<!--                        </h4>-->
+<!--                        <div class="card-description">-->
+<!--                            The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the night life in London, UK.-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="card-footer">-->
+<!--                        <div class="price">-->
+<!--                            <h4>$1.119/night</h4>-->
+<!--                        </div>-->
+<!--                        <div class="stats">-->
+<!--                            <p class="card-category"><i class="material-icons">place</i> London, UK</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-3">-->
+<!--                <div class="card card-product">-->
+<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
+<!--                        <a href="#pablo">-->
+<!--                            <img class="img" src="./assets/img/card-1.jpg">-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="card-actions text-center">-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
+<!--                                <i class="material-icons">build</i> Fix Header!-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">art_track</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">edit</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">close</i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <h4 class="card-title">-->
+<!--                            <a href="#pablo">Beautiful Castle</a>-->
+<!--                        </h4>-->
+<!--                        <div class="card-description">-->
+<!--                            The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="card-footer">-->
+<!--                        <div class="price">-->
+<!--                            <h4>$459/night</h4>-->
+<!--                        </div>-->
+<!--                        <div class="stats">-->
+<!--                            <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-3">-->
+<!--                <div class="card card-product">-->
+<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
+<!--                        <a href="#pablo">-->
+<!--                            <img class="img" src="./assets/img/card-1.jpg">-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="card-actions text-center">-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
+<!--                                <i class="material-icons">build</i> Fix Header!-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">art_track</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">edit</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">close</i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <h4 class="card-title">-->
+<!--                            <a href="#pablo">Beautiful Castle</a>-->
+<!--                        </h4>-->
+<!--                        <div class="card-description">-->
+<!--                            n night life in Milan.-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="card-footer">-->
+<!--                        <div class="price">-->
+<!--                            <h4>$459/night</h4>-->
+<!--                        </div>-->
+<!--                        <div class="stats">-->
+<!--                            <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-3">-->
+<!--                <div class="card card-product">-->
+<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
+<!--                        <a href="#pablo">-->
+<!--                            <img class="img" src="./assets/img/card-1.jpg">-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="card-actions text-center">-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
+<!--                                <i class="material-icons">build</i> Fix Header!-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">art_track</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">edit</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">close</i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <h4 class="card-title">-->
+<!--                            <a href="#pablo">Beautiful Castle</a>-->
+<!--                        </h4>-->
+<!--                        <div class="card-description">-->
+<!--                            The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="card-footer">-->
+<!--                        <div class="price">-->
+<!--                            <h4>$459/night</h4>-->
+<!--                        </div>-->
+<!--                        <div class="stats">-->
+<!--                            <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-3">-->
+<!--                <div class="card card-product">-->
+<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
+<!--                        <a href="#pablo">-->
+<!--                            <img class="img" src="./assets/img/card-1.jpg">-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="card-actions text-center">-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
+<!--                                <i class="material-icons">build</i> Fix Header!-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">art_track</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">edit</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">close</i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <h4 class="card-title">-->
+<!--                            <a href="#pablo">Beautiful Castle</a>-->
+<!--                        </h4>-->
+<!--                        <div class="card-description">-->
+<!--                            The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="card-footer">-->
+<!--                        <div class="price">-->
+<!--                            <h4>$459/night</h4>-->
+<!--                        </div>-->
+<!--                        <div class="stats">-->
+<!--                            <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-3">-->
+<!--                <div class="card card-product">-->
+<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
+<!--                        <a href="#pablo">-->
+<!--                            <img class="img" src="./assets/img/card-1.jpg">-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="card-actions text-center">-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
+<!--                                <i class="material-icons">build</i> Fix Header!-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">art_track</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">edit</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">close</i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <h4 class="card-title">-->
+<!--                            <a href="#pablo">Beautiful Castle</a>-->
+<!--                        </h4>-->
+<!--                        <div class="card-description">-->
+<!--                            The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="card-footer">-->
+<!--                        <div class="price">-->
+<!--                            <h4>$459/night</h4>-->
+<!--                        </div>-->
+<!--                        <div class="stats">-->
+<!--                            <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-3">-->
+<!--                <div class="card card-product">-->
+<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
+<!--                        <a href="#pablo">-->
+<!--                            <img class="img" src="./assets/img/card-1.jpg">-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="card-actions text-center">-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
+<!--                                <i class="material-icons">build</i> Fix Header!-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">art_track</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">edit</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">close</i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <h4 class="card-title">-->
+<!--                            <a href="#pablo">Beautiful Castle</a>-->
+<!--                        </h4>-->
+<!--                        <div class="card-description">-->
+<!--                            u can enjoy the main night life in Milan.-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="card-footer">-->
+<!--                        <div class="price">-->
+<!--                            <h4>$459/night</h4>-->
+<!--                        </div>-->
+<!--                        <div class="stats">-->
+<!--                            <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-3">-->
+<!--                <div class="card card-product">-->
+<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
+<!--                        <a href="#pablo">-->
+<!--                            <img class="img" src="./assets/img/card-1.jpg">-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="card-actions text-center">-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
+<!--                                <i class="material-icons">build</i> Fix Header!-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">art_track</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">edit</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">close</i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <h4 class="card-title">-->
+<!--                            <a href="#pablo">Beautiful Castle</a>-->
+<!--                        </h4>-->
+<!--                        <div class="card-description">-->
+<!--                            The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="card-footer">-->
+<!--                        <div class="price">-->
+<!--                            <h4>$459/night</h4>-->
+<!--                        </div>-->
+<!--                        <div class="stats">-->
+<!--                            <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+
+    </div>
+</div>

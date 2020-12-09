@@ -1,0 +1,94 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <app-alert
+                    [message]="message"
+                    *ngIf="showAlert"
+                    (close)="onCloseAlert()"
+                    (ok)="onAccept()"
+            ></app-alert>
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Danh sách trong giỏ hàng</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-shopping">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">{{ tableData3.headerRow[0] }}</th>
+                                    <th>{{ tableData3.headerRow[1] }}</th>
+                                    <th class="th-description">{{ tableData3.headerRow[2] }}</th>
+                                    <th class="th-description">{{ tableData3.headerRow[3] }}</th>
+                                    <th class="text-right">{{ tableData3.headerRow[4] }}</th>
+                                    <th class="text-right">{{ tableData3.headerRow[5] }}</th>
+                                    <th class="text-right">{{ tableData3.headerRow[6] }}</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let item of sanPhamDTO">
+                                    <td>
+                                        <div class="img-container">
+                                            <img src="./assets/img/product3.jpg" alt="...">
+                                        </div>
+                                    </td>
+                                    <td class="td-name">
+                                        <a >{{item.tenSanPham}}</a>
+                                        <br />
+                                        <small>{{item.tenLoai}}</small>
+                                    </td>
+                                    <td>{{item.tenNsx}}</td>
+                                    <td>
+                                        {{item.ngaySxFormat}}
+                                    </td>
+                                    <td class="td-number text-right"><small>&euro;</small> {{item.gia}}</td>
+                                    <td class="td-number">
+                                        {{item.soLuong}}
+                                        <div class="btn-group btn-group-sm">
+                                            <button mat-raised-button class="btn btn-round btn-info btn-xs" (click)="giamSoLuong(item.idSp)"> <i class="material-icons">remove</i> </button>
+                                            <button mat-raised-button class="btn btn-round btn-info btn-xs" (click)="tangSoLuong(item.idSp)"> <i class="material-icons">add</i> </button>
+                                        </div>
+                                    </td>
+                                    <td class="td-number">
+                                        <small>&euro;</small>{{item.tongTien}}
+                                    </td>
+                                    <td class="td-actions">
+                                        <button mat-button type="button"
+                                                matTooltip="Xóa" [matTooltipPosition]="'left'"
+                                                class="btn btn-link"
+                                        (click)="removeItem(item.idSp)">
+                                            <i class="material-icons">close</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5"></td>
+                                    <td class="td-total">
+                                        Total
+                                    </td>
+                                    <td colspan="1" class="td-price">
+                                        <small>&euro;</small>{{getTotal()}}
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6"></td>
+                                    <td colspan="2" class="text-right">
+                                        <button mat-raised-button type="button" class="btn btn-info btn-round" (click)="pay()">Thanh toán <i class="material-icons">keyboard_arrow_right</i></button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

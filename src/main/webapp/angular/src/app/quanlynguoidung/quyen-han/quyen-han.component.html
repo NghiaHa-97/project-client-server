@@ -1,0 +1,230 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- alert delete  -->
+            <app-alert
+                    [message]="message"
+                    *ngIf="showAlert"
+                    (close)="onCloseAlert()"
+                    (ok)="onDelete()"
+            ></app-alert>
+            <div class="col-md-12">
+                <div class="card height-card">
+                    <div class="card-header card-header-primary card-header-icon height-card-header">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Chưc vụ vai trò</h4>
+
+                        <div class="input-group no-border col-md-4 ml-auto">
+
+                            <input [(ngModel)]="searchText"
+                                   type="text"
+                                   name="search"
+                                   class="form-control"
+                                   placeholder="Tìm kiếm..."
+                                   (keydown.enter)="search()">
+                            <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon"
+                                    (click)="search()">
+                                <i class="material-icons">search</i>
+                                <div class="ripple-container"></div>
+                            </button>
+                            |
+                            <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon"
+                                    title="Thêm mới" (click)="new()">
+                                <i class="material-icons">add_circle_outline</i>
+                                <div class="ripple-container"></div>
+                            </button>
+                        </div>
+
+                    </div>
+                    <div class="card-body height-card-body" style="margin-top: 5px">
+                        <div class="material-datatables " style="height: 550px !important;">
+                            <table id="datatables"
+                                   class="table  table-hover cell-border table-bordered"
+                                   cellspacing="0" width="100%" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">{{ headerRow[10]}}</th>
+                                    <th class="text-center">{{ headerRow[0]}}</th>
+                                    <th class="text-center">{{ headerRow[9] }}</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+
+                                <tr *ngFor="let item of rolesTemp ; let i=index"
+                                    (click)="editPermission(item)">
+                                    <td class="text-center">
+                                        {{ i + 1}}</td>
+                                    <td class="text-center" style="white-space: normal ;">
+                                        {{item.roleName !== null ? item.roleName.trim() : ''}}</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-link btn-warning btn-just-icon "
+                                           title="Sửa"
+                                           (click)="editRole(item)"><i
+                                                class="material-icons">visibility</i></a>
+                                        <a class="btn btn-link btn-danger btn-just-icon remove" title="Xóa"
+                                           (click)="deleteRole(item.id)"><i
+                                                class="material-icons">close</i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                    <!-- end content-->
+                </div>
+                <!--  end card  -->
+                <div class="card height-card-role" >
+                    <div class="card-header card-header-primary card-header-icon height-card-header-role">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Chức năng {{" được phép của vai trò " +roleName}}</h4>
+                    </div>
+                    <div class="card-body height-card-body-role"
+                         style="margin-top: 5px">
+                        <div class="material-datatables ">
+                            <table id="datatablesRole"
+                                   class="table  table-hover cell-border table-bordered"
+                                   cellspacing="0" width="100%" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">STT</th>
+                                    <th class="text-center">Tên chức năng</th>
+                                    <th class="text-left">Xem</th>
+                                    <th class="text-left">Sửa</th>
+                                    <th class="text-left">Thêm</th>
+                                    <th class="text-left">Xóa</th>
+                                    <th class="text-left">In</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr *ngFor="let item of rolePermissionDetaiList ; let i=index">
+                                    <td class="text-center">
+                                        {{ i + 1}}</td>
+                                    <td class="text-center" style="white-space: normal ;" >
+                                        {{item.premissionName}}</td>
+                                    <td  class="text-left">
+                                        <div class="form-check text-center "
+                                             *ngIf="!item.permissionXem.isHide" >
+                                            <label class="form-check-label text-center">
+                                                <input class="form-check-input text-center" type="checkbox"
+                                                       [(ngModel)]="item.permissionXem.isCheck"
+                                                       (click)="checkItem(item.permissionXem)"
+                                                        [disabled]="isAdmin" >
+                                                <span class="form-check-sign text-center">
+                                                        <span class="check"></span>
+                                                    </span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td  class="text-left">
+                                        <div class="form-check text-center" *ngIf="!item.permissionSua.isHide">
+                                            <label class="form-check-label text-center">
+                                                <input class="form-check-input text-center" type="checkbox"
+                                                       [(ngModel)]="item.permissionSua.isCheck"
+                                                       (click)="checkItem(item.permissionSua)"
+                                                       [disabled]="isAdmin" >
+                                                <span class="form-check-sign text-center">
+                                                        <span class="check"></span>
+                                                    </span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td  class="text-left">
+                                        <div class="form-check text-center"  *ngIf="!item.permissionThem.isHide">
+                                            <label class="form-check-label text-center">
+                                                <input class="form-check-input text-center" type="checkbox"
+                                                       [(ngModel)]="item.permissionThem.isCheck"
+                                                       (click)="checkItem(item.permissionThem)"
+                                                       [disabled]="isAdmin" >
+                                                <span class="form-check-sign text-center">
+                                                        <span class="check"></span>
+                                                    </span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td  class="text-left">
+                                        <div class="form-check text-center"  *ngIf="!item.permissionXoa.isHide">
+                                            <label class="form-check-label text-center">
+                                                <input class="form-check-input text-center" type="checkbox"
+                                                       [(ngModel)]="item.permissionXoa.isCheck"
+                                                       (click)="checkItem(item.permissionXoa)"
+                                                       [disabled]="isAdmin" >
+                                                <span class="form-check-sign text-center">
+                                                        <span class="check"></span>
+                                                    </span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td  class="text-left">
+                                        <div class="form-check text-center"  *ngIf="!item.permissionIn.isHide">
+                                            <label class="form-check-label text-center">
+                                                <input class="form-check-input text-center" type="checkbox"
+                                                       [(ngModel)]="item.permissionIn.isCheck"
+                                                       (click)="checkItem(item.permissionIn)"
+                                                       [disabled]="isAdmin" >
+                                                <span class="form-check-sign text-center">
+                                                        <span class="check"></span>
+                                                    </span>
+                                            </label>
+                                        </div>
+                                    </td>
+
+                                </tr>
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="card-footer text-right col-md-1 ml-auto">
+                            <button mat-raised-button type="submit" class="btn btn-rose btn-fill" (click)="savePermission()">Lưu</button>
+                        </div>
+                    </div>
+
+                    <!-- end content-->
+                </div>
+                <!--  end card  -->
+            </div>
+            <!-- end col-md-12 -->
+        </div>
+        <!-- end row -->
+    </div>
+</div>
+
+<ng-template #test>
+
+    <div class="card ">
+        <div class="card-header card-header-primary card-header-icon ">
+            <div class="card-icon">
+                <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">Thêm mới Chức vụ - Vai trò</h4>
+        </div>
+        <div class="card-body " style="margin-top: 5px">
+            <input [(ngModel)]="rolePopup.roleName"
+                   type="text"
+                   name="search"
+                   class="form-control"
+                   placeholder="Nhập tên vai trò..."
+                   (keydown.enter)="saveRole()">
+        </div>
+        <!-- end content-->
+    </div>
+    <div class="input-group no-border col-md-3 ml-auto">
+        <button class="btn btn-success" (click)="saveRole()"> Lưu</button>
+        <button class="btn btn-success" (click)="closePopup()">Đóng</button>
+    </div>
+
+
+</ng-template>
