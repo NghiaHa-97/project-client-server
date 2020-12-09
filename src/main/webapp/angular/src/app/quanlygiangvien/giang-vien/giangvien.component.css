@@ -72,3 +72,9 @@ table.dataTable thead .sorting_desc_disabled:before {
 td {
     white-space: normal;
 }
+
+.height-card-popup {
+    max-height: 400px !important;
+    height: 400px;
+    /*height: 1000px !important;*/
+}

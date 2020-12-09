@@ -72,7 +72,7 @@
                                     <td>{{row.chucVu}}</td>
                                     <td>{{row.dienThoai}}</td>
                                     <td class="text-center" style="width: 100px;min-width: 80px;">
-                                        <a class="btn btn-link btn-info btn-just-icon " title="Thêm ngoại ngữ" ><i class="material-icons md-10" (click)="addNgoaingu()">add_box</i></a>
+                                        <a class="btn btn-link btn-info btn-just-icon " title="Thêm ngoại ngữ" ><i class="material-icons md-10" (click)="addNgoaingu(row.id, row.hoTen)">add_box</i></a>
                                         <a title="Sửa" (click)="editgiangvien(row.id)"  class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">dvr</i></a>
                                         <a title="xóa" (click)="deletegiangvien(row.id)" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a>
                                     </td>
@@ -146,40 +146,43 @@
                         <div class="card-icon">
                             <i class="material-icons">assignment</i>
                         </div>
-                        <h4 class="card-title">Thêm Chức vụ - Vai trò {{userName}}</h4>
+                        <h4 class="card-title">Thêm Ngoại ngữ  --  Giảng Viên: {{namegiangvien}}</h4>
                     </div>
                     <div class="card-body height-card-body-popup" style="margin-top: 5px">
                         <div class="material-datatables height-card-body-popup" >
-                            <table id="datatablesAddRole"
+                            <table id="datatablesAddNgoaiNgu"
                                    class="table  table-hover cell-border table-bordered "
                                    cellspacing="0" style="width: 758px" >
                                 <thead>
                                 <tr>
                                     <th  class="text-center" style="width: 252px">STT</th>
                                     <th  class="text-left" style="width: 252px">STT</th>
-                                    <th  class="text-center" style="width: 252px">Tên chưc vụ</th>
+                                    <th  class="text-center" style="width: 252px">Tên ngoại ngữ</th>
+                                    <th  class="text-center" style="width: 252px">Trinh độ</th>
     
                                 </tr>
                                 </thead>
     
                                 <tbody>
-                                <tr *ngFor="let item of rolesTemp ; let i=index">
+                                <tr *ngFor="let item of ngoainguList; let i=index">
                                     <td class="text-center">
                                         {{ i+1}}</td>
                                     <td class="text-center">
                                         <div class="form-check">
                                             <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox"
-                                                       [checked]="item.check"
-                                                        (click)="changeRole(item)">
-                                                <span class="form-check-sign">
-                                                        <span class="check"></span>
-                                                      </span>
+                                                <input class="form-check-input"
+                                                       type="radio"
+                                                       name="test"
+                                                       (click)="changeNgoaiNgu(item)"
+                                                       [checked]="item.check"> 
+                                                <span class="circle">
+                                                <span class="check"></span>
+                                              </span>
                                             </label>
                                         </div>
                                     </td>
-                                    <td class="text-center" style= "white-space: normal ;">
-                                        {{item.roleName?item.roleName.trim():''}}</td>
+                                    <td class="text-center" style= "white-space: normal ;">{{item.tenNgoaiNgu}}</td>
+                                    <td class="text-center" style= "white-space: normal ;">{{item.trinhDo}}</td>
     
                                 </tr>
                                 </tbody>
@@ -192,7 +195,7 @@
     <!--    </div>-->
     <!--    <div class="row">-->
         <div class="input-group no-border col-md-3 ml-auto">
-            <button class="btn btn-success" (click)="saveRole()"> Lưu </button>
+            <button class="btn btn-success" (click)="saveNgoaiNgu()"> Lưu </button>
             <button class="btn btn-success" (click)="closePopup()">Đóng</button>
         </div>
     <!--    </div>-->
