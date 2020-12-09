@@ -55,6 +55,9 @@ export const AppRoutes: Routes = [
           },{
               path: 'qlmonhocphancong',
               loadChildren: './quanlymonhoc-phancong/monhocphancong.modul#MonhocphancongModul'
+          },{
+              path: 'thongke',
+              loadChildren: './Thong-Ke/thong-ke.modul#ThongKeModul'
           }
   ]}, {
       path: '',

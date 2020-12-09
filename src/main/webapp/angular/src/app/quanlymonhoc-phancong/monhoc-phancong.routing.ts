@@ -15,10 +15,10 @@ export const monHocPhanCongRuotes:Routes=[
             {
                 path:'monhocphancong/monhoc/update/:monhocid',
                 component:MonHocUpdateComponent,
-                resolve:{nguoiDungDTO:MonHocResolve}
+                resolve:{MonHoc:MonHocResolve}
             },
             {
-                path:'monhoc/new',
+                path:'monhocphancong/monhoc/new',
                 component:MonHocUpdateComponent
             }
 

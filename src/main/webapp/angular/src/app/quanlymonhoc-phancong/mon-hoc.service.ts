@@ -6,6 +6,8 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/rou
 import {MonHoc} from "../model/MonHoc.model";
 import {SERVER_API_URL} from "../const/app.const";
 import {createRequestOption} from "../common/common";
+import {DataPhanCongModel} from "../model/DataPhanCong.model";
+import {GiangVienPhanCongDTO} from "../model/GiangVienPhanCongDTO.model";
 
 
 @Injectable({
@@ -23,15 +25,15 @@ export class MonHocService{
             params: param
         })
     }
-    ///user/save
-    // saveUser(user:NguoiDungCTDTO){
+
+    // savePhanCong(user:NguoiDungCTDTO){
     //     console.log("save");
     //     return this.http.post<boolean>(`${this.url}api/user/save`,user,{
     //         observe:'response'
     //     })
     // }
-    //
-    //
+
+
     findById(req:number):Observable<any> {
 
         return this.http.get<MonHoc>(`${this.url}api/mon-hoc/getById/${req}`,{
@@ -65,6 +67,21 @@ export class MonHocService{
     saveMonHoc(request:MonHoc){
         return this.http.post(this.url+'api/mon-hoc/save',request,{
             observe:"response"
+        })
+    }
+
+    savePhanCong(requestPc: DataPhanCongModel[]) {
+        return this.http.post(this.url+'api/mon-hoc/savephancong',requestPc,{
+            observe:"response"
+        })
+    }
+
+
+    getGVDcPhanCongMonHocId(req?:any):Observable<any>{
+        const param=createRequestOption(req);
+        return this.http.get<GiangVienPhanCongDTO[]>(`${this.url}api/mon-hoc/get-gv-dc-phancong`,{
+            observe:'response',
+            params:param
         })
     }
 }

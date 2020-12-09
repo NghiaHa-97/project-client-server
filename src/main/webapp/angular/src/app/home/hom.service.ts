@@ -16,34 +16,35 @@ export class HomService{
     }
 
     getPageSanPham(request:any):Observable<any>{
-        let params=createRequestOption(request);
-        return this.http.get<any>(`${this.url}api/sanpham/get-page-san-pham`,{
-            observe:'response',
-            params:params
-        }).pipe(
-            map((x)=>{
-                x.body.forEach(i=>{
-                    if(i.ngaySx){
-                        i.ngaySxFormat=moment(i.ngaySx).format(DDMMYYYY);
-                    }
-                });
-                return x;
-            }));
+        return null;
+        // let params=createRequestOption(request);
+        // return this.http.get<any>(`${this.url}api/sanpham/get-page-san-pham`,{
+        //     observe:'response',
+        //     params:params
+        // }).pipe(
+        //     map((x)=>{
+        //         x.body.forEach(i=>{
+        //             if(i.ngaySx){
+        //                 i.ngaySxFormat=moment(i.ngaySx).format(DDMMYYYY);
+        //             }
+        //         });
+        //         return x;
+        //     }));
     }
     ///sanpham/get-data-gio-hang
 
     getDataGioHang(request:ShoppingCart[]):Observable<any>{
-
-        return this.http.post<any>(`${this.url}api/sanpham/get-data-gio-hang`,request,{
-            observe:'response'
-        }).pipe(
-            map((x)=>{
-                x.body.forEach(i=>{
-                    if(i.ngaySx){
-                        i.ngaySxFormat=moment(i.ngaySx).format(DDMMYYYY);
-                    }
-                });
-                return x;
-            }));
+        return null;
+        // return this.http.post<any>(`${this.url}api/sanpham/get-data-gio-hang`,request,{
+        //     observe:'response'
+        // }).pipe(
+        //     map((x)=>{
+        //         x.body.forEach(i=>{
+        //             if(i.ngaySx){
+        //                 i.ngaySxFormat=moment(i.ngaySx).format(DDMMYYYY);
+        //             }
+        //         });
+        //         return x;
+        //     }));
     }
 }

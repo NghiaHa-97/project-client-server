@@ -1,47 +1,47 @@
 <div class="main-content">
     <div class="container-fluid">
-        <legend>Chọn chủ đề</legend>
-        <div class="col-md-6">
+<!--        <legend>Chọn chủ đề</legend>-->
+<!--        <div class="col-md-6">-->
 
-            <div class="row">
-                <div class="col-lg-5 col-md-8 col-sm-4">
-                    <mat-form-field>
-                        <mat-select multiple placeholder="Chủ đề" [(ngModel)]="currentCity" name="Paris" ariaLabel="cities[0]">
-                            <mat-option *ngFor="let city of cities" [value]="city.value">
-                                {{ city.viewValue }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-            </div>
-        </div>
+<!--            <div class="row">-->
+<!--                <div class="col-lg-5 col-md-8 col-sm-4">-->
+<!--                    <mat-form-field>-->
+<!--                        <mat-select multiple placeholder="Chủ đề" [(ngModel)]="currentCity" name="Paris" ariaLabel="cities[0]">-->
+<!--                            <mat-option *ngFor="let city of cities" [value]="city.value">-->
+<!--                                {{ city.viewValue }}-->
+<!--                            </mat-option>-->
+<!--                        </mat-select>-->
+<!--                    </mat-form-field>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
 
-        <h3>Sản phẩm</h3>
+<!--        <h3>Sản phẩm</h3>-->
 
-        <div class="row">
-            <div class="col-lg-5 col-md-8 col-sm-4">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label pt-1 pr-0 text-left" for="itemsPerPage" >Tổng số {{totalItems}}</label>
-                    <div class="col-sm-4 pd-l-0">
-                        <select class="form-control form-control-sm pt-1 pb-1" name="itemsPerPage"
-                                id="itemsPerPage"
-                                [(ngModel)]="itemsPerPage"
-                                (ngModelChange)="selectedItemPerPage()">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-5 pd-l-0">
-                        <ngb-pagination [size]="'sm'" [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage"
-                                        [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
-                                        (pageChange)="loadPage(page)"></ngb-pagination>
-                    </div>
+<!--        <div class="row">-->
+<!--            <div class="col-lg-5 col-md-8 col-sm-4">-->
+<!--                <div class="form-group row">-->
+<!--                    <label class="col-sm-3 col-form-label pt-1 pr-0 text-left" for="itemsPerPage" >Tổng số {{totalItems}}</label>-->
+<!--                    <div class="col-sm-4 pd-l-0">-->
+<!--                        <select class="form-control form-control-sm pt-1 pb-1" name="itemsPerPage"-->
+<!--                                id="itemsPerPage"-->
+<!--                                [(ngModel)]="itemsPerPage"-->
+<!--                                (ngModelChange)="selectedItemPerPage()">-->
+<!--                            <option value="10">10</option>-->
+<!--                            <option value="20">20</option>-->
+<!--                            <option value="30">30</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-5 pd-l-0">-->
+<!--                        <ngb-pagination [size]="'sm'" [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage"-->
+<!--                                        [maxSize]="5" [rotate]="true" [boundaryLinks]="true"-->
+<!--                                        (pageChange)="loadPage(page)"></ngb-pagination>-->
+<!--                    </div>-->
 
-                </div>
-            </div>
-        </div>
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <br>
         <div class="row">
             <div class="col-md-3" *ngFor="let item of sanPhamDTOs">

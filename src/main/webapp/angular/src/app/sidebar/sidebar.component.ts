@@ -31,12 +31,12 @@ export const ROUTES: RouteInfo[] = [
     //     type: 'link',
     //     icontype: 'dashboard'
     // },
-    {
-        path: '/home',
-        title: 'Trang chủ',
-        type: 'link',
-        icontype: 'dashboard'
-    },
+    // {
+    //     path: '/home',
+    //     title: 'Trang chủ',
+    //     type: 'link',
+    //     icontype: 'dashboard'
+    // },
     {
         path: '/quanlygiangvien',
         title: 'Quản Lý Giảng Viên',
@@ -71,48 +71,53 @@ export const ROUTES: RouteInfo[] = [
             // {path: 'extended', title: 'Extended Tables', ab:'ET'},
             // {path: 'datatables.net', title: 'Danh sách giảng viên', ab:'DT'}
         ]
-    },
-    {
-        path: '/components',
-        title: 'Components',
-        type: 'sub',
-        icontype: 'apps',
-        collapse: 'components',
-        children: [
-            {path: 'buttons', title: 'Buttons', ab:'B'},
-            {path: 'grid', title: 'Grid System', ab:'GS'},
-            {path: 'panels', title: 'Panels', ab:'P'},
-            {path: 'sweet-alert', title: 'Sweet Alert', ab:'SA'},
-            {path: 'notifications', title: 'Notifications', ab:'N'},
-            {path: 'icons', title: 'Icons', ab:'I'},
-            {path: 'typography', title: 'Typography', ab:'T'}
-        ]
-    },
-    {
-        path: '/forms',
-        title: 'Forms',
-        type: 'sub',
-        icontype: 'content_paste',
-        collapse: 'forms',
-        children: [
-            {path: 'regular', title: 'Regular Forms', ab:'RF'},
-            {path: 'extended', title: 'Extended Forms', ab:'EF'},
-            {path: 'validation', title: 'Validation Forms', ab:'VF'},
-            {path: 'wizard', title: 'Wizard', ab:'W'}
-        ]
-    },
-    {
-        path: '/tables',
-        title: 'Giảng Viên',
-        type: 'sub',
-        icontype: 'grid_on',
-        collapse: 'tables',
-        children: [
-            {path: 'regular', title: 'Regular Tables', ab:'RT'},
-            {path: 'extended', title: 'Extended Tables', ab:'ET'},
-            {path: 'datatables.net', title: 'Danh sách giảng viên', ab:'DT'}
-        ]
-    },
+    },{
+        path: '/thongke/nhom-tuoi',
+        title: 'Thống kê',
+        type: 'link',
+        icontype: 'dashboard'
+    }
+    // {
+    //     path: '/components',
+    //     title: 'Components',
+    //     type: 'sub',
+    //     icontype: 'apps',
+    //     collapse: 'components',
+    //     children: [
+    //         {path: 'buttons', title: 'Buttons', ab:'B'},
+    //         {path: 'grid', title: 'Grid System', ab:'GS'},
+    //         {path: 'panels', title: 'Panels', ab:'P'},
+    //         {path: 'sweet-alert', title: 'Sweet Alert', ab:'SA'},
+    //         {path: 'notifications', title: 'Notifications', ab:'N'},
+    //         {path: 'icons', title: 'Icons', ab:'I'},
+    //         {path: 'typography', title: 'Typography', ab:'T'}
+    //     ]
+    // },
+    // {
+    //     path: '/forms',
+    //     title: 'Forms',
+    //     type: 'sub',
+    //     icontype: 'content_paste',
+    //     collapse: 'forms',
+    //     children: [
+    //         {path: 'regular', title: 'Regular Forms', ab:'RF'},
+    //         {path: 'extended', title: 'Extended Forms', ab:'EF'},
+    //         {path: 'validation', title: 'Validation Forms', ab:'VF'},
+    //         {path: 'wizard', title: 'Wizard', ab:'W'}
+    //     ]
+    // },
+    // {
+    //     path: '/tables',
+    //     title: 'Giảng Viên',
+    //     type: 'sub',
+    //     icontype: 'grid_on',
+    //     collapse: 'tables',
+    //     children: [
+    //         {path: 'regular', title: 'Regular Tables', ab:'RT'},
+    //         {path: 'extended', title: 'Extended Tables', ab:'ET'},
+    //         {path: 'datatables.net', title: 'Danh sách giảng viên', ab:'DT'}
+    //     ]
+    // },
     // {
     //     path: '/maps',
     //     title: 'Maps',
@@ -145,21 +150,21 @@ export const ROUTES: RouteInfo[] = [
     //     type: 'link',
     //     icontype: 'date_range'
     // },
-    {
-        path: '/pages',
-        title: 'Pages',
-        type: 'sub',
-        icontype: 'image',
-        collapse: 'pages',
-        children: [
-            {path: 'pricing', title: 'Pricing', ab:'P'},
-            {path: 'timeline', title: 'Timeline Page', ab:'TP'},
-            {path: 'login', title: 'Login Page', ab:'LP'},
-            {path: 'register', title: 'Register Page', ab:'RP'},
-            {path: 'lock', title: 'Lock Screen Page', ab:'LSP'},
-            {path: 'user', title: 'User Page', ab:'UP'}
-        ]
-    }
+    // {
+    //     path: '/pages',
+    //     title: 'Pages',
+    //     type: 'sub',
+    //     icontype: 'image',
+    //     collapse: 'pages',
+    //     children: [
+    //         {path: 'pricing', title: 'Pricing', ab:'P'},
+    //         {path: 'timeline', title: 'Timeline Page', ab:'TP'},
+    //         {path: 'login', title: 'Login Page', ab:'LP'},
+    //         {path: 'register', title: 'Register Page', ab:'RP'},
+    //         {path: 'lock', title: 'Lock Screen Page', ab:'LSP'},
+    //         {path: 'user', title: 'User Page', ab:'UP'}
+    //     ]
+    // }
 ];
 @Component({
     selector: 'app-sidebar-cmp',

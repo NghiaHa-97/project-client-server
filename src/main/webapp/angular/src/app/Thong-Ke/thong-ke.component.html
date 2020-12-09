@@ -1,0 +1,79 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- alert delete  -->
+            <div class="col-md-12" >
+                <div class="card height-card">
+                    <div class="card-header card-header-primary card-header-icon height-card-header">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Thống kê nhóm tuổi và số tiết trung bình</h4>
+
+
+                        <div class="input-group no-border col-md-4 ml-auto">
+
+                            <input [(ngModel)]="year"
+                                   type="number"
+                                   name="search"
+                                   class="form-control"
+                                   placeholder="Nhập năm xem thống kê..."
+                            (keydown.enter)="search()" >
+                            <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon" (click)="search()">
+                                <i class="material-icons">search</i>
+                                <div class="ripple-container"></div>
+                            </button>
+                        </div>
+
+                    </div>
+                    <div class="card-body height-card-body" style="margin-top: 5px">
+                        <div class="material-datatables " style="height: 550px !important;">
+                            <table id="datatables"
+                                   class="table  table-hover cell-border table-bordered"
+                                   cellspacing="0" width="100%" style="width:100%" >
+                                <thead>
+                                <tr>
+                                    <th  class="text-center">{{ headerRow[0]}}</th>
+                                    <th  class="text-center">{{ headerRow[1]}}</th>
+                                    <th class="text-center"  >{{ headerRow[2] }}</th>
+                                    <th class="text-center">{{ headerRow[3] }}</th>
+                                    <th class="text-center" >{{ headerRow[4] }}</th>
+
+
+                                </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr *ngFor="let item of listThongKe ; let i=index" >
+                                        <td class="text-center">
+                                            {{ i+1}}</td>
+                                        <td style= "white-space: normal ;" class="text-center">
+                                            {{item.tenNhom}}</td>
+                                        <td class="text-center" style=" white-space: normal ;">{{item.soGiangVien!==null?item.soGiangVien:''}}</td>
+                                        <td class="text-center">{{item.tongSoTiet}}</td>
+                                        <td class="text-center">{{item.soTietTb}}</td>
+
+
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+
+                    </div>
+                    <!-- end content-->
+                </div>
+                <!--  end card  -->
+
+                <!--  end card  -->
+            </div>
+            <!-- end col-md-12 -->
+        </div>
+        <!-- end row -->
+    </div>
+</div>
+

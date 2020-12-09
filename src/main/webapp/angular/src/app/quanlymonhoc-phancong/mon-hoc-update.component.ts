@@ -8,6 +8,7 @@ import {ToastrService} from "ngx-toastr";
 import {NguoiDungCTDTO} from "../model/NguoiDungCTDTO.modet";
 import {DDMMYYYY} from "../const/app.const";
 import {PasswordValidation} from "../forms/validationforms/password-validator.component";
+import {MonHoc} from "../model/MonHoc.model";
 
 
 
@@ -19,7 +20,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-    selector:'app-nguoi-dung-update',
+    selector:'app-mon-hoc-update',
     templateUrl:'./mon-hoc-update.component.html',
     styleUrls:['./mon-hoc-update.component.css']
 })
@@ -49,12 +50,12 @@ export class MonHocUpdateComponent{
     register : FormGroup;
     login : FormGroup;
     type : FormGroup;
-    startDate:Date = new Date(1990, 1, 1);
-    nguoiDungDTO:NguoiDungCTDTO;
+
+    monHoc:MonHoc;
 
 
     constructor(private formBuilder: FormBuilder,
-                private nguoiDungService:MonHocService,
+                private monHocService:MonHocService,
                 private activateRouter:ActivatedRoute,
                 private router:Router,
                 private toarService:ToastrService) {}
@@ -70,31 +71,31 @@ export class MonHocUpdateComponent{
         };
     }
 
-    onRegister() {
-        if (this.register.valid) {
-        } else {
-            this.validateAllFormFields(this.register);
-        }
-    }
-    onLogin() {
-        if (this.login.valid) {
-        } else {
-            this.validateAllFormFields(this.login);
-        }
-    }
+    // onRegister() {
+    //     if (this.register.valid) {
+    //     } else {
+    //         this.validateAllFormFields(this.register);
+    //     }
+    // }
+    // onLogin() {
+    //     if (this.login.valid) {
+    //     } else {
+    //         this.validateAllFormFields(this.login);
+    //     }
+    // }
     onType() {
         //nếu không có lỗi thì gọi vào
         if (this.type.valid) {
             // console.log("aaaaaaa");
-            // console.log(this.type);
-            this.nguoiDungDTO=this.type.value;
-            this.nguoiDungDTO.ngaySinh=moment(this.nguoiDungDTO.ngaySinhDate);
-            this.nguoiDungDTO.nngaySinhFormat=moment(this.nguoiDungDTO.ngaySinh).format(DDMMYYYY);
+            console.log(this.type.value);
+            this.monHoc=this.type.value;
 
-            this.nguoiDungService.saveUser(this.nguoiDungDTO).subscribe(
+
+            this.monHocService.saveMonHoc(this.monHoc).subscribe(
                 response=>{
                     this.toarService.success("Lưu thành công")
                     this.resetForm();
+                    this.monHoc=null;
                 },
                 error => {
                     this.toarService.error("Lưu thất bại")
@@ -116,50 +117,27 @@ export class MonHocUpdateComponent{
     }
     ngOnInit() {
         this.type = this.formBuilder.group({
-            // To add a validator, we must first convert the string value into an array. The first item in the array is the default value if any, then the next item in the array is the validator. Here we are adding a required validator meaning that the firstName attribute must have a value in it.
-            // text: [null, Validators.required],
-            userId:null,
-            userDetailId:null,
-            userName: [null, Validators.required],
-            diaChi: [null, Validators.required],
-            hoTen: [null, Validators.required],
-            sdt: [null, Validators.required],
-            taiKhoan: [null, Validators.required],
-            ngaySinhDate:[new Date(1990,0,1)],
-            gioiTinh:['true'],
-            email: [null, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
-            // number: [null, Validators.required],
-            // url: [null , Validators.required],
-            // We can use more than one validator per field. If we want to use more than one validator we have to wrap our array of validators with a Validators.compose function. Here we are using a required, minimum length and maximum length validator.
-            password: ['', Validators.required],
-            confirmPassword: ['', Validators.required],
-        }, {
-            validator: PasswordValidation.MatchPassword // your validation method
+            id: null,
+            maMonHoc: [null, Validators.required],
+            tenMonHoc: [null, Validators.required],
+            soTinChi: [null, Validators.required],
+            soTietGiangDay: [null, Validators.required]
         });
 
         this.activateRouter.data.subscribe(data=>{
-            this.nguoiDungDTO=data['nguoiDungDTO'];
-            console.log(this.nguoiDungDTO);
-            if(this.nguoiDungDTO){
-                this.type.setValue({
-                    // To add a validator, we must first convert the string value into an array. The first item in the array is the default value if any, then the next item in the array is the validator. Here we are adding a required validator meaning that the firstName attribute must have a value in it.
-                    // text: [null, Validators.required],
-                    userId:this.nguoiDungDTO.userId,
-                    userDetailId:this.nguoiDungDTO.userDetailId,
-                    userName: this.nguoiDungDTO.userName,
-                    diaChi: this.nguoiDungDTO.diaChi,
-                    hoTen: this.nguoiDungDTO.hoTen,
-                    sdt: this.nguoiDungDTO.sdt,
-                    taiKhoan: this.nguoiDungDTO.taiKhoan,
-                    ngaySinhDate:this.nguoiDungDTO.ngaySinh,
-                    gioiTinh:this.nguoiDungDTO.gioiTinh+'',
-                    email: this.nguoiDungDTO.email,
-                    // number: [null, Validators.required],
-                    // url: [null , Validators.required],
-                    // We can use more than one validator per field. If we want to use more than one validator we have to wrap our array of validators with a Validators.compose function. Here we are using a required, minimum length and maximum length validator.
-                    password: this.nguoiDungDTO.password,
-                    confirmPassword: this.nguoiDungDTO.password
-                })
+            if(data['MonHoc']){
+                this.monHoc=data['MonHoc'].body;
+                console.log(this.monHoc);
+                if(this.monHoc){
+                    this.type.setValue({
+                        id:this.monHoc.id,
+                        maMonHoc:this.monHoc.maMonHoc,
+                        tenMonHoc: this.monHoc.tenMonHoc,
+                        soTinChi: this.monHoc.soTinChi,
+                        soTietGiangDay: this.monHoc.soTietGiangDay,
+
+                    })
+                }
             }}
         )
 
@@ -297,28 +275,19 @@ export class MonHocUpdateComponent{
     }
 
     back() {
-        this.router.navigate(['quanlynguoidung/nguoidung']);
+        this.router.navigate(['qlmonhocphancong/monhocphancong']);
     }
 
 
     resetForm(){
-
-
         this.type.setValue({
             // To add a validator, we must first convert the string value into an array. The first item in the array is the default value if any, then the next item in the array is the validator. Here we are adding a required validator meaning that the firstName attribute must have a value in it.
             // text: [null, Validators.required],
-            userId:null,
-            userDetailId:null,
-            userName: null,
-            diaChi: null,
-            hoTen: null,
-            sdt: null,
-            taiKhoan:null,
-            ngaySinhDate:new Date(1990,0,1),
-            gioiTinh:'true',
-            email: null,
-            password:null,
-            confirmPassword: null
+            id:null,
+            maMonHoc:null,
+            tenMonHoc: null,
+            soTinChi: null,
+            soTietGiangDay: null
         });
     }
 }
