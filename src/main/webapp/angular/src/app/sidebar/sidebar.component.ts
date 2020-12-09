@@ -38,6 +38,18 @@ export const ROUTES: RouteInfo[] = [
         icontype: 'dashboard'
     },
     {
+        path: '/quanlygiangvien',
+        title: 'Quản Lý Giảng Viên',
+        type: 'sub',
+        icontype: 'dashboard',
+        collapse: 'quanlygiangvien',
+        children: [
+            {path: 'giangvien', title: 'giảng viên', ab:'GV'}
+            // {path: 'extended', title: 'Extended Tables', ab:'ET'},
+            // {path: 'datatables.net', title: 'Danh sách giảng viên', ab:'DT'}
+        ]
+    },
+    {
         path: '/quanlynguoidung',
         title: 'Quản lý người dùng',
         type: 'sub',
@@ -49,13 +61,13 @@ export const ROUTES: RouteInfo[] = [
         ]
     },
     {
-        path: '/quanlygiangvien',
-        title: 'Quản Lý Giảng Viên',
+        path: '/qlmonhocphancong',
+        title: 'Môn Học - Phân Công',
         type: 'sub',
-        icontype: 'dashboard',
-        collapse: 'quanlygiangvien',
+        icontype: 'apps',
+        collapse: 'monhocphancong',
         children: [
-            {path: 'giangvien', title: 'giảng viên', ab:'GV'}
+            {path: 'monhocphancong', title: 'Môn học - Phân công', ab:'MH'}
             // {path: 'extended', title: 'Extended Tables', ab:'ET'},
             // {path: 'datatables.net', title: 'Danh sách giảng viên', ab:'DT'}
         ]

@@ -10,17 +10,24 @@ public class QuaTrinhNgoaiNgu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "tenngoaingu")
-    private String tenNgoaiNgu;
-
-    @Column(name = "trinhdo")
-    private String trinhDo;
+    @Column(name = "ngoainguid")
+    private Integer ngoaiNguId;
 
     @Column(name = "ngaykhaibosung")
     private Date ngayKhaiBoSung;
 
     @Column(name = "giangvienid")
     private Integer giangVienId;
+
+    public QuaTrinhNgoaiNgu() {
+    }
+
+    public QuaTrinhNgoaiNgu(Integer id, Integer ngoaiNguId, Date ngayKhaiBoSung, Integer giangVienId) {
+        this.id = id;
+        this.ngoaiNguId = ngoaiNguId;
+        this.ngayKhaiBoSung = ngayKhaiBoSung;
+        this.giangVienId = giangVienId;
+    }
 
     public Integer getId() {
         return id;
@@ -30,20 +37,12 @@ public class QuaTrinhNgoaiNgu {
         this.id = id;
     }
 
-    public String getTenNgoaiNgu() {
-        return tenNgoaiNgu;
+    public Integer getNgoaiNguId() {
+        return ngoaiNguId;
     }
 
-    public void setTenNgoaiNgu(String tenNgoaiNgu) {
-        this.tenNgoaiNgu = tenNgoaiNgu;
-    }
-
-    public String getTrinhDo() {
-        return trinhDo;
-    }
-
-    public void setTrinhDo(String trinhDo) {
-        this.trinhDo = trinhDo;
+    public void setNgoaiNguId(Integer ngoaiNguId) {
+        this.ngoaiNguId = ngoaiNguId;
     }
 
     public Date getNgayKhaiBoSung() {
