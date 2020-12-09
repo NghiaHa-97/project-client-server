@@ -25,7 +25,7 @@ export class GiangVienComponent implements OnInit, AfterViewInit {
 
     constructor(private giangvienService:GiangVienService, private router: Router, private activateRouter:ActivatedRoute, private toastr:ToastrService){}
 
-
+    @ViewChild('test') test;
     public headerRow:string[];
     public giangvienList: GiangVien[]=[];
     public dataTable: DataTable;
@@ -152,5 +152,14 @@ export class GiangVienComponent implements OnInit, AfterViewInit {
     deletegiangvien(userId: number) {
         this.showAlert=true;
         this.idUserDelete=userId;
+    }
+
+
+    addNgoaingu() {
+        this.refModal=this.modalService.open(this.test,{
+            size: 'lg',
+            windowClass: 'width-80',
+            backdrop: 'static'
+        });
     }
 }
