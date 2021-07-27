@@ -52,7 +52,7 @@ export  class ThongKeComponent implements OnInit{
     ngOnInit() {
 
          this.headerRow = [ 'Stt', 'Nhóm tuổi', 'Số lượng Gv', 'Tổng số tiết','Số tiết TB'];
-        this.getPageMonHoc();
+        // this.getPageMonHoc();
 
 
     }

@@ -7,21 +7,25 @@ import { GiangVienComponent } from './giang-vien/giangvien.component';
 
 export const GiangVienRoutes: Routes = [
    {
-      path: '',
-      children: [ 
-        {
-        path: 'giangvien',
-        component: GiangVienComponent
-        },
-        {
-          path: 'giangvien/update/:id',
-        component: GiangVienUpdateComponent,
-        resolve:{giangvien:GiangVienResolve}
-        },
-        {
-          path: 'giangvien/new',
-        component: GiangVienUpdateComponent
-        }
-      ]
+       path: '',
+       children: [
+           {
+               path: 'bacsi',
+               component: GiangVienComponent
+           },
+           {
+               path: 'danh-sach',
+               component: GiangVienComponent
+           },
+           {
+               path: 'bacsi/update/:id',
+               component: GiangVienUpdateComponent,
+               resolve: {giangvien: GiangVienResolve}
+           },
+           {
+               path: 'bacsi/new',
+               component: GiangVienUpdateComponent
+           }
+       ]
     }
 ];

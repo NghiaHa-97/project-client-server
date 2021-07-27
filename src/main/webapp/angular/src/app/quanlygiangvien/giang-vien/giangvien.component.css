@@ -20,16 +20,16 @@ th     { background:#8c9eff; }
 /*.tableFixHead th {*/
 /*    box-shadow: inset 1px 1px #000, 0 1px #000;*/
 /*}*/
-.height-card {
-    height: 700px !important;
-    /*height: 1000px !important;*/
-}
+/*.height-card {*/
+/*    height: 700px !important;*/
+/*    !*height: 1000px !important;*!*/
+/*}*/
 .height-card-header{
     height: 20px !important;
 }
-.height-card-body{
-    height: 500px !important;
-}
+/*.height-card-body{*/
+/*    height: 500px !important;*/
+/*}*/
 
 .datatables {
     max-width: 100%;
@@ -77,4 +77,30 @@ td {
     max-height: 400px !important;
     height: 400px;
     /*height: 1000px !important;*/
+}
+
+:host ::ng-deep .p-button #button-dialog {
+    margin: 0 .5rem 0 0;
+    min-width: 10rem;
+}
+
+p {
+    margin: 0;
+}
+
+.confirmation-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+:host ::ng-deep .p-dialog .p-button #button-dialog {
+    min-width: 6rem;
+}
+
+.ellipse{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }

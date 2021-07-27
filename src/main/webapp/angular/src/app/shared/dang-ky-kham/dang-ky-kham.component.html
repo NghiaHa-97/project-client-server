@@ -1,0 +1,90 @@
+<p-toast position="top-center"></p-toast>
+<div *nzModalTitle>
+    <h3>Đặt lịch khám, chữa bệnh</h3>
+</div>
+
+<div id="divElement">
+    <form [formGroup]="formReg" >
+        <div class="p-mt-4">
+            <label>Họ tên</label>
+            <br>
+            <input type="text" pInputText formControlName="hoTen" style="width: 50%">
+            <p-message severity="error" text="Bắt buộc nhập"
+                       [@errorState]="isFieldValid(formReg,'hoTen') ? 'visible' : 'hidden'"></p-message>
+        </div>
+        <div class="p-mt-4">
+            <label>Giói tính</label>
+            <br>
+            <p-radioButton name="gioiTinh" [value]="1" label="Nam" formControlName="gioiTinh" ></p-radioButton>
+            <p-radioButton name="gioiTinh" [value]="0" label="Nữ" formControlName="gioiTinh" ></p-radioButton>
+
+        </div>
+
+        <div class="p-mt-4">
+            <label>Ngày sinh</label>
+            <br>
+            <p-calendar inputId="basic" styleClass="widthInput50"
+                        formControlName="ngaySinh"
+                        [dateFormat]="'dd/mm/yy'"></p-calendar>
+            <p-message severity="error" text="Bắt buộc nhập"
+                       [@errorState]="isFieldValid(formReg,'ngaySinh') ? 'visible' : 'hidden'"></p-message>
+        </div>
+        <div class="p-mt-4">
+            <label>Địa chỉ</label>
+            <br>
+
+            <textarea inputId="textarea" rows="3" cols="30"
+                      formControlName="diaChi"
+                      pInputTextarea
+                      style="width: 60%"></textarea>
+<!--            <p-calendar inputId="basic"-->
+<!--                        formControlName="diaChi"-->
+<!--                        (ngModelChange)="change()"-->
+<!--                        styleClass="widthInput50"-->
+<!--                        [dateFormat]="'dd/mm/yy'"></p-calendar>-->
+            <p-message severity="error" text="Bắt buộc nhập"
+                       [@errorState]="isFieldValid(formReg,'diaChi') ? 'visible' : 'hidden'"></p-message>
+        </div>
+
+        <div class="p-mt-4">
+            <label>Số điện thoại</label>
+            <br>
+            <p-inputMask mask="9999 999 999"
+                         formControlName="sDT"></p-inputMask>
+            <p-message severity="error" text="Bắt buộc nhập"
+                       [@errorState]="isFieldValid(formReg,'sDT') ? 'visible' : 'hidden'"></p-message>
+        </div>
+        <div class="p-mt-4">
+            <label>Khoa khám</label>
+            <br>
+            <p-dropdown [options]="khoas"
+                        styleClass="widthInput40"
+                        formControlName="khoaId"
+                        placeholder="Chọn khoa"
+                        optionLabel="tenKhoa"
+                        optionValue="id"
+                        [showClear]="true"></p-dropdown>
+            <p-message severity="error" text="Bắt buộc nhập"
+                       [@errorState]="isFieldValid(formReg,'khoaId') ? 'visible' : 'hidden'"></p-message>
+        </div>
+
+        <div class="p-mt-4">
+            <label>Ngày khám</label>
+            <br>
+            <p-calendar inputId="basic"
+                        formControlName="thoiGian"
+                        (ngModelChange)="change()"
+                        styleClass="widthInput50"
+                        [dateFormat]="'dd/mm/yy'"></p-calendar>
+            <p-message severity="error" text="Bắt buộc nhập"
+                       [@errorState]="isFieldValid(formReg,'thoiGian') ? 'visible' : 'hidden'"></p-message>
+        </div>
+
+
+    </form>
+
+</div>
+<div *nzModalFooter>
+    <button nz-button nzType="default" (click)="destroyModal()">Hủy</button>
+    <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">Đặt lịch</button>
+</div>

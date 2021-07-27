@@ -12,16 +12,14 @@ public class NgoaiNgu {
     @Column(name = "tennn")
     private String tenNgoaiNgu;
 
-    @Column(name = "trinhdo")
-    private String trinhDo;
+
 
     public NgoaiNgu() {
     }
 
-    public NgoaiNgu(Integer id, String tenNgoaiNgu, String trinhDo) {
+    public NgoaiNgu(Integer id, String tenNgoaiNgu) {
         this.id = id;
         this.tenNgoaiNgu = tenNgoaiNgu;
-        this.trinhDo = trinhDo;
     }
 
     public Integer getId() {
@@ -40,11 +38,4 @@ public class NgoaiNgu {
         this.tenNgoaiNgu = tenNgoaiNgu;
     }
 
-    public String getTrinhDo() {
-        return trinhDo;
-    }
-
-    public void setTrinhDo(String trinhDo) {
-        this.trinhDo = trinhDo;
-    }
 }

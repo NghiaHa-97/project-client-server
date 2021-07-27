@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
+import {Component, OnInit, ElementRef, OnDestroy, AfterViewInit} from '@angular/core';
 import {AuthenticationRequest} from "../../model/AuthenticationRequest";
 import {LoginService} from "./login.service";
 import {ToastrService} from "ngx-toastr";
@@ -13,7 +13,7 @@ declare var $: any;
     templateUrl: './login.component.html'
 })
 
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit, OnDestroy,AfterViewInit {
     test: Date = new Date();
     private toggleButton: any;
     private sidebarVisible: boolean;
@@ -40,11 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         const body = document.getElementsByTagName('body')[0];
         body.classList.add('login-page');
         body.classList.add('off-canvas-sidebar');
-        const card = document.getElementsByClassName('card')[0];
-        setTimeout(function() {
-            // after 1000 ms we add the class animated to the login/register card
-            card.classList.remove('card-hidden');
-        }, 700);
+
     }
     sidebarToggle() {
         // var toggleButton = this.toggleButton;
@@ -85,6 +81,17 @@ export class LoginComponent implements OnInit, OnDestroy {
             console.log(error);
             this.toars.error("Đăng nhập không thành công")
         } )
+    }
+
+    ngAfterViewInit(): void {
+        const card = document.querySelector('#form-login');
+        setTimeout(function() {
+            // after 1000 ms we add the class animated to the login/register card
+            console.log(card);
+            console.log(card.classList);
+            card.classList.remove('card-hidden');
+            console.log(card.classList);
+        }, 1000);
     }
 
 

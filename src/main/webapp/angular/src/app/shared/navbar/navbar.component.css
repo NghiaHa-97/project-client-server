@@ -1,0 +1,15 @@
+::ng-deep .font-menubar{
+    font-size: 25px;
+    /*font-family: "Times New Roman", Times, serif;*/
+    z-index: 9999;
+    overflow: visible;
+}
+::ng-deep .font-menubar-ul{
+    font-size: 25px;
+}
+
+::ng-deep .p-submenu-list{
+    white-space: nowrap;
+    width: auto !important;
+}
+

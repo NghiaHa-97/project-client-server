@@ -6,12 +6,12 @@ import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent } from 
 import 'rxjs/add/operator/filter';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import PerfectScrollbar from 'perfect-scrollbar';
-
 declare const $: any;
 
 @Component({
   selector: 'app-layout',
-  templateUrl: './admin-layout.component.html'
+  templateUrl: './admin-layout.component.html',
+    styleUrls:['./admin-layout.component.css']
 })
 
 export class AdminLayoutComponent implements OnInit, AfterViewInit {

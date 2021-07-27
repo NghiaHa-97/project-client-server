@@ -9,6 +9,8 @@ import {MonHoc} from "../model/MonHoc.model";
 import {GiangVienService} from "../quanlygiangvien/giang-vien/giangvien.service";
 import {GiangVienPhanCongDTO} from "../model/GiangVienPhanCongDTO.model";
 import {DataPhanCong, DataPhanCongModel} from "../model/DataPhanCong.model";
+import {IBieuHien} from "../model/httt-yte/BieuHien.model";
+import {IResultChuanDoan} from "../model/httt-yte/ResultChuanDoan.model";
 
 
 
@@ -50,9 +52,50 @@ export  class MonHocComponent implements OnInit{
     listRequest:GiangVienPhanCongDTO[]=[];
 
     lsitMonHoc:MonHoc[]=[];
+    /////////
+    listOfData = [
+        {
+            id: 1,
+            name: 'Benh A',
+            age: 32,
+            expand: false,
+            address: '',
+            description: 'Mô tả'
+        },
+        {
+            id: 2,
+            name: 'Benh B',
+            age: 32,
+            expand: false,
+            address: '',
+            description: 'Mô tả'
+        },
+        {
+            id: 3,
+            name: 'Benh C',
+            age: 32,
+            expand: false,
+            address: '',
+            description: 'Mô tả'
+        },
+    ];
+    expandSet = new Set<number>();
 
     year: number;
     private monHoc: number;
+
+    loading = false;
+
+
+
+    customersTrue:{name:string,lua:boolean}[];
+    displayModal: boolean;
+    data1:any;
+    rows: number;
+    first: number;
+    bieuHiens:IBieuHien[];
+    bieuHienCheck: IBieuHien[]=[];
+    resultChuanDoan:IResultChuanDoan[];
 
     constructor(private monHocService:MonHocService,
                 private modalService: NgbModal,
@@ -61,12 +104,168 @@ export  class MonHocComponent implements OnInit{
                 private toastr:ToastrService,
                 private giangVienService:GiangVienService)  {}
     ngOnInit() {
-
-         this.headerRow = [ 'Mã môn học', 'Tên môn học', 'Số tín chỉ', 'Số tiết học giảng dậy','Acction','STT'];
-        this.getPageMonHoc();
-
+        this.rows=10;
+        this.first=0;
+        // this.getPageMonHoc();
+        this.page=1;
+        this.itemsPerPage=10;
+        this.getPageBieuHienDetails();
+        this.displayModal=false;
+        this.data1 = {
+            labels: ['Biểu hiện 1','Biểu hiện 2'],
+            datasets: [
+                {
+                    data: [70, 30],
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        // "#FFCE56"
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        // "#FFCE56"
+                    ]
+                }]
+        };
 
     }
+
+    getPageBieuHienDetails(){
+        console.log(this.page);
+        this.giangVienService.getPageBieuHien({
+            page:this.first,
+            size:this.rows,
+            sort:["id,asc","maBieuHien,asc"],
+            search:this.searchText? this.searchText:''
+        }).subscribe(data=>{
+            this.bieuHiens=data.body;
+            if(this.bieuHienCheck.length>0){
+                this.bieuHienCheck.forEach((item)=>{
+                    const index=this.bieuHiens.findIndex(x=>x.id===item.id);
+                    if(index>=0){
+                        this.bieuHiens[index]=item;
+                    }
+                })
+            }
+            console.log(data);
+            this.totalItems=parseInt(data.headers.get('X-Total-Count'), 10);
+            console.log(this.totalItems);
+        },error => {
+            // this.toastr.error("Không tìm thấy Giảng viên vào")
+        })
+    }
+
+    onChangPage($event: any) {
+        console.log($event);
+        this.rows=$event.rows,
+        this.first=Math.trunc($event.first/$event.rows),
+        this.getPageBieuHienDetails();
+    }
+
+
+
+    onSearch() {
+        console.log(this.searchText);
+        this.getPageBieuHienDetails();
+    }
+
+    select(bieuHien: IBieuHien) {
+        if(bieuHien.check){
+            this.bieuHienCheck.push(bieuHien);
+        }else{
+            const index=this.bieuHienCheck.findIndex(x=>x.id===bieuHien.id);
+            if(index>=0){
+                this.bieuHienCheck.splice(index,1);
+            }
+        }
+    }
+
+
+    remove(bieuHien: IBieuHien,index:number) {
+        this.bieuHienCheck.splice(index,1);
+    }
+
+    removeAll() {
+        this.bieuHienCheck.forEach(x=>x.check=false);
+        this.bieuHienCheck=[];
+    }
+
+    load() {
+        const listId=this.bieuHienCheck.map(x=>x.id).sort((a, b)=>a-b);
+        console.log(listId);
+
+        if(listId.length>0){
+            this.loading = true;
+            this.giangVienService.getChuanDoan(listId).subscribe(resp=>{
+                this.resultChuanDoan=resp.body;
+                console.log(this.resultChuanDoan);
+
+                this.resultChuanDoan.forEach(item=>{
+                   item.dataChart= {
+                                        labels: [`Tỷ lệ mắc ${item.tenBenhChiTiet}`,`Tỷ lệ không mắc ${item.tenBenhChiTiet}`],
+                                        datasets: [
+                                            {
+                                                data: [item.phanTram, 100-item.phanTram],
+                                                backgroundColor: [
+                                                    "#ff6384",
+                                                    "#2ed610",
+                                                    // "#FFCE56"
+                                                ],
+                                                hoverBackgroundColor: [
+                                                    "#c0032a",
+                                                    "#1d8b05",
+                                                    // "#FFCE56"
+                                                ]
+                                            }]
+                                    };
+                });
+                this.loading = false;
+                this.displayModal = true;
+
+            });
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    onExpandChange(id: number, checked: boolean): void {
+        if (checked) {
+            this.expandSet.add(id);
+        } else {
+            this.expandSet.delete(id);
+        }
+    }
+
     getPageMonHoc(){
         this.monHocService.getAllMonHoc({
             page:this.page-1,
@@ -78,6 +277,7 @@ export  class MonHocComponent implements OnInit{
             // console.log(data);
             // console.log(parseInt(data.headers.get('X-Total-Count'), 10))
             this.totalItems=parseInt(data.headers.get('X-Total-Count'), 10);
+
         })
     }
 
@@ -99,83 +299,6 @@ export  class MonHocComponent implements OnInit{
 
     ngAfterViewInit() {
         $(document).ready(function() {
-            $('#datatables').DataTable({
-                "scrollX": true,
-                "scrollY": 470,
-                "bPaginate": false,
-                "bSort": false,
-                responsive: true,
-                "bLengthChange": false,
-                "bFilter": false,
-                "bInfo": true,
-                "bAutoWidth": true,
-                "bSearching": false,
-                "language": {
-                    "decimal":        "",
-                    "emptyTable":     "",
-                    "info":           "",
-                    "infoEmpty":      "",
-                    "infoFiltered":   "",
-                    "infoPostFix":    "",
-                    "thousands":      ",",
-                    "lengthMenu":     "",
-                    "loadingRecords": "Loading...",
-                    "processing":     "Processing...",
-                    "search":         "Search:",
-                    "zeroRecords":    "",
-                    "paginate": {
-                        "first":      "First",
-                        "last":       "Last",
-                        "next":       "Next",
-                        "previous":   "Previous"
-                    },
-                    "aria": {
-                        "sortAscending":  ": activate to sort column ascending",
-                        "sortDescending": ": activate to sort column descending"
-                    }
-                }
-            });
-
-
-            // $('#datatablesRole').DataTable({
-            //     "scrollX": true,
-            //     "scrollY": 270,
-            //     "bPaginate": false,
-            //     "bSort": false,
-            //     responsive: true,
-            //     "bLengthChange": false,
-            //     "bFilter": false,
-            //     "bInfo": true,
-            //     "bAutoWidth": true,
-            //     "bSearching": false,
-            //     "language": {
-            //         "decimal":        "",
-            //         "emptyTable":     "",
-            //         "info":           "",
-            //         "infoEmpty":      "",
-            //         "infoFiltered":   "",
-            //         "infoPostFix":    "",
-            //         "thousands":      ",",
-            //         "lengthMenu":     "",
-            //         "loadingRecords": "Loading...",
-            //         "processing":     "Processing...",
-            //         "search":         "Search:",
-            //         "zeroRecords":    "",
-            //         "paginate": {
-            //             "first":      "First",
-            //             "last":       "Last",
-            //             "next":       "Next",
-            //             "previous":   "Previous"
-            //         },
-            //         "aria": {
-            //             "sortAscending":  ": activate to sort column ascending",
-            //             "sortDescending": ": activate to sort column descending"
-            //         }
-            //     }
-            // });
-
-
-
             $('.card .material-datatables label').addClass('form-group');
         })
     }
@@ -227,42 +350,7 @@ export  class MonHocComponent implements OnInit{
             backdrop: 'static'
         });
 
-        $('#datatablesAddPhanCong').DataTable({
-            "scrollX": true,
-            "scrollY": 300,
-            "bPaginate": false,
-            "bSort": false,
-            responsive: true,
-            "bLengthChange": false,
-            "bFilter": false,
-            "bInfo": true,
-            "bAutoWidth": false,
-            "bSearching": false,
-            "language": {
-                "decimal":        "",
-                "emptyTable":     "",
-                "info":           "",
-                "infoEmpty":      "",
-                "infoFiltered":   "",
-                "infoPostFix":    "",
-                "thousands":      ",",
-                "lengthMenu":     "",
-                "loadingRecords": "Loading...",
-                "processing":     "Processing...",
-                "search":         "Search:",
-                "zeroRecords":    "",
-                "paginate": {
-                    "first":      "First",
-                    "last":       "Last",
-                    "next":       "Next",
-                    "previous":   "Previous"
-                },
-                "aria": {
-                    "sortAscending":  ": activate to sort column ascending",
-                    "sortDescending": ": activate to sort column descending"
-                }
-            }
-        });
+
         this.monHocService.getGVDcPhanCongMonHocId({idMonHoc:this.monHoc,namHoc:this.year}).subscribe(data=>{
             this.giangVienPhanCongDTOSCopy=data.body;
             this.giangVienPhanCongDTOSCopy.forEach(x=>x.isCheck=true);
@@ -403,4 +491,6 @@ export  class MonHocComponent implements OnInit{
             })
         })
     }
+
+
 }

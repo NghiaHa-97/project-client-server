@@ -8,6 +8,8 @@ import {ToastrService} from "ngx-toastr";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {NgoaiNgu} from '../../model/NgoaiNgu';
 import { QTNN } from 'src/app/model/QTNN';
+import {TreeNodeInterface} from "./giangvien-update.component";
+import {BacSi} from "../../model/httt-yte/BacSi.model";
 
 
 declare interface DataTable {
@@ -25,6 +27,7 @@ declare const $: any;
 })
 
 export class GiangVienComponent implements OnInit, AfterViewInit {
+    private ngoaiNgus: NgoaiNgu[];
 
     constructor(private giangvienService:GiangVienService, private router: Router, private activateRouter:ActivatedRoute, private toastr:ToastrService,
         private modalService: NgbModal){}
@@ -38,7 +41,7 @@ export class GiangVienComponent implements OnInit, AfterViewInit {
     public dataTable: DataTable;
     public totalItems: number;
     public page: number=1;
-    public itemsPerPage: number =10;
+    public itemsPerPage: number =8;
     searchText: string;
     isDelete:boolean;
     showAlert: boolean=false;
@@ -47,24 +50,55 @@ export class GiangVienComponent implements OnInit, AfterViewInit {
     private giangvienId: number;
     private namegiangvien: string;
     message:string= "Bạn có chắc chắn muốn xóa";
+    displayModal:boolean;
+
+    listBacSi:BacSi[];
+    bacSiModal:BacSi;
+    isNoEdit:boolean;
+
     ngOnInit() {
-        this.headerRow= [ 'Mã GV', 'Họ Tên', 'Giới Tính', 'Email', 'Ngày Sinh', 'Nơi Sinh', 'Dân Tộc', 'Học Vị','Chức Vụ', 'Số Điện Thoai', 'Action' ],
+        if(this.router.url.includes('thong-tin-bac-si')){
+            this.isNoEdit=true;
+        }
+        // this.headerRow= [ 'Mã GV', 'Họ Tên', 'Giới Tính', 'Email', 'Ngày Sinh', 'Nơi Sinh', 'Dân Tộc', 'Học Vị','Chức Vụ', 'Số Điện Thoai', 'Action' ],
         this.getPageUserDetails();
+        this.displayModal=false;
+
+        this.giangvienService.getAllNN().subscribe(x=>{
+            this.ngoaiNgus=x.body;
+        })
 
 
     }
 
+    getNameEnglish(id){
+        const i=this.ngoaiNgus.find(x=>x.id===id);
+        return i ? i.tenNgoaiNgu: null;
+
+    }
+
+    showModal(id:number) {
+
+        this.giangvienService.getOneBacSi(id).subscribe((resp)=>{
+            console.log(resp.body);
+            this.bacSiModal=resp.body;
+            console.log(this.bacSiModal);
+        })
+        this.displayModal=true;
+    }
+
     getPageUserDetails(){
-        this.giangvienService.getAllGiangVien({
+        console.log(this.page);
+        this.giangvienService.getAllBacSi({
             page:this.page-1,
             size:this.itemsPerPage,
-            sort:["giangvienId,asc","maGV,asc"],
+            sort:["id,asc","maBS,asc"],
             search:this.searchText? this.searchText:''
         }).subscribe(data=>{
-            this.giangvienList=data.body;
+            this.listBacSi=data.body;
             this.totalItems=parseInt(data.headers.get('X-Total-Count'), 10);
         },error => {
-            this.toastr.error("Không tìm thấy Giảng viên vào")
+            // this.toastr.error("Không tìm thấy Giảng viên vào")
         })
     }
 
@@ -86,42 +120,7 @@ export class GiangVienComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         $(document).ready(function() {
-            $('#datatables').DataTable({
-                "scrollX": true,
-                "scrollY": 470,
-                "bPaginate": false,
-                "bSort": false,
-                responsive: true,
-                "bLengthChange": false,
-                "bFilter": false,
-                "bInfo": true,
-                "bAutoWidth": true,
-                "bSearching": false,
-                "language": {
-                    "decimal":        "",
-                    "emptyTable":     "",
-                    "info":           "",
-                    "infoEmpty":      "",
-                    "infoFiltered":   "",
-                    "infoPostFix":    "",
-                    "thousands":      ",",
-                    "lengthMenu":     "",
-                    "loadingRecords": "Loading...",
-                    "processing":     "Processing...",
-                    "search":         "Search:",
-                    "zeroRecords":    "",
-                    "paginate": {
-                        "first":      "First",
-                        "last":       "Last",
-                        "next":       "Next",
-                        "previous":   "Previous"
-                    },
-                    "aria": {
-                        "sortAscending":  ": activate to sort column ascending",
-                        "sortDescending": ": activate to sort column descending"
-                    }
-                }
-            });
+
             $('.card .material-datatables label').addClass('form-group');
         })
     }
@@ -201,42 +200,7 @@ export class GiangVienComponent implements OnInit, AfterViewInit {
             backdrop: 'static'
         });
 
-        $('#datatablesAddNgoaiNgu').DataTable({
-            "scrollX": true,
-            "scrollY": 300,
-            "bPaginate": false,
-            "bSort": false,
-            responsive: true,
-            "bLengthChange": false,
-            "bFilter": false,
-            "bInfo": true,
-            "bAutoWidth": false,
-            "bSearching": false,
-            "language": {
-                "decimal":        "",
-                "emptyTable":     "",
-                "info":           "",
-                "infoEmpty":      "",
-                "infoFiltered":   "",
-                "infoPostFix":    "",
-                "thousands":      ",",
-                "lengthMenu":     "",
-                "loadingRecords": "Loading...",
-                "processing":     "Processing...",
-                "search":         "Search:",
-                "zeroRecords":    "",
-                "paginate": {
-                    "first":      "First",
-                    "last":       "Last",
-                    "next":       "Next",
-                    "previous":   "Previous"
-                },
-                "aria": {
-                    "sortAscending":  ": activate to sort column ascending",
-                    "sortDescending": ": activate to sort column descending"
-                }
-            }
-        });
+
 
     }
 
@@ -259,5 +223,15 @@ export class GiangVienComponent implements OnInit, AfterViewInit {
 
     closePopup() {
         this.refModal.close();
+    }
+
+
+    changPage(event) {
+        this.page=event.page+1;
+        this.getPageUserDetails();
+    }
+
+    editBacSi(id: number) {
+        this.router.navigate(['update',id],{relativeTo:this.activateRouter});
     }
 }

@@ -1,12 +1,17 @@
-import {Component, OnInit, Renderer, ViewChild, ElementRef, Directive, OnDestroy} from '@angular/core';
+import {Component, OnInit, Renderer2, ViewChild, ElementRef, Directive, OnDestroy} from '@angular/core';
 import { ROUTES } from '../.././sidebar/sidebar.component';
 import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import {NgForm} from "@angular/forms";
 import {WebSocketService} from "./web-socket.service";
-import {Message} from "../../model/Message";
 import {LoginService} from "../../pages/login/login.service";
+import {MenuItem} from 'primeng/api';
+import {NzModalService} from "ng-zorro-antd/modal";
+import {DangKyKhamComponent} from "../dang-ky-kham/dang-ky-kham.component";
+import {IKhoa} from "../../model/httt-yte/Khoa.model";
+import {DangKyKhamService} from "../dang-ky-kham/dang-ky-kham.service";
+
 const misc: any = {
     navbar_menu_visible: 0,
     active_collapse: true,
@@ -16,10 +21,12 @@ const misc: any = {
 declare var $: any;
 @Component({
     selector: 'app-navbar-cmp',
-    templateUrl: 'navbar.component.html'
+    templateUrl: 'navbar.component.html',
+    styleUrls: ['navbar.component.css']
 })
 
 export class NavbarComponent implements OnInit,OnDestroy {
+    items: MenuItem[];
     private listTitles: any[];
     location: Location;
     mobile_menu_visible: any = 0;
@@ -32,13 +39,16 @@ export class NavbarComponent implements OnInit,OnDestroy {
     public name:string;
 
     @ViewChild('app-navbar-cmp') button: any;
+    khoas:IKhoa[];
 
     constructor(location: Location,
-                private renderer: Renderer,
+                private renderer: Renderer2,
                 private element: ElementRef,
                 private router: Router,
                 private webSocketService:WebSocketService,
-                private loginService:LoginService) {
+                private loginService:LoginService,
+                private modalService: NzModalService,
+                private dangKyKhamService:DangKyKhamService) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -102,6 +112,118 @@ export class NavbarComponent implements OnInit,OnDestroy {
     }
 
     ngOnInit() {
+        this.items = [
+            {
+                label:'Trang chủ',
+                icon:' pi pi-fw pi-home',
+                styleClass:'font-menubar-ul',
+                routerLink:['/home']
+            },
+            {
+                label:'Tìm bác sỹ',
+                styleClass:'font-menubar-ul',
+                icon:' pi pi-fw pi-search-plus',
+                routerLink:['/thong-tin-bac-si/danh-sach']
+
+            },
+            {
+                label:'Chuyên khoa',
+                styleClass:'font-menubar-ul',
+                icon:'pi pi-fw pi-user',
+                items:[
+                    // {
+                    //     label:'New',
+                    //     icon:'pi pi-fw pi-bars',
+                    //     styleClass:'font-menubar',
+                    //
+                    // },
+                    // {
+                    //     label:'Delete',
+                    //     icon:'pi pi-fw pi-bars',
+                    //     styleClass:'font-menubar',
+                    //
+                    // },
+                    // {
+                    //     label:'Search',
+                    //     icon:'pi pi-fw pi-bars',
+                    //     styleClass:'font-menubar',
+                    //     // items:[
+                    //     //     {
+                    //     //         label:'Filter',
+                    //     //         icon:'pi pi-fw pi-filter',
+                    //     //         items:[
+                    //     //             {
+                    //     //                 label:'Print',
+                    //     //                 icon:'pi pi-fw pi-print'
+                    //     //
+                    //     //             }
+                    //     //         ]
+                    //     //     },
+                    //     //     {
+                    //     //         icon:'pi pi-fw pi-bars',
+                    //     //         label:'List'
+                    //     //     }
+                    //     // ]
+                    // }
+                ]
+            },
+            {
+                label:'Sự kiện',
+                styleClass:'font-menubar-ul',
+                icon:'pi pi-fw pi-calendar',
+                // items:[
+                //     {
+                //         label:'Edit',
+                //         icon:'pi pi-fw pi-pencil',
+                //         styleClass:'font-menubar',
+                //         items:[
+                //             {
+                //                 label:'Save',
+                //                 icon:'pi pi-fw pi-calendar-plus'
+                //             },
+                //             {
+                //                 label:'Delete',
+                //                 icon:'pi pi-fw pi-calendar-minus'
+                //             },
+                //
+                //         ]
+                //     },
+                //     {
+                //         label:'Archieve',
+                //         icon:'pi pi-fw pi-calendar-times',
+                //         items:[
+                //             {
+                //                 label:'Remove',
+                //                 icon:'pi pi-fw pi-calendar-minus'
+                //             }
+                //         ]
+                //     }
+                // ]
+            },
+            {
+                label:'Đăng ký khám',
+                command:(event)=>{
+                    console.log(event);
+                    this.showModal2();
+                },
+                styleClass:'font-menubar-ul',
+                icon:'pi pi-fw pi-pencil'
+            }
+        ];
+        this.dangKyKhamService.getAllKhoa().subscribe((resp)=>{
+            this.khoas=resp.body;
+            this.khoas.forEach(item=>{
+
+                this.items[2].items.push({
+                    label:item.tenKhoa,
+                    icon:'pi pi-fw pi-bars',
+                    styleClass:'font-menubar',
+                    routerLink:`/gioi-thieu/${item.gioiThieu}`
+                })
+            })
+
+        });
+
         if(this.isLogin){
             this.name=JSON.parse(sessionStorage.getItem('auth')).username;
             this.webSocketService.openWebSocket(this.name);
@@ -124,7 +246,18 @@ export class NavbarComponent implements OnInit,OnDestroy {
             $layer.remove();
           }
         });
+
+
+
     }
+
+    showModal2(): void {
+        this.modalService.create({
+            nzContent: DangKyKhamComponent,
+            nzWidth:900
+        });
+    }
+
     onResize(event) {
       if ($(window).width() > 991) {
         return false;
@@ -165,7 +298,8 @@ export class NavbarComponent implements OnInit,OnDestroy {
           $layer.classList.remove('visible');
           setTimeout(function() {
               $layer.remove();
-              $toggle.classList.remove('toggled');
+              if($toggle)
+                $toggle.classList.remove('toggled');
           }, 400);
         }.bind(this);
 
@@ -176,7 +310,9 @@ export class NavbarComponent implements OnInit,OnDestroy {
     sidebarClose() {
       var $toggle = document.getElementsByClassName('navbar-toggler')[0];
         const body = document.getElementsByTagName('body')[0];
-        this.toggleButton.classList.remove('toggled');
+        if(this.toggleButton){
+            this.toggleButton.classList.remove('toggled');
+        }
         var $layer = document.createElement('div');
         $layer.setAttribute('class', 'close-layer');
 
@@ -189,7 +325,8 @@ export class NavbarComponent implements OnInit,OnDestroy {
         }
 
         setTimeout(function() {
-            $toggle.classList.remove('toggled');
+            if($toggle)
+                $toggle.classList.remove('toggled');
         }, 400);
 
         this.mobile_menu_visible = 0;

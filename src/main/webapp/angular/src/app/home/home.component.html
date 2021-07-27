@@ -1,103 +1,375 @@
 <div class="main-content">
     <div class="container-fluid">
-<!--        <legend>Chọn chủ đề</legend>-->
-<!--        <div class="col-md-6">-->
-
-<!--            <div class="row">-->
-<!--                <div class="col-lg-5 col-md-8 col-sm-4">-->
-<!--                    <mat-form-field>-->
-<!--                        <mat-select multiple placeholder="Chủ đề" [(ngModel)]="currentCity" name="Paris" ariaLabel="cities[0]">-->
-<!--                            <mat-option *ngFor="let city of cities" [value]="city.value">-->
-<!--                                {{ city.viewValue }}-->
-<!--                            </mat-option>-->
-<!--                        </mat-select>-->
-<!--                    </mat-form-field>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
-<!--        <h3>Sản phẩm</h3>-->
-
-<!--        <div class="row">-->
-<!--            <div class="col-lg-5 col-md-8 col-sm-4">-->
-<!--                <div class="form-group row">-->
-<!--                    <label class="col-sm-3 col-form-label pt-1 pr-0 text-left" for="itemsPerPage" >Tổng số {{totalItems}}</label>-->
-<!--                    <div class="col-sm-4 pd-l-0">-->
-<!--                        <select class="form-control form-control-sm pt-1 pb-1" name="itemsPerPage"-->
-<!--                                id="itemsPerPage"-->
-<!--                                [(ngModel)]="itemsPerPage"-->
-<!--                                (ngModelChange)="selectedItemPerPage()">-->
-<!--                            <option value="10">10</option>-->
-<!--                            <option value="20">20</option>-->
-<!--                            <option value="30">30</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                    <div class="col-sm-5 pd-l-0">-->
-<!--                        <ngb-pagination [size]="'sm'" [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage"-->
-<!--                                        [maxSize]="5" [rotate]="true" [boundaryLinks]="true"-->
-<!--                                        (pageChange)="loadPage(page)"></ngb-pagination>-->
-<!--                    </div>-->
-
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-        <br>
         <div class="row">
-            <div class="col-md-3" *ngFor="let item of sanPhamDTOs">
-                <div class="card card-product">
-                    <div class="card-header card-header-image" data-header-animation="true">
-                        <a >
-                            <img class="img" src="./assets/img/card-2.jpg">
-                        </a>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons"></i>
+                        </div>
+                        <h2 class="card-title">Bệnh Viện Bắc Hà</h2>
                     </div>
                     <div class="card-body">
-                        <div class="card-actions text-center">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p-fieldset legend="Tin mới nhất">
+                                    <a [routerLink]="'/tin-tuc/tin-moi-nhat'">- Đào tạo đội ngũ thầy thuốc giỏi từ mô hình viện-trường</a>
+                                    <br><br>
+                                    <a>- Triển khai các lớp đào tạo thuộc Dự án bệnh viện vệ tinh chuyên ngành Tim mạch năm 2020</a>
+                                    <br><br>
+                                    <a>- THÔNG BÁO VỀ CÁC KHÓA ĐÀO TẠO LIÊN TỤC ĐẠI HỘI TIM MẠCH TOÀN QUỐC LẦN THỨ 17</a>
+                                    <br><br>
+                                    <a>- Cấp cứu thành công vết thương do thanh sắt đâm vào vùng cổ</a>
+                                    <br><br>
+                                    <a>- Đào tạo đội ngũ thầy thuốc giỏi từ mô hình viện-trường</a>
+                                    <br><br>
+                                    <a>- Thông qua Kỹ thuật mới “Xét nghiệm phát hiện kháng nguyên virut SARS-CoV-2 bằng test nhanh”</a>
+                                    <br><br>
+                                    <a>- Thông qua Kỹ thuật mới “Xét nghiệm phát hiện kháng nguyên virut SARS-CoV-2 bằng test nhanh”</a>
+                                    <br><br>
+                                    <a>- Thông qua Kỹ thuật mới “Xét nghiệm phát hiện kháng nguyên virut SARS-CoV-2 bằng test nhanh”</a>
+                                </p-fieldset>
+                            </div>
+                            <div class="col-sm-8">
+                                <p-fieldset legend="Tin nổi bật">
+                                    <div class="card page-carousel">
+                                        <ngb-carousel>
+                                            <ng-template ngbSlide>
+                                                <img src="./assets/img/yte/slide1.jpg" >
+                                                <div class="carousel-caption">
+                                                    <p>Somewhere</p>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template ngbSlide>
+                                                <img src="./assets/img/yte/slide2.jpg" >
+                                                <div class="carousel-caption">
+                                                    <p>Somewhere else</p>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template ngbSlide>
+                                                <img src="./assets/img/yte/slide3.png" >
+                                                <div class="carousel-caption">
+                                                    <p>Here it is</p>
+                                                </div>
+                                            </ng-template>
+                                        </ngb-carousel>
+                                    </div>
+                                </p-fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3>SỐ LIỆU NỔI BẬT</h3>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">weekend</i>
+                        </div>
+                        <h3 class="card-title">18</h3>
+                        <br>
+                        <h3 class="card-title">Năm thành lập</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">equalizer</i>
+                        </div>
+                        <h3 class="card-title">206</h3>
+                        <br>
+                        <h3 class="card-title">Chuyên gia</h3>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">store</i>
+                        </div>
+                        <h3 class="card-title">1.821.000</h3>
+                        <br>
+                        <h3 class="card-title">Bệnh nhân</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="fa fa-twitter"></i>
+                        </div>
+                        <h3 class="card-title">7</h3>
+                        <br>
+                        <h3 class="card-title">Cơ sở</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3>DỊCH VỤ CHẤT LƯỢNG CAO</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-info" data-header-animation="true">
+                        <div class="ct-chart" >
+                            <h4>Phẫu thuật lồng ngực, phổi</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Chi tiết" [matTooltipPosition]="'below'">
+                                <i class="material-icons">art_track</i>
+                            </button>
+                        </div>
+                        <h5 class="card-title">Điều trị các bệnh lồng ngực: U phổi, u nấm phổi, nốt phổi đơn độc, u trung thất, u thành ngực. Dãn phế quản, kén phế quản, tràn khí màng phổi tự phát. Tràn dịch màn phổi bệnh lý, tràn mủ màng phổi, ổ cặn màng phổi.</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-info" data-header-animation="true">
+                        <div class="ct-chart">
+                            <h4>Khám - phát hiện, điều trị Ung thư</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Chi tiết" [matTooltipPosition]="'below'">
+                                <i class="material-icons">art_track</i>
+                            </button>
+                        </div>
+                        <h5 class="card-title">Chẩn đoán và hóa trị các bệnh lý ung thư phổi, ung thư vùng trung thất. Tư vấn và hướng dẫn cho bệnh nhân và thân nhân về phương hướng tầm soát và cách điều trị chăm sóc các bệnh lý ung thư liên quan trong phổi, lồng ngực.</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-info" data-header-animation="true">
+                        <div class="ct-chart">
+                            <h4>Điều trị dịch vụ bệnh phổi</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Chi tiết" [matTooltipPosition]="'below'">
+                                <i class="material-icons">art_track</i>
+                            </button>
+                        </div>
+                        <h5 class="card-title">Chẩn đoán nhanh và chính xác các bệnh Ung thư phổi, nguyên nhân tràn dịch màng phổi, tràn khí màng phổi, các bệnh phổi khác đặc biệt bệnh phổi hiếm như bệnh phổi mô bào, LAM, phổi biệt trí, Sarcoidosis</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-info" data-header-animation="true">
+                        <div class="ct-chart">
+                            <h4>Chẩn đoán và điều trị Hen COPD</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Chi tiết" [matTooltipPosition]="'below'">
+                                <i class="material-icons">art_track</i>
+                            </button>
+                        </div>
+                        <h5 class="card-title">Điều trị bệnh nội trú với các đối tượng chủ yếu là các bệnh nhân bệnh phổi tắc nghẽn mạn tính</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-info" data-header-animation="true">
+                        <div class="ct-chart">
+                            <h4>Khám phát hiện, quản lý điều trị</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Chi tiết" [matTooltipPosition]="'below'">
+                                <i class="material-icons">art_track</i>
+                            </button>
+                        </div>
+                        <h5 class="card-title">Khám phát hiện, quản lý điều trị: bệnh phổi không lao, Lao các thể, Hen - COPD và các kỹ thuật chẩn đoán liên quan</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-info" data-header-animation="true">
+                        <div class="ct-chart">
+                            <h4>Nội soi phế quản</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Chi tiết" [matTooltipPosition]="'below'">
+                                <i class="material-icons">art_track</i>
+                            </button>
+                        </div>
+                        <h5 class="card-title">Chẩn đoán sớm các bệnh lý về hô hấp, điều trị một số bệnh lý gây tắc nghẽn đường thở như: dị vật đường thở, u bít khí-phế quản</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-info" data-header-animation="true">
+                        <div class="ct-chart">
+                            <h4>Đơn vị khám chuyên sâu phổi - hô hấp chất lượng quốc tế</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Chi tiết" [matTooltipPosition]="'below'">
+                                <i class="material-icons">art_track</i>
+                            </button>
+                        </div>
+                        <h5 class="card-title">Khám bệnh đúng theo giờ yêu cầu của người bệnh, gia đình người bệnh; Khám bệnh không cần chờ đợi, xếp hàng; Thực hiện xét nghiệm ngay tại vị trí buồng khám bệnh; Có kết quả xét nghiệm trong thời gian ngắn nhất qua tin nhắn điện thoại hoặc email ( khi có yêu cầu); Có chuyên gia hàng đầu trong lĩnh vực hô hấp, tư vấn rõ rang, chi tiết kết quả xét nghiệm.</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-info" data-header-animation="true">
+                        <div class="ct-chart">
+                            <h4>Khám, điều trị cho bệnh nhi</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Chi tiết" [matTooltipPosition]="'below'">
+                                <i class="material-icons">art_track</i>
+                            </button>
+                        </div>
+                        <h5 class="card-title">Đảm nhận vai trò điều trị đặc thù cho bệnh nhi, từ việc khám bệnh ngoại trú đến điều trị nội trú cho tất cả bệnh nhi tại Thành phố Hồ Chí Minh và các tỉnh phía Nam. Chẩn đoán và điều trị các bệnh: lao nguyên phát, lao phổi, lao ngoài phổi như: lao màng não, lao màng phổi, lao màng bụng, lao màng tim, lao cột sống và các thể lao xương khớp khác. Ngoài ra, còn điều trị các bệnh về hô hấp như hen phế quản, viêm phế quản, viêm phổi…cho tất cả bệnh nhi.</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-info" data-header-animation="true">
+                        <div class="ct-chart">
+                            <h4>Chẩn đoán hình ảnh</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Chi tiết" [matTooltipPosition]="'below'">
+                                <i class="material-icons">art_track</i>
+                            </button>
+                        </div>
+                        <h5 class="card-title">Thực hiện các kỹ thuật chẩn đoán hình ảnh liên quan đến bệnh lý phổi: siêu âm tổng quát, siêu âm lồng ngực, đo ECG, chụp CT và sinh thiết u phổi… theo yêu cầu của BS lâm sàng. Thực hiện chụp XQ, CT, siêu âm, đo ECG và trả kết quả ngay cho bệnh nhân cấp cứu. Giải thích rõ các tai biến và lấy chữ ký cam kết đồng ý cho tiêm thuốc cản quang và các kỹ thuật xâm lấn khi sinh thiết hoặc đốt u phổi. Đảm bảo đủ cơ số thuốc cấp cứu và cấp cứu ban đầu những tai biến do tiêm cản quang hoặc sinh thiết phổi.</h5>
+                    </div>
+                </div>
+            </div>
+<!--            <div class="col-md-4">-->
+<!--                <div class="card card-chart">-->
+<!--                    <div class="card-header card-header-info" data-header-animation="true">-->
+<!--                        <div class="ct-chart" id="dailySalesChart"></div>-->
+<!--                    </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="card-actions">-->
 <!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
 <!--                                <i class="material-icons">build</i> Fix Header!-->
 <!--                            </button>-->
-                            <button mat-raised-button type="button"
-                                    class="btn btn-default btn-link"
-                                    matTooltip="Xem chi tiết" [matTooltipPosition]="'below'">
-                                <i class="material-icons">art_track</i>
-                            </button>
+<!--                            <button mat-raised-button type="button" class="btn btn-info btn-link" matTooltip="Refresh" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">refresh</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Change Date" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">edit</i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <h4 class="card-title">Daily Sales</h4>-->
+<!--                        <p class="card-category">-->
+<!--                            <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>-->
+<!--                    </div>-->
+<!--                    <div class="card-footer">-->
+<!--                        <div class="stats">-->
+<!--                            <i class="material-icons">access_time</i> updated 4 minutes ago-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-4">-->
+<!--                <div class="card card-chart">-->
+<!--                    <div class="card-header card-header-info" data-header-animation="true">-->
+<!--                        <div class="ct-chart" id="completedTasksChart"></div>-->
+<!--                    </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="card-actions">-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
+<!--                                <i class="material-icons">build</i> Fix Header!-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-info btn-link" matTooltip="Refresh" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">refresh</i>-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Change Date" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">edit</i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <h4 class="card-title">Completed Tasks</h4>-->
+<!--                        <p class="card-category">Last Campaign Performance</p>-->
+<!--                    </div>-->
+<!--                    <div class="card-footer">-->
+<!--                        <div class="stats">-->
+<!--                            <i class="material-icons">access_time</i> campaign sent 2 days ago-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+
+<!--        <h3>TÌM HIỂU BỆNH</h3>-->
+<!--        <br>-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-4">-->
+<!--                <div class="card card-product">-->
+<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
+<!--                        <a href="#pablo">-->
+<!--                            <img class="img" src="./assets/img/card-2.jpg">-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="card-actions text-center">-->
+<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
+<!--                                <i class="material-icons">build</i> Fix Header!-->
+<!--                            </button>-->
+<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
+<!--                                <i class="material-icons">art_track</i>-->
+<!--                            </button>-->
 <!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
 <!--                                <i class="material-icons">edit</i>-->
 <!--                            </button>-->
 <!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
 <!--                                <i class="material-icons">close</i>-->
 <!--                            </button>-->
-                            <button mat-raised-button type="button"
-                                    class="btn btn-danger btn-link"
-                                    matTooltip="Thêm vào giỏ hàng"
-                                    [matTooltipPosition]="'below'"
-                                    (click)="addShoppingCart(item.idSp)">
-                                <i class="material-icons">local_grocery_store</i>
-                            </button>
-                        </div>
-                        <h4 class="card-title">
-                            <a >{{item.tenSanPham}}</a>
-                        </h4>
-                        <div class="card-description">
-                            {{item.mota}}
-                            <br>
-                            {{item.ngaySxFormat? 'Ngày sx: ' +item.ngaySxFormat: ''}}
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="price">
-                            <h4>{{item.gia}}.đ</h4>
-                        </div>
-                        <div class="stats">
-                            <p class="card-category"><i class="material-icons">place</i> {{item.username}} </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-<!--            <div class="col-md-3">-->
+<!--                        </div>-->
+<!--                        <h4 class="card-title">-->
+<!--                            <a href="#pablo">Cozy 5 Stars Apartment</a>-->
+<!--                        </h4>-->
+<!--                        <div class="card-description">-->
+<!--                            The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona.-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="card-footer">-->
+<!--                        <div class="price">-->
+<!--                            <h4>$899/night</h4>-->
+<!--                        </div>-->
+<!--                        <div class="stats">-->
+<!--                            <p class="card-category"><i class="material-icons">place</i> Barcelona, Spain</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-4">-->
 <!--                <div class="card card-product">-->
 <!--                    <div class="card-header card-header-image" data-header-animation="true">-->
 <!--                        <a href="#pablo">-->
@@ -136,7 +408,7 @@
 <!--                    </div>-->
 <!--                </div>-->
 <!--            </div>-->
-<!--            <div class="col-md-3">-->
+<!--            <div class="col-md-4">-->
 <!--                <div class="card card-product">-->
 <!--                    <div class="card-header card-header-image" data-header-animation="true">-->
 <!--                        <a href="#pablo">-->
@@ -175,241 +447,6 @@
 <!--                    </div>-->
 <!--                </div>-->
 <!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--                <div class="card card-product">-->
-<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
-<!--                        <a href="#pablo">-->
-<!--                            <img class="img" src="./assets/img/card-1.jpg">-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                    <div class="card-body">-->
-<!--                        <div class="card-actions text-center">-->
-<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
-<!--                                <i class="material-icons">build</i> Fix Header!-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">art_track</i>-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">edit</i>-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">close</i>-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                        <h4 class="card-title">-->
-<!--                            <a href="#pablo">Beautiful Castle</a>-->
-<!--                        </h4>-->
-<!--                        <div class="card-description">-->
-<!--                            n night life in Milan.-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="card-footer">-->
-<!--                        <div class="price">-->
-<!--                            <h4>$459/night</h4>-->
-<!--                        </div>-->
-<!--                        <div class="stats">-->
-<!--                            <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--                <div class="card card-product">-->
-<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
-<!--                        <a href="#pablo">-->
-<!--                            <img class="img" src="./assets/img/card-1.jpg">-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                    <div class="card-body">-->
-<!--                        <div class="card-actions text-center">-->
-<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
-<!--                                <i class="material-icons">build</i> Fix Header!-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">art_track</i>-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">edit</i>-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">close</i>-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                        <h4 class="card-title">-->
-<!--                            <a href="#pablo">Beautiful Castle</a>-->
-<!--                        </h4>-->
-<!--                        <div class="card-description">-->
-<!--                            The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="card-footer">-->
-<!--                        <div class="price">-->
-<!--                            <h4>$459/night</h4>-->
-<!--                        </div>-->
-<!--                        <div class="stats">-->
-<!--                            <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--                <div class="card card-product">-->
-<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
-<!--                        <a href="#pablo">-->
-<!--                            <img class="img" src="./assets/img/card-1.jpg">-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                    <div class="card-body">-->
-<!--                        <div class="card-actions text-center">-->
-<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
-<!--                                <i class="material-icons">build</i> Fix Header!-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">art_track</i>-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">edit</i>-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">close</i>-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                        <h4 class="card-title">-->
-<!--                            <a href="#pablo">Beautiful Castle</a>-->
-<!--                        </h4>-->
-<!--                        <div class="card-description">-->
-<!--                            The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="card-footer">-->
-<!--                        <div class="price">-->
-<!--                            <h4>$459/night</h4>-->
-<!--                        </div>-->
-<!--                        <div class="stats">-->
-<!--                            <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--                <div class="card card-product">-->
-<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
-<!--                        <a href="#pablo">-->
-<!--                            <img class="img" src="./assets/img/card-1.jpg">-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                    <div class="card-body">-->
-<!--                        <div class="card-actions text-center">-->
-<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
-<!--                                <i class="material-icons">build</i> Fix Header!-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">art_track</i>-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">edit</i>-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">close</i>-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                        <h4 class="card-title">-->
-<!--                            <a href="#pablo">Beautiful Castle</a>-->
-<!--                        </h4>-->
-<!--                        <div class="card-description">-->
-<!--                            The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="card-footer">-->
-<!--                        <div class="price">-->
-<!--                            <h4>$459/night</h4>-->
-<!--                        </div>-->
-<!--                        <div class="stats">-->
-<!--                            <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--                <div class="card card-product">-->
-<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
-<!--                        <a href="#pablo">-->
-<!--                            <img class="img" src="./assets/img/card-1.jpg">-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                    <div class="card-body">-->
-<!--                        <div class="card-actions text-center">-->
-<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
-<!--                                <i class="material-icons">build</i> Fix Header!-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">art_track</i>-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">edit</i>-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">close</i>-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                        <h4 class="card-title">-->
-<!--                            <a href="#pablo">Beautiful Castle</a>-->
-<!--                        </h4>-->
-<!--                        <div class="card-description">-->
-<!--                            u can enjoy the main night life in Milan.-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="card-footer">-->
-<!--                        <div class="price">-->
-<!--                            <h4>$459/night</h4>-->
-<!--                        </div>-->
-<!--                        <div class="stats">-->
-<!--                            <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--                <div class="card card-product">-->
-<!--                    <div class="card-header card-header-image" data-header-animation="true">-->
-<!--                        <a href="#pablo">-->
-<!--                            <img class="img" src="./assets/img/card-1.jpg">-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                    <div class="card-body">-->
-<!--                        <div class="card-actions text-center">-->
-<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">-->
-<!--                                <i class="material-icons">build</i> Fix Header!-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">art_track</i>-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">edit</i>-->
-<!--                            </button>-->
-<!--                            <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove" [matTooltipPosition]="'below'">-->
-<!--                                <i class="material-icons">close</i>-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                        <h4 class="card-title">-->
-<!--                            <a href="#pablo">Beautiful Castle</a>-->
-<!--                        </h4>-->
-<!--                        <div class="card-description">-->
-<!--                            The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="card-footer">-->
-<!--                        <div class="price">-->
-<!--                            <h4>$459/night</h4>-->
-<!--                        </div>-->
-<!--                        <div class="stats">-->
-<!--                            <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-        </div>
-
+<!--        </div>-->
     </div>
 </div>

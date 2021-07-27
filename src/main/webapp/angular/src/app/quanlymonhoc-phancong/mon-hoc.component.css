@@ -20,16 +20,16 @@ th     { background:#8c9eff; }
 /*.tableFixHead th {*/
 /*    box-shadow: inset 1px 1px #000, 0 1px #000;*/
 /*}*/
-.height-card {
-    height: 700px !important;
-    /*height: 1000px !important;*/
-}
+/*.height-card {*/
+/*    height: 700px !important;*/
+/*    !*height: 1000px !important;*!*/
+/*}*/
 .height-card-header{
     height: 70px !important;
 }
-.height-card-body{
-    height: 600px !important;
-}
+/*.height-card-body{*/
+/*    height: 600px !important;*/
+/*}*/
 
 .datatables {
     max-width: 100%;
@@ -94,4 +94,6 @@ td{
     width: 100% !important;
 }
 
-
+tr span{
+    font-size: large;
+}

@@ -38,13 +38,13 @@ export const ROUTES: RouteInfo[] = [
     //     icontype: 'dashboard'
     // },
     {
-        path: '/quanlygiangvien',
-        title: 'Quản Lý Giảng Viên',
+        path: '/quanlybacsi',
+        title: 'Quản lý bác sĩ',
         type: 'sub',
         icontype: 'dashboard',
         collapse: 'quanlygiangvien',
         children: [
-            {path: 'giangvien', title: 'giảng viên', ab:'GV'}
+            {path: 'bacsi', title: 'Bác sĩ', ab:'BS'}
             // {path: 'extended', title: 'Extended Tables', ab:'ET'},
             // {path: 'datatables.net', title: 'Danh sách giảng viên', ab:'DT'}
         ]
@@ -62,21 +62,22 @@ export const ROUTES: RouteInfo[] = [
     },
     {
         path: '/qlmonhocphancong',
-        title: 'Môn Học - Phân Công',
+        title: 'Hệ chuyên gia',
         type: 'sub',
         icontype: 'apps',
         collapse: 'monhocphancong',
         children: [
-            {path: 'monhocphancong', title: 'Môn học - Phân công', ab:'MH'}
+            {path: 'monhocphancong', title: 'Chẩn đoán bệnh', ab:'CD'}
             // {path: 'extended', title: 'Extended Tables', ab:'ET'},
             // {path: 'datatables.net', title: 'Danh sách giảng viên', ab:'DT'}
         ]
-    },{
-        path: '/thongke/nhom-tuoi',
-        title: 'Thống kê',
-        type: 'link',
-        icontype: 'dashboard'
     }
+    // ,{
+    //     path: '/thongke/nhom-tuoi',
+    //     title: 'Thống kê',
+    //     type: 'link',
+    //     icontype: 'dashboard'
+    // }
     // {
     //     path: '/components',
     //     title: 'Components',

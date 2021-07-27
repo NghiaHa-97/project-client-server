@@ -1,0 +1,29 @@
+::ng-deep .widthInput60{
+    max-width:60%;
+    width:60%
+}
+
+::ng-deep .widthInput50{
+    max-width:50%;
+    width:50%
+}
+
+::ng-deep .widthInput55{
+    max-width:55%;
+    width:55%
+}
+
+::ng-deep .widthInput40{
+    max-width:40%;
+    width:40%
+}
+
+::ng-deep .widthInput45{
+    max-width:45%;
+    width:45%
+}
+
+::ng-deep .widthInput35{
+    max-width:35%;
+    width:35%
+}

@@ -1,116 +1,157 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <!-- alert delete  -->
-            <app-alert
-                    [message]="message"
-                    *ngIf="showAlert"
-                    (close)="onCloseAlert()"
-                    (ok)="onDelete()"
-            ></app-alert>
             <div class="col-md-12" >
-                <div class="card height-card">
+                <div class="card " style="height: 960px;">
                     <div class="card-header card-header-primary card-header-icon height-card-header">
                         <div class="card-icon">
                             <i class="material-icons">assignment</i>
                         </div>
-                        <h4 class="card-title">Môn học - Phân công</h4>
-
-
-                        <div class="input-group no-border col-md-4 ml-auto">
-
-                            <input [(ngModel)]="searchText"
-                                   type="text"
-                                   name="search"
-                                   class="form-control"
-                                   placeholder="Tìm kiếm..."
-                            (keydown.enter)="search()" >
-                            <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon" (click)="search()">
-                                <i class="material-icons">search</i>
-                                <div class="ripple-container"></div>
-                            </button>
-                            |
-                            <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon" title="Thêm mới" (click)="new()">
-                                <i class="material-icons">add_circle_outline</i>
-                                <div class="ripple-container"></div>
-                            </button>
-                        </div>
-
+                        <h4 class="card-title">Chẩn đoán bệnh</h4>
                     </div>
                     <div class="card-body height-card-body" style="margin-top: 5px">
-                        <div class="material-datatables " style="height: 550px !important;">
-                            <table id="datatables"
-                                   class="table  table-hover cell-border table-bordered"
-                                   cellspacing="0" width="100%" style="width:100%" >
-                                <thead>
-                                <tr>
-                                    <th  class="text-center">{{ headerRow[5]}}</th>
-                                    <th  class="text-center">{{ headerRow[0]}}</th>
-                                    <th class="text-center"  >{{ headerRow[1] }}</th>
-                                    <th class="text-center">{{ headerRow[2] }}</th>
-                                    <th class="text-center" >{{ headerRow[3] }}</th>
-                                    <th class="text-center">{{ headerRow[4] }}</th>
 
-                                </tr>
-                                </thead>
-
-                                <tbody>
-
-                                    <tr *ngFor="let item of lsitMonHoc ; let i=index" >
-                                        <td class="text-center">
-                                            {{(page-1)*itemsPerPage + i+1}}</td>
-                                        <td style= "white-space: normal ;" class="text-center">
-                                            {{item.maMonHoc}}</td>
-                                        <td style=" white-space: normal ;">{{item.tenMonHoc!==null?item.tenMonHoc.trim():''}}</td>
-                                        <td class="text-center">{{item.soTinChi}}</td>
-                                        <td class="text-center">{{item.soTietGiangDay}}</td>
-
-
-                                        <td class="text-center">
-                                            <a  class="btn btn-link btn-info btn-just-icon " title="Phân công giảng dậy" (click)="openPhanCong(item.id)"   ><i class="material-icons md-10">add_box</i></a>
-                                            <a class="btn btn-link btn-warning btn-just-icon "
-                                               title="Sửa"
-                                            (click)="viewDetail(item.id)"><i class="material-icons">visibility</i></a>
-                                            <a  class="btn btn-link btn-danger btn-just-icon remove" title="Xóa" (click)="deleteMonHoc(item.id)"><i class="material-icons">close</i></a>
-                                        </td>
-                                    </tr>
-
-                                    <tr *ngFor="let item of newArr(itemsPerPage-lsitMonHoc?.length)">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><a  class="btn btn-link  btn-just-icon " ></a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-
-                        </div>
-                        <div class="row justify-content-end" style="height: 50px !important; margin-top: 0px">
-                            <div class="col-md-3 ml-auto">
-                                <div class="form-group row">
-                                    <label class="col-sm-6 col-form-label pt-1 pr-0 text-right" for="itemsPerPage" >Tổng số</label>
-                                    <label class="col-sm-2 col-form-label total pt-1 pl-1 pr-0">{{totalItems}}</label>
-                                    <div class="col-sm-4 pd-l-0">
-                                        <select class="form-control form-control-sm pt-1 pb-1" name="itemsPerPage"
-                                                id="itemsPerPage"
-                                                [(ngModel)]="itemsPerPage"
-                                                (ngModelChange)="selectedItemPerPage()">
-                                            <option value="10">10</option>
-                                            <option value="20">20</option>
-                                            <option value="30">30</option>
-                                        </select>
-                                    </div>
+                        <p-splitter  styleClass="p-mb-5">
+                            <ng-template pTemplate>
+                                <div class="p-col p-d-flex p-ai-center p-jc-center">
+                                    <p-table [value]="bieuHiens"
+                                             [scrollable]="true" scrollHeight="600px"
+                                             [showCurrentPageReport]="true"
+                                             [rowsPerPageOptions]="[10,25,50]"
+                                             styleClass="p-datatable-customers p-datatable-gridlines"
+                                             [paginator]="true"
+                                             [style]="{height:'600px'}"
+                                             [rows]="rows"
+                                             (onPage)="onChangPage($event)"
+                                             [totalRecords]="totalItems"
+                                             [lazy]="true"
+                                             currentPageReportTemplate="Hiển thị {first} đến {last} của {totalRecords}">
+                                        <ng-template pTemplate="caption">
+                                            <div class="p-d-flex">
+                                                <h5>Biêu hiện</h5>
+                                                <span class="p-input-icon-left p-ml-auto">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                       placeholder="Tìm kiếm"
+                                                        [(ngModel)]="searchText"
+                                                        (ngModelChange)="onSearch()"/>
+                                            </span>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template pTemplate="colgroup" let-columns>
+                                            <colgroup>
+                                                <col style="width:70px">
+                                                <col style="width:100px">
+                                                <col style="min-width:250px">
+                                            </colgroup>
+                                        </ng-template>
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th></th>
+                                                <th >
+                                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                                        Mã biểu hiện
+                                                    </div>
+                                                </th>
+                                                <th >
+                                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                                        Tên biểu hiện
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-bieuHien let-index="rowIndex">
+                                            <tr>
+                                                <td style="text-align: center">
+<!--                                                    <p-tableCheckbox  [value]="customer"-->
+<!--                                                                       ></p-tableCheckbox>-->
+                                                    <p-checkbox (onChange)="select(bieuHien)" [(ngModel)]="bieuHien.check" binary="true"></p-checkbox>
+                                                </td>
+                                                <td>
+                                                    {{bieuHien.maBieuHien}}
+                                                </td>
+                                                <td [title]="bieuHien.moTa">
+                                                    {{bieuHien.moTa}}
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="emptymessage">
+                                            <tr>
+                                                <td colspan="3">Không có dữ liệu</td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
                                 </div>
-                            </div>
-                            <div class="justify-content-end" style="padding-top: 8px; padding-right: 5px">
-                                <ngb-pagination [size]="'sm'" [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage"
-                                                [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
-                                                (pageChange)="loadPage(page)"></ngb-pagination>
-                            </div>
-                        </div>
+                            </ng-template>
+                            <ng-template pTemplate>
+                                <div class="p-col p-d-flex p-ai-center p-jc-center">
+                                    <p-table [value]="bieuHienCheck"
+                                             [scrollable]="true"
+                                             scrollHeight="600px"
+                                             styleClass="p-datatable-customers p-datatable-gridlines"
+
+                                             [style]="{height:'600px'}"
+                                             >
+                                        <ng-template pTemplate="caption">
+                                            <div class="p-d-flex">
+                                                <h5>Danh sách biểu hiện chọn</h5>
+                                                <span class=" p-ml-auto">
+                                                   <button pButton label="Xóa toàn bộ" class="p-button-outlined"
+                                                           icon="pi pi-filter-slash"
+                                                            (click)="removeAll()"></button>
+                                                </span>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template pTemplate="colgroup" let-columns>
+                                            <colgroup>
+                                                <col style="width:70px">
+                                                <col style="width:100px">
+                                                <col style="min-width:250px">
+                                            </colgroup>
+                                        </ng-template>
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th></th>
+                                                <th >
+                                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                                        Mã biểu hiện
+                                                    </div>
+                                                </th>
+                                                <th >
+                                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                                        Tên biểu hiện
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-bieuHien let-index="rowIndex">
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    <!--                                                    <p-tableCheckbox  [value]="customer"-->
+                                                    <!--                                                                       ></p-tableCheckbox>-->
+                                                    <p-checkbox (onChange)="remove(bieuHien,index)" [(ngModel)]="bieuHien.check" binary="true"></p-checkbox>
+                                                </td>
+                                                <td>
+                                                    {{bieuHien.maBieuHien}}
+                                                </td>
+                                                <td>
+                                                    {{bieuHien.moTa}}
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="emptymessage">
+                                            <tr>
+                                                <td colspan="3">Không có dữ liệu</td>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="summary">
+                                            <p-button label="Chuẩn đoán" icon="pi pi-search" [loading]="loading" (onClick)="load()"></p-button>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </ng-template>
+                        </p-splitter>
+
 
                     </div>
                     <!-- end content-->
@@ -125,142 +166,53 @@
     </div>
 </div>
 
-<ng-template #test>
-<!--    <div class="row">-->
-<!--        <div class="col-md-12" >-->
-    <div class="card height-card-popup">
-        <div class="card-header card-header-primary card-header-icon height-card-header-popup">
-            <div class="row">
-                <h4 class="card-title" style="padding-left: 20px">Phân công môn học</h4>
 
-                <div class="input-group no-border col-md-4 ml-auto mr-auto" style="padding-top: 15px;">
-                    <input [(ngModel)]="year"
-                           type="number"
-                           name="search"
-                           class="form-control"
-                           placeholder="Nhập năm học"
-                           (keydown.enter)="getDataPc()" >
-                    <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon" (click)="getDataPc()">
-                        <i class="material-icons">search</i>
-                        <div class="ripple-container"></div>
-                    </button>
-
-                </div>
-
-                <div class="input-group no-border col-md-4 ml-auto" style="padding-top: 15px;">
-
-                    <input [(ngModel)]="searchGvPc"
-                           type="text"
-                           name="search"
-                           class="form-control"
-                           placeholder="Tìm kiếm..."
-                           (keydown.enter)="searchGvPhanCong()" >
-                    <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon" (click)="searchGvPhanCong()">
-                        <i class="material-icons">search</i>
-                        <div class="ripple-container"></div>
-                    </button>
-                </div>
-
-            </div>
-
-
-        </div>
-        <div class="card-body height-card-body-popup" style="margin-top: 5px">
-            <div class="material-datatables height-card-body-popup" >
-                <table id="datatablesAddPhanCong"
-                       class="table  table-hover cell-border table-bordered "
-                       cellspacing="0" style="width: 758px" >
-                    <thead>
-                    <tr>
-                        <th  class="text-center" style="width: 252px">STT</th>
-                        <th  class="text-left" style="width: 252px"></th>
-                        <th  class="text-center" style="width: 252px">Mã GV</th>
-                        <th  class="text-center" style="width: 252px">Tên GV</th>
-
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr *ngFor="let item of giangVienPhanCongDTOS ; let i=index">
-                        <td class="text-center">
-                            {{ i+1}}</td>
-                        <td class="text-center">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox"
-                                           [checked]="item.isCheck"
-                                            (click)="changeGvPhanCong(item)">
-                                    <span class="form-check-sign">
-                                            <span class="check"></span>
-                                          </span>
-                                </label>
-                            </div>
-                        </td>
-                        <td class="text-center" style= "white-space: normal ;">
-                            {{item.maGV?item.maGV.trim():''}}</td>
-                        <td class="text-center" style= "white-space: normal ;">
-                            {{item.hoTen?item.hoTen.trim():''}}</td>
-
-                    </tr>
-
-                    <tr *ngFor="let item of newArr(itemsPerPagePc-giangVienPhanCongDTOS?.length)">
-                        <td></td>
-                        <td class="text-center">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox"
-                                    >
-                                    <span class="form-check-sign">
-                                            <span class=""></span>
-                                          </span>
-                                </label>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+<p-dialog header="Kết quả chuẩn đoán" [(visible)]="displayModal" [modal]="true" [style]="{width: '60vw'}" [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false">
+    <nz-table #nzTable [nzData]="resultChuanDoan" nzTableLayout="fixed">
+        <thead>
+        <tr>
+            <th nzWidth="60px"></th>
+            <th>Tên bệnh</th>
+            <th>Tên bệnh chi tiết</th>
+            <th>Phần trăm mắc bệnh</th>
+            <th>Biểu đồ</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let data of nzTable.data">
+            <tr>
+                <td title="Chi tiết" [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"></td>
+                <td>{{ data.tenBenh }}</td>
+                <td>{{ data.tenBenhChiTiet }}</td>
+                <td>{{ data.phanTram + ' %' }}</td>
+                <td><p-chart type="pie" [data]="data.dataChart"></p-chart></td>
+            </tr>
+            <tr [nzExpand]="expandSet.has(data.id)">
+                <span style="font-weight: bold;">{{'+ Tên bệnh: ' }}</span>
+                <span>{{data.tenBenh }}</span>
+                <br>
+                <span style="font-weight: bold;">{{'+ Tên bệnh chi tiết: ' }}</span>
+                <span>{{ data.tenBenhChiTiet }}</span>
+                <br>
+                <span style="font-weight: bold;">{{'+ Số biểu hiện / tổng số: '  }}</span>
+                <span>{{ data.soBieuHienChon + ' / '+data.tongSoBieuHien }}</span>
+                <br>
+                <span style="font-weight: bold;">+ Danh sách biểu hiện mắc phải:</span>
+                <br>
+                <ng-container *ngFor="let i of data.listDanhSach">
+                    <span style="margin-left: 25px">{{ i }}</span>
+                    <br>
+                </ng-container>
 
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!-- end content-->
-    </div>
+            </tr>
+        </ng-container>
+        </tbody>
+    </nz-table>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-times" (click)="displayModal=false" label="Đóng"></p-button>
+    </ng-template>
+</p-dialog>
 
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="row">-->
-    <div class="row justify-content-end col-md-6 ml-auto mr-auto" style="height: 45px !important; margin-top: 0px">
-        <div class="col-md-6 ml-auto mr-auto">
-            <div class="form-group row">
-                <label class="col-sm-5 col-form-label pt-1 pr-0 text-right" for="itemsPerPage" >Tổng số</label>
-                <label class="col-sm-2 col-form-label total pt-1 pl-1 pr-0">{{totalItemsPc}}</label>
-                <div class="col-sm-5 pd-l-0">
-                    <select class="form-control form-control-sm pt-1 pb-1" name="itemsPerPage"
-                            id="itemsPerPagePc"
-                            [(ngModel)]="itemsPerPagePc"
-                            (ngModelChange)="selectedItemPerPagePc()">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="justify-content-end" style="padding-top: 8px; padding-right: 5px">
-            <ngb-pagination [size]="'sm'" [collectionSize]="totalItemsPc" [(page)]="pagePc" [pageSize]="itemsPerPagePc"
-                            [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
-                            (pageChange)="loadPageGVPc()"></ngb-pagination>
-        </div>
-    </div>
-    <div class="row">
-        <div class="input-group no-border col-md-3 ml-auto">
-            <button class="btn btn-success" (click)="savePhanCong()"> Lưu </button>
-            <button class="btn btn-success" (click)="closePopup()">Đóng</button>
-        </div>
-    </div>
 
-<!--    </div>-->
-
-</ng-template>

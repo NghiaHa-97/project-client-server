@@ -7,7 +7,7 @@ export const thongKeRoutes:Routes=[
         path:'',
         children:[
             {
-                path:'nhom-tuoi',
+                path:'tin-moi-nhat',
                 component:ThongKeComponent
 
             }

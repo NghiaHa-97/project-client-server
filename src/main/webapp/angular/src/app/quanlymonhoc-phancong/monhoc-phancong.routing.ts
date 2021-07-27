@@ -18,7 +18,7 @@ export const monHocPhanCongRuotes:Routes=[
                 resolve:{MonHoc:MonHocResolve}
             },
             {
-                path:'monhocphancong/monhoc/new',
+                path:'khoa-phoi-gioi-thieu',
                 component:MonHocUpdateComponent
             }
 

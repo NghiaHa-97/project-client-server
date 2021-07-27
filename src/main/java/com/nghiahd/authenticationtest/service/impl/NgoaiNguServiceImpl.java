@@ -1,45 +1,25 @@
 package com.nghiahd.authenticationtest.service.impl;
 
+import com.nghiahd.authenticationtest.domain.NgoaiNgu;
+import com.nghiahd.authenticationtest.repository.NgoaiNguRepository;
+import com.nghiahd.authenticationtest.service.NgoaiNguService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.nghiahd.authenticationtest.domain.NgoaiNgu;
-import com.nghiahd.authenticationtest.domain.QuaTrinhNgoaiNgu;
-import com.nghiahd.authenticationtest.repository.NgoaiNguRepository;
-import com.nghiahd.authenticationtest.repository.QuaTrinhNgoaiNguRepository;
-import com.nghiahd.authenticationtest.service.NgoaiNguService;
-
 @Service
+@Transactional
 public class NgoaiNguServiceImpl implements NgoaiNguService {
 
-	@Autowired
-	NgoaiNguRepository ngoaiNguRepository;
-	@Autowired
-	QuaTrinhNgoaiNguRepository quaTrinhNgoaiNguRepository; 
+    private final NgoaiNguRepository ngoaiNguRepository;
 
-	@Override
-	public List<NgoaiNgu> getAll() {
-		return ngoaiNguRepository.findAll();
-	}
+    public NgoaiNguServiceImpl(NgoaiNguRepository ngoaiNguRepository) {
+        this.ngoaiNguRepository = ngoaiNguRepository;
+    }
 
-	@Override
-	public List<QuaTrinhNgoaiNgu> getQTNNByGiangVienId(Integer giangVienId) {
-		// TODO Auto-generated method stub
-		return quaTrinhNgoaiNguRepository.findByGiangVienId(giangVienId);
-	}
-
-	@Override
-	public QuaTrinhNgoaiNgu getQTNN_NearestDayByGiangVienId(Integer giangvienId) {
-		// TODO Auto-generated method stub
-		return quaTrinhNgoaiNguRepository.getQTNN_NearestDayByGiangVienId(giangvienId);
-	}
-
-	@Override
-	public QuaTrinhNgoaiNgu saveQTNgoaiNgu(QuaTrinhNgoaiNgu qtnn) {
-		// TODO Auto-generated method stub
-		return quaTrinhNgoaiNguRepository.save(qtnn);
-	}
-	
+    @Override
+    public List<NgoaiNgu> getAllNN() {
+        return ngoaiNguRepository.grtAllNN();
+    }
 }

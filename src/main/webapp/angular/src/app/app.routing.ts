@@ -6,7 +6,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 export const AppRoutes: Routes = [
     {
       path: '',
-      redirectTo: 'pages/login',
+      redirectTo: 'home',
       pathMatch: 'full',
     },
     {
@@ -50,13 +50,26 @@ export const AppRoutes: Routes = [
               path: 'quanlynguoidung',
               loadChildren: './quanlynguoidung/quan-ly-nguoi-dung.module#QuanLyNguoiDungModule'
           },{
-              path: 'quanlygiangvien',
+              path: 'quanlybacsi',
               loadChildren: './quanlygiangvien/giangvien.module#GiangVienModule'
           },{
               path: 'qlmonhocphancong',
               loadChildren: './quanlymonhoc-phancong/monhocphancong.modul#MonhocphancongModul'
-          },{
+          },
+          {
+              path: 'gioi-thieu',
+              loadChildren: './quanlymonhoc-phancong/monhocphancong.modul#MonhocphancongModul'
+          },
+          {
               path: 'thongke',
+              loadChildren: './Thong-Ke/thong-ke.modul#ThongKeModul'
+          },{
+              path: 'thong-tin-bac-si',
+              loadChildren: './quanlygiangvien/giangvien.module#GiangVienModule'
+          }
+          ,
+          {
+              path: 'tin-tuc',
               loadChildren: './Thong-Ke/thong-ke.modul#ThongKeModul'
           }
   ]}, {

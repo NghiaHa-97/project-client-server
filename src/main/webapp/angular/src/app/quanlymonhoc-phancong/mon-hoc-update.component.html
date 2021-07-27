@@ -1,100 +1,246 @@
-<div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 ml-auto mr-auto">
-                <div class="card">
-                    <form [formGroup]="type" class="form-horizontal">
-                        <div class="card-header card-header-rose card-header-text">
-                            <div class="card-text">
-                                <h4 class="card-title">Thông tin môn học</h4>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <div class="row">
 
-                                        <label class="col-sm-4 col-form-label">Mã môn học</label>
+<header class="header">
+    <nav class="nav">
+        <ul class="nav__links">
+            <li class="nav__item">
+                <a class="nav__link" href="#section--1"></a>
+            </li>
+            <li class="nav__item">
+                <a class="nav__link" href="#section--2"></a>
+            </li>
+            <li class="nav__item">
+                <a class="nav__link" href="#section--3"></a>
+            </li>
+            <li class="nav__item">
+                <a class="nav__link " href="#"></a>
+            </li>
+        </ul>
+    </nav>
 
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width"
-                                                            [ngClass]="{'has-success':validTextType===true}">
-                                                <input
-                                                        type="text"
-                                                        matInput
-                                                        formControlName="maMonHoc"
-                                                        (ngModelChange)="textValidationType($event)">
-                                                <app-field-error-display [displayError]="isFieldValid(type, 'maMonHoc')" errorMsg="Bắt buộc nhập">
-                                                </app-field-error-display>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
+    <div class="header__title">
+        <!-- <h1 onclick="alert('HTML alert')"> -->
+        <h1>
+            Khoa
+            <!-- Green highlight effect -->
+            <span class="highlight">Hô hấp</span>
+        </h1>
+        <h4>Chất lượng – Niềm tin – Y đức</h4>
+        <button class="btn--text btn--scroll-to">***</button>
+        <div class="features__feature">
+            <p>Tại Việt Nam, vấn đề ô nhiễm môi trường là một trong những nguyên nhân làm gia tăng tỉ lệ mắc bệnh và nguy cơ tử vong đối với các bệnh lý hô hấp. Đặc biệt, nhóm bệnh không lây như hen suyễn, phổi tắc nghẽn mạn tính, ung thư phổi… chiếm tỉ lệ lớn ở mọi độ tuổi. Nhóm các bệnh hô hấp dễ lây như cảm cúm, lao, viêm phổi cộng đồng… lại có nhiều diễn biến phức tạp vì tình trạng vi khuẩn kháng thuốc đang hiện hành. Trước những thực trạng hiện tại, Khoa Hô hấp Bệnh viện Đại học Y Dược TPHCM (BV ĐHYD TPHCM) là một trong những địa chỉ khám, chữa bệnh hô hấp đáng tin cậy mang chất lượng đạt chuẩn.
+            </p>
+        </div>
 
-                                    <div class="row">
+        <img
+                src="assets/img/yte/337_PhanKhoaNoiHoHap.jpg"
+                class="header__img"
+                alt="Minimalist bank items"
+        />
+    </div>
+</header>
 
-                                        <label class="col-sm-4 col-form-label">Tên môn học</label>
+<section class="section" id="section--1">
+    <div class="section__title">
+        <h2 class="section__description">Hoạt động nổi bật</h2>
+    </div>
 
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width"
-                                                            [ngClass]="{'has-success':validTextType===true}">
-                                                <input
-                                                        type="text"
-                                                        matInput
-                                                        formControlName="tenMonHoc"
-                                                        (ngModelChange)="textValidationType($event)">
-                                                <app-field-error-display [displayError]="isFieldValid(type, 'tenMonHoc')" errorMsg="Bắt buộc nhập">
-                                                </app-field-error-display>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="row">
-                                        <label class="col-sm-4 col-form-label">Số tín chỉ</label>
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validNumberType===true}" [ngClass]="displayFieldCss(type, 'soTinChi')">
-                                                <input type="number" name="number" number="true"
-                                                       matInput
-                                                       (ngModelChange)="numberValidationType($event)"
-                                                       formControlName="soTinChi">
-                                                <app-field-error-display [displayError]="isFieldValid(type, 'soTinChi')" errorMsg="Thêm 1 số!">
-                                                </app-field-error-display>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <label class="col-sm-4 col-form-label">Số tiết giảng dậy</label>
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validNumberType===true}" [ngClass]="displayFieldCss(type, 'soTietGiangDay')">
-                                                <input type="number" name="number" number="true"
-                                                       matInput
-                                                       (ngModelChange)="numberValidationType($event)"
-                                                       formControlName="soTietGiangDay">
-                                                <app-field-error-display [displayError]="isFieldValid(type, 'soTietGiangDay')" errorMsg="Thêm 1 số!">
-                                                </app-field-error-display>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="card-footer col-md-3" style="padding-left: 15px">
-                                <button mat-raised-button class="btn btn-rose btn-fill" (click)="back()">Quay Lại</button>
-                            </div>
-                            <div class="card-footer text-right col-md-3 ml-auto">
-                                <button mat-raised-button type="submit" class="btn btn-rose btn-fill" (click)="onType()">Lưu</button>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
+    <div class="features">
+        <img
+                src="assets/img/yte/337_PhanKhoaNoiHoHap2_lazy.png"
+                data-src="assets/img/yte/337_PhanKhoaNoiHoHap2.jpg"
+                alt="Computer"
+                class="features__img lazy-img"
+        />
+        <div class="features__feature">
+            <div class="features__icon">
+                <svg>
+                    <use xlink:href="assets/img/yte/icons.svg#icon-monitor"></use>
+                </svg>
             </div>
+            <h5 class="features__header">Hoạt động điều trị</h5>
+            <p>
+                Khoa tiên phong sử dụng phương pháp điều trị ít xâm lấn, phối hợp đa mô thức để người bệnh được điều trị triệt để và phục hồi nhanh. Nhiều công trình nghiên cứu khoa học tại Khoa đã được thế giới công nhận vì có nhiều phát hiện đột phá góp phần mở thêm cánh cửa hy vọng cho người bệnh ung thư phổi ngày nay.
+                Với những cống hiến mạnh mẽ trong nền y học thế giới nói chung và y học Việt Nam nói riêng, Trưởng khoa PGS TS BS. Lê Tiến Dũng là Ủy viên Ban chấp hành Hội Hô Hấp Việt Nam, Phó chủ tịch của Hội Hô Hấp TPHCM, và là thành viên chủ chốt trong Mạng lưới giám sát mầm bệnh kháng thuốc Châu Á (ANSORP), Hội hô hấp Châu Á Thái Bình Dương (APSR), Hội hô hấp Châu Âu (ERS), cũng như Hội lồng ngực Hoa Kỳ (ATS).
+            </p>
+        </div>
+
+        <div class="features__feature">
+            <div class="features__icon">
+                <svg>
+                    <use xlink:href="assets/img/yte/icons.svg#icon-trending-up"></use>
+                </svg>
+            </div>
+            <h5 class="features__header">Hoạt động cộng đồng</h5>
+            <p>
+                Ngoài các hoạt động chuyên môn, Khoa còn tổ chức thêm các hoạt động giáo dục và chăm sóc sức khỏe cho cộng đồng như câu lạc bộ người bệnh, giúp đỡ người bệnh không chỉ về mặt thể chất mà còn về mặt tinh thần, hỗ trợ người bệnh cùng gia đình trong suốt thời gian nội trú tại Bệnh viện. Bên cạnh đó, Khoa tổ chức khám từ thiện cho người dân ở vùng sâu vùng xa, nhân rộng yêu thương đến người bệnh trên khắp miền đất nước.
+            </p>
+        </div>
+        <img
+                src="assets/img/yte/337_PhanKhoaNoiHoHap3_lazy.png"
+                data-src="assets/img/yte/337_PhanKhoaNoiHoHap3.jpg"
+                alt="Plant"
+                class="features__img lazy-img"
+        />
+
+        <img
+                src="assets/img/yte/337_PhanKhoaNoiHoHap1_lazy.png"
+                data-src="assets/img/yte/337_PhanKhoaNoiHoHap1.jpg"
+                alt="Credit card"
+                class="features__img lazy-img"
+        />
+        <div class="features__feature">
+            <div class="features__icon">
+                <svg>
+                    <use xlink:href="assets/img/yte/icons.svg#icon-credit-card"></use>
+                </svg>
+            </div>
+            <h5 class="features__header">Hoạt động đài tạo</h5>
+            <p>
+                Khoa rất chú trọng trong công tác đào tạo, nâng cao tay nghề cho đội ngũ thành viên nhằm xây dựng nền tảng phát triển bền vững. Bên cạnh đó, đội ngũ y bác sĩ tích cực tham gia viết sách giáo khoa, tài liệu giảng dạy, thực hiện các buổi hội thảo với các bệnh viện trong và ngoài nước để cập nhật và chia sẻ kiến thức. Trong tương lai, Khoa hướng đến mục tiêu chung của Bệnh viện là áp dụng các kỹ thuật chẩn đoán tiên tiến; điều trị ít xâm lấn. Đồng thời tập trung huấn luyện các kỹ năng thực hành trong chăm sóc người bệnh, đào tạo các chuyên đề về các ứng dụng trong thực tiễn lâm sàng, tổ chức các chương trình đào tạo y khoa liên tục về quản lý chất lượng chuyên môn điều trị và chăm sóc theo phương châm “Chất lượng – Niềm tin – Y Đức”.
+            </p>
         </div>
     </div>
-</div>
+</section>
+
+<section class="section" id="section--2">
+    <div class="section__title">
+        <h2 class="section__description">Chứng năng, nhiệm vụ, nghiên cứu khoa học</h2>
+    </div>
+
+    <div class="operations">
+        <div class="operations__tab-container">
+            <button class="btn operations__tab operations__tab--1 operations__tab--active"
+                    data-tab="1">
+                <span>01</span>Chức năng và nhiệm vụ
+            </button>
+            <button class="btn operations__tab operations__tab--2" data-tab="2">
+                <span>02</span>Hoạt động chuyên môn
+            </button>
+            <button class="btn operations__tab operations__tab--3" data-tab="3">
+                <span>03</span>Nghiên cứu khoa học, triển vọng phát triển
+            </button>
+        </div>
+        <div class="operations__content operations__content--1 operations__content--active">
+            <div class="operations__icon operations__icon--1">
+                <svg>
+                    <use xlink:href="assets/img/yte/icons.svg#icon-upload"></use>
+                </svg>
+            </div>
+            <p>- Thu dung, cấp cứu và điều trị các bệnh thuộc chuyên khoa lao và bệnh phổi cho các đối tượng là quân nhân, chính sách, BHYT và bệnh nhân nhân dân.</p>
+            <p>- Tham gia công tác đào tạo, nghiên cứu khoa học, hợp tác Quốc tế và chỉ đạo tuyến.</p>
+        </div>
+
+        <div class="operations__content operations__content--2">
+            <div class="operations__icon operations__icon--2">
+                <svg>
+                    <use xlink:href="assets/img/yte/icons.svg#icon-home"></use>
+                </svg>
+            </div>
+            <p>- Hiện tại khoa có 42 giường bệnh</p>
+            <p>- Đã triển khai soi màng phổi, soi phế quản thường quy để sinh thiết xuyên thành dưới hướng dẫn của màn huỳnh quang tăng sáng chẩn đoán mô bệnh tế bào ung thư phế quản ngoại vi có kích thước khối u nhỏ. Thở máy không xâm nhập và thở máy xâm nhập cho bệnh nhân COPD có suy hô hấp, từng bước chuẩn hóa các phác đồ chẩn đoán, điều trị ung thư phế quản theo từng giai đoạn bệnh và điều trị hóa chất cho u trung biểu mô màng phổi ác tính.</p>
+            <br>
+            <p>- Tham gia giảng dạy lý thuyết, hướng dẫn lâm sàng cho lớp BSCKI, BSCKII nội chung, hướng dẫn 2 NCS, 8 học viên cao học và các CKII đã bảo vệ thành công.
+            </p>
+            <p>- Liên tục tham gia báo cáo tại các Hội nghị Khoa học chuyên ngành phổi toàn quốc, Hội phổi Pháp Mỹ, Hội hô hấp Việt Nam, năm 2009 đạt giải 3 tại Hội thao kỹ thuật tuổi trẻ sáng tạo ngành Y tế Thủ đô.
+            </p>
+        </div>
+        <div class="operations__content operations__content--3">
+            <div class="operations__icon operations__icon--3">
+                <svg>
+                    <use xlink:href="assets/img/yte/icons.svg#icon-user-x"></use>
+                </svg>
+            </div>
+            <p>
+                - Liên tục tham gia báo cáo tại các hội nghị khoa học chuyên ngành phổi toàn quốc, Hội phổi Pháp – Việt, Hội hô hấp Việt Nam Hội lao và bệnh phổi Việt Nam, năm 2009 đạt giải 3 tại Hội thao kỹ thuật tuổi trẻ sáng tạo ngành Y tế Thủ đô.
+            </p>
+            <p>- Triển khao các kỹ thuật mới như nội soi màng phổi để tăng cường hiệu quả chẩn đoán các bệnh màng phổi, nội soi phế quản ống cứng can thiệp để tăng cượng hiệu quả điều trị của nội soi phế quản như cắt, đốt để giải phóng đường khí đạo, đặt stent, đặt van 1 chiều nội khí quản/ bệnh nhân COPD. Đẩy mạnh công tác đào tạo và nghiên cứu khoa học sát với tình hình thực tiễn, mang lại hiệu quả điều trị thiết thực cho công tác chẩn đoán và điều trị. Đã có quyết định của Bộ Giáo dục và Đào tạo thành lập Bộ môn Nội hô hấp đào tạo tiến sĩ chuyên ngành (17/02/2016)</p>
+        </div>
+    </div>
+</section>
+
+<!--<section class="section" id="section&#45;&#45;3">-->
+<!--    <div class="section__title section__title&#45;&#45;testimonials">-->
+<!--        <h2 class="section__description"></h2>-->
+<!--    </div>-->
+
+<!--    <div class="slider">-->
+<!--        <div class="slide">-->
+<!--            <div class="testimonial">-->
+<!--                <h5 class="testimonial__header">Best financial decision ever!</h5>-->
+<!--                <blockquote class="testimonial__text">-->
+<!--                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.-->
+<!--                    Accusantium quas quisquam non? Quas voluptate nulla minima-->
+<!--                    deleniti optio ullam nesciunt, numquam corporis et asperiores-->
+<!--                    laboriosam sunt, praesentium suscipit blanditiis. Necessitatibus-->
+<!--                    id alias reiciendis, perferendis facere pariatur dolore veniam-->
+<!--                    autem esse non voluptatem saepe provident nihil molestiae.-->
+<!--                </blockquote>-->
+<!--                <address class="testimonial__author">-->
+<!--                    <img src="assets/img/yte/user-1.jpg" alt="" class="testimonial__photo" />-->
+<!--                    <h6 class="testimonial__name">Aarav Lynn</h6>-->
+<!--                    <p class="testimonial__location">San Francisco, USA</p>-->
+<!--                </address>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="slide">-->
+<!--            <div class="testimonial">-->
+<!--                <h5 class="testimonial__header">-->
+<!--                    The last step to becoming a complete minimalist-->
+<!--                </h5>-->
+<!--                <blockquote class="testimonial__text">-->
+<!--                    Quisquam itaque deserunt ullam, quia ea repellendus provident,-->
+<!--                    ducimus neque ipsam modi voluptatibus doloremque, corrupti-->
+<!--                    laborum. Incidunt numquam perferendis veritatis neque repellendus.-->
+<!--                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo-->
+<!--                    deserunt exercitationem deleniti.-->
+<!--                </blockquote>-->
+<!--                <address class="testimonial__author">-->
+<!--                    <img src="assets/img/yte/user-2.jpg" alt="" class="testimonial__photo" />-->
+<!--                    <h6 class="testimonial__name">Miyah Miles</h6>-->
+<!--                    <p class="testimonial__location">London, UK</p>-->
+<!--                </address>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="slide">-->
+<!--            <div class="testimonial">-->
+<!--                <h5 class="testimonial__header">-->
+<!--                    Finally free from old-school banks-->
+<!--                </h5>-->
+<!--                <blockquote class="testimonial__text">-->
+<!--                    Debitis, nihil sit minus suscipit magni aperiam vel tenetur-->
+<!--                    incidunt commodi architecto numquam omnis nulla autem,-->
+<!--                    necessitatibus blanditiis modi similique quidem. Odio aliquam-->
+<!--                    culpa dicta beatae quod maiores ipsa minus consequatur error sunt,-->
+<!--                    deleniti saepe aliquid quos inventore sequi. Necessitatibus id-->
+<!--                    alias reiciendis, perferendis facere.-->
+<!--                </blockquote>-->
+<!--                <address class="testimonial__author">-->
+<!--                    <img src="assets/img/yte/user-3.jpg" alt="" class="testimonial__photo" />-->
+<!--                    <h6 class="testimonial__name">Francisco Gomes</h6>-->
+<!--                    <p class="testimonial__location">Lisbon, Portugal</p>-->
+<!--                </address>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <button class="slider__btn slider__btn&#45;&#45;left">&larr;</button>-->
+<!--        <button class="slider__btn slider__btn&#45;&#45;right">&rarr;</button>-->
+<!--        <div class="dots"></div>-->
+<!--    </div>-->
+<!--</section>-->
+
+<section class="section section--sign-up">
+    <div class="section__title">
+        <h3 class="section__description">Thông tin liên hệ:</h3>
+        <h3 class="section__description">* Khoa Hô hấp, lầu 13, khu A, BV– 215 Hồng Bàng, phường 11, quận 5, TPHCM</h3>
+        <h3 class="section__description">* Số điện thoại: (028) 3952 5851</h3>
+        <h3 class="section__description">* Email: hohap@umc.edu.vn</h3>
+        <h3 class="section__description">* Lịch khám bệnh: <button (click)="showModal2()" class="btn">Đặt lịch khám</button></h3>
+    </div>
+</section>
+
+<div class="overlay hidden"></div>
+
+<!-- <script src="script.js"></script> -->
+

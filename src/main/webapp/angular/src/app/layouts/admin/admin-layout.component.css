@@ -1,0 +1,56 @@
+/* The page is NOT responsive. You can implement responsiveness yourself if you wanna have some fun 😃 */
+
+::ng-deep  :root {
+    --color-primary: #5ec576;
+    --color-secondary: #ffcb03;
+    --color-tertiary: #ff585f;
+    --color-primary-darker: #4bbb7d;
+    --color-secondary-darker: #ffbb00;
+    --color-tertiary-darker: #fd424b;
+    --color-primary-opacity: #5ec5763a;
+    --color-secondary-opacity: #ffcd0331;
+    --color-tertiary-opacity: #ff58602d;
+    --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
+    --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
+}
+
+/* FOOTER */
+.footer {
+    padding: 10rem 3rem;
+    background-color: #37383d;
+}
+
+.footer__nav {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+}
+
+.footer__item {
+    margin-right: 4rem;
+}
+
+.footer__link {
+    font-size: 1.6rem;
+    color: #eee;
+    text-decoration: none;
+}
+
+.footer__logo {
+    height: 5rem;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 5rem;
+}
+
+.footer__copyright {
+    font-size: 1.4rem;
+    color: #aaa;
+    text-align: center;
+}
+
+.footer__copyright .footer__link {
+    font-size: 1.4rem;
+}
+

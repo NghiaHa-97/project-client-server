@@ -2,7 +2,7 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MdModule} from "../md/md.module";
-import {MaterialModule} from "../app.module";
+import {MaterialModule, NgZorroAntdModule, PrimeModule} from "../app.module";
 import {RouterModule} from "@angular/router";
 import {AlertModule} from "../shared/alert/alert.module";
 import {FieldErrorDisplayModule} from "../shared/field-error-display/field-error-display.module";
@@ -19,7 +19,9 @@ import {monHocPhanCongRuotes} from "./monhoc-phancong.routing";
         RouterModule.forChild(monHocPhanCongRuotes),
         AlertModule,
         FieldErrorDisplayModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        PrimeModule,
+        NgZorroAntdModule
     ],
     declarations:[
         MonHocUpdateComponent,

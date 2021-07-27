@@ -1,264 +1,553 @@
+<p-confirmPopup></p-confirmPopup>
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form [formGroup]="type" class="form-horizontal">
+                    <form [formGroup]="formBacSi" class="form-horizontal">
                         <div class="card-header card-header-rose card-header-text">
                             <div class="card-text">
-                                <h4 class="card-title">Thông tin giảng viên</h4>
+                                <h4 class="card-title">Thông tin bác sĩ</h4>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="row">
-
-                                        <label class="col-sm-4 col-form-label">Mã giảng viên</label>
-
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width"
-                                                            [ngClass]="{'has-success':validTextType===true}">
-                                                <input
-                                                        type="text"
-                                                        matInput
-                                                        formControlName="maGV"
-                                                        (ngModelChange)="textValidationType($event)">
-                                                <app-field-error-display [displayError]="isFieldValid(type, 'maGV')" errorMsg="Bắt buộc nhập">
-                                                </app-field-error-display>
-                                            </mat-form-field>
+                            <div class="p-grid">
+                                <div class="p-col-2" >
+                                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                        <div class="fileinput-new thumbnail">
+                                            <img *ngIf="bacSi.anh" src="assets/img/yte/{{bacSi.anh}}" alt="...">
+                                            <img *ngIf="!bacSi.anh" src="./assets/img/image_placeholder.jpg" alt="...">
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-sm-4 col-form-label">Học vị</label>
-
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width"
-                                                            [ngClass]="{'has-success':validTextType===true}">
-                                                <input
-                                                        type="text"
-                                                        matInput
-                                                        formControlName="hocVi"
-                                                        (ngModelChange)="textValidationType($event)">
-                                                <app-field-error-display [displayError]="isFieldValid(type, 'hocVi')" errorMsg="Bắt buộc nhập">
-                                                </app-field-error-display>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-sm-4 col-form-label">Chức vụ</label>
-
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width"
-                                                            [ngClass]="{'has-success':validTextType===true}">
-                                                <input
-                                                        type="text"
-                                                        matInput
-                                                        formControlName="chucVu"
-                                                        (ngModelChange)="textValidationType($event)">
-                                                <app-field-error-display [displayError]="isFieldValid(type, 'chucVu')" errorMsg="Bắt buộc nhập">
-                                                </app-field-error-display>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-sm-4 col-form-label">Dân tộc</label>
-
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width"
-                                                            [ngClass]="{'has-success':validTextType===true}">
-                                                <input
-                                                        type="text"
-                                                        matInput
-                                                        formControlName="danToc"
-                                                        (ngModelChange)="textValidationType($event)">
-                                                <app-field-error-display [displayError]="isFieldValid(type, 'danToc')" errorMsg="Bắt buộc nhập">
-                                                </app-field-error-display>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-sm-4 col-form-label">Điện thoại</label>
-
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'dienThoai')">
-                                                <input type="text"
-                                                       matInput
-                                                       (ngModelChange)="textValidationType($event)"
-                                                       formControlName="dienThoai">
-                                                <app-field-error-display [displayError]="isFieldValid(type, 'dienThoai')" errorMsg="Bắt buộc nhập">
-                                                </app-field-error-display>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-sm-4 col-form-label">Email</label>
-
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width" [ngClass]="{'has-success':validEmailType===true}">
-                                                <input
-                                                        type="email"
-                                                        matInput
-                                                        [errorStateMatcher]="matcher"
-                                                        (ngModelChange)="emailValidationType($event)"
-                                                        formControlName="email">
-<!--                                                <mat-error *ngIf=" !validEmailType && !emailFormControl.hasError('required')">-->
-<!--                                                    Vui lòng nhập một địa chỉ email hợp lệ-->
-<!--                                                </mat-error>-->
-                                                <mat-error *ngIf="emailFormControl.hasError('required')">
-                                                     <strong>Vui lòng nhập một địa chỉ email hợp lệ</strong>
-                                                </mat-error>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="row">
-                                        <label class="col-sm-2 col-form-label">Họ và tên</label>
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'hoTen')">
-                                                <input type="text"
-                                                       matInput
-                                                       id="hoTen"
-                                                       (ngModelChange)="textValidationType($event)"
-                                                       formControlName="hoTen">
-                                                <app-field-error-display [displayError]="isFieldValid(type, 'hoTen')" errorMsg="Bắt buộc nhập">
-                                                </app-field-error-display>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-
-                                        <label class="col-sm-2 col-form-label">Nơi Sinh</label>
-
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width" [ngClass]="{'has-success':validEmailType===true}">
-                                                <input
-                                                        type="text"
-                                                        matInput
-                                                        [errorStateMatcher]="matcher"
-                                                        (ngModelChange)="emailValidationType($event)"
-                                                        formControlName="noiSinh">
-                                                <app-field-error-display [displayError]="isFieldValid(type, 'queQuan')" errorMsg="Bắt buộc nhập">
-                                               </app-field-error-display>
-<!--                                                <mat-error *ngIf=" !validEmailType && !emailFormControl.hasError('required')">-->
-<!--                                                    Vui lòng nhập một địa chỉ email hợp lệ-->
-<!--                                                </mat-error>-->
-                                                <!-- <mat-error *ngIf="emailFormControl.hasError('required')">
-                                                     <strong>Vui lòng nhập một địa chỉ email hợp lệ</strong>
-                                                </mat-error> -->
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-sm-2 col-form-label">Quê Quán</label>
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'chucVu')">
-                                                <input type="text"
-                                                       matInput
-                                                       (ngModelChange)="textValidationType($event)"
-                                                       formControlName="queQuan">
-                                                <app-field-error-display [displayError]="isFieldValid(type, 'queQuan')" errorMsg="Bắt buộc nhập">
-                                                </app-field-error-display>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-                                    <!-- gioi tinh -->
-                                    <div class="row">
-                                        <label class="col-sm-2 col-form-label">Giới tính</label>
-                                        <div class="col-sm-7">
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input formControlName="gioiTinh"
-                                                           class="form-check-input"
-                                                           type="radio"
-                                                           name="gioiTinh"
-                                                           value="true" checked> Nam
-                                                    <span class="circle">
-                                                    <span class="check"></span>
-                                                  </span>
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input"
-                                                           type="radio"
-                                                           name="gioiTinh"
-                                                           value="false"
-                                                           formControlName="gioiTinh"> Nữ
-                                                    <span class="circle">
-                                                    <span class="check"></span>
-                                                  </span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--  ngay sinh -->
-                                    <div class="row">
-                                        <label class="col-sm-2 col-form-label">Ngày sinh</label>
-                                        <div class="col-sm-7">
-                                            <mat-form-field >
-                                                <input formControlName="ngaySinhDate"
-                                                       matInput [matDatepicker]="picker"
-                                                       placeholder="Chọn 1 ngày" (click)="picker.open()">
-                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                                <mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-sm-2 col-form-label">Địa chỉ</label>
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'diaChi')">
-                                                <input type="text"
-                                                       matInput
-                                                       (ngModelChange)="textValidationType($event)"
-                                                       formControlName="diaChi">
-                                                <app-field-error-display [displayError]="isFieldValid(type, 'diaChi')" errorMsg="Bắt buộc nhập">
-                                                </app-field-error-display>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-sm-2 col-form-label">Đơn vị công tác</label>
-                                        <div class="col-sm-7">
-                                            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'donViCongTac')">
-                                                <input type="text"
-                                                       matInput
-                                                       (ngModelChange)="textValidationType($event)"
-                                                       formControlName="donViCongTac">
-                                                <app-field-error-display [displayError]="isFieldValid(type, 'donViCongTac')" errorMsg="Bắt buộc nhập">
-                                                </app-field-error-display>
-                                            </mat-form-field>
+                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                        <div>
+                                        <span class="btn btn-rose btn-round btn-file">
+                                            <span class="fileinput-new">Thêm mới</span>
+                                            <span class="fileinput-exists">Sửa</span>
+                                            <input type="file" id="files" name="files"
+                                                   (change)="changeFileInput($event)">
+                                        </span>
+                                            <a class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="card-footer">
-                                <button mat-raised-button class="btn btn-rose btn-fill" (click)="back()">Quay Lại</button>
-                            </div>
-                            <div class="card-footer text-right col-md-3 ml-auto">
-                                <button mat-raised-button type="submit" class="btn btn-rose btn-fill" (click)="onType()">Lưu</button>
-                            </div>
-                        </div>
+                                <div class="p-col-9">
+                                    <div class="p-grid" >
+                                        <div class="p-col-6">
 
+                                            <label>Mã bác sĩ</label>
+                                            <br>
+                                            <input type="text" pInputText formControlName="maBS" style="width: 50%">
+                                            <p-message severity="error" text="Bắt buộc nhập"
+                                                       [@errorState]="isFieldValid(formBacSi,'maBS') ? 'visible' : 'hidden'"></p-message>
+
+                                        </div>
+                                        <div class="p-col-6">
+                                            <label>Họ tên</label>
+                                            <br>
+                                            <input type="text" pInputText formControlName="hoTen" style="width: 50%">
+                                            <p-message severity="error" text="Bắt buộc nhập"
+                                                       [@errorState]="isFieldValid(formBacSi,'hoTen') ? 'visible' : 'hidden'"></p-message>
+
+                                        </div>
+                                        <div class="p-col-6">
+                                            <label>Giói tính</label>
+                                            <br>
+                                            <p-radioButton name="gioiTinh" [value]="1" label="Nam" formControlName="gioiTinh" ></p-radioButton>
+                                            <p-radioButton name="gioiTinh" [value]="0" label="Nữ" formControlName="gioiTinh" ></p-radioButton>
+                                        </div>
+                                        <div class="p-col-6">
+                                            <label>Ngày sinh</label>
+                                            <br>
+                                            <p-calendar inputId="basic" styleClass="widthInput50"
+                                                        formControlName="ngaySinh"
+                                                        [dateFormat]="'dd/mm/yy'"></p-calendar>
+                                            <p-message severity="error" text="Bắt buộc nhập"
+                                                       [@errorState]="isFieldValid(formBacSi,'ngaySinh') ? 'visible' : 'hidden'"></p-message>
+                                        </div>
+                                        <div class="p-col-6">
+                                            <label>Học vị</label>
+                                            <br>
+                                            <input type="text" pInputText formControlName="hocVi" style="width: 50%">
+                                            <p-message severity="error" text="Bắt buộc nhập"
+                                                       [@errorState]="isFieldValid(formBacSi,'hocVi') ? 'visible' : 'hidden'"></p-message>
+                                        </div>
+                                        <div class="p-col-6">
+                                            <label>Đơn vị công tác</label>
+                                            <br>
+                                            <input type="text" pInputText formControlName="donViCongTac" style="width: 50%">
+                                            <p-message severity="error" text="Bắt buộc nhập"
+                                                       [@errorState]="isFieldValid(formBacSi,'donViCongTac') ? 'visible' : 'hidden'"></p-message>
+                                        </div>
+                                        <div class="p-col-6">
+                                            <label>Địa chỉ</label>
+                                            <br>
+                                            <textarea inputId="textarea" rows="3" cols="30"
+                                                      formControlName="diaChi"
+                                                      pInputTextarea
+                                                      style="width: 60%"></textarea>
+                                            <p-message severity="error" text="Bắt buộc nhập"
+                                                       [@errorState]="isFieldValid(formBacSi,'diaChi') ? 'visible' : 'hidden'"></p-message>
+                                        </div>
+                                        <div class="p-col-6">
+                                            <label>Số điện thoại</label>
+                                            <br>
+                                            <p-inputMask mask="9999 999 999"
+                                                         formControlName="dienThoai"></p-inputMask>
+                                            <p-message severity="error" text="Bắt buộc nhập"
+                                                       [@errorState]="isFieldValid(formBacSi,'dienThoai') ? 'visible' : 'hidden'"></p-message>
+                                        </div>
+                                        <div class="p-col-6">
+                                            <label>Email</label>
+                                            <br>
+                                            <input type="text" pInputText formControlName="email" style="width: 50%">
+                                            <p-message severity="error" text="Bắt buộc nhập"
+                                                       [@errorState]="isFieldValid(formBacSi,'email') ? 'visible' : 'hidden'"></p-message>
+                                        </div>
+                                        <div class="p-col-6">
+                                            <label>Khoa làm việc</label>
+                                            <br>
+                                            <p-dropdown [options]="khoas"
+                                                        styleClass="widthInput60"
+                                                        formControlName="khoaId"
+                                                        placeholder="Chọn khoa"
+                                                        optionLabel="tenKhoa"
+                                                        optionValue="id"
+                                                        [showClear]="true"></p-dropdown>
+                                            <p-message severity="error" text="Bắt buộc nhập"
+                                                       [@errorState]="isFieldValid(formBacSi,'khoaId') ? 'visible' : 'hidden'"></p-message>
+                                        </div>
+
+                                        <div class="p-col-12">
+                                            <label>Giới thiệu</label>
+                                            <br>
+
+                                            <textarea inputId="textarea" rows="3" cols="30"
+                                                      formControlName="gioiThieu"
+                                                      pInputTextarea
+                                                      style="width: 60%"></textarea>
+                                            <p-message severity="error" text="Bắt buộc nhập"
+                                                       [@errorState]="isFieldValid(formBacSi,'gioiThieu') ? 'visible' : 'hidden'"></p-message>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+<!--                            <div class="row">-->
+<!--                                <div class="col-md-4">-->
+
+<!--                                </div>-->
+<!--                                <div class="col-md-8">-->
+
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
                     </form>
+
+                    <p-table [value]="products"
+                             styleClass="p-datatable-gridlines p-datatable-sm"
+
+
+
+                             dataKey="key"
+                    >
+                        <ng-template pTemplate="colgroup" let-columns>
+                            <colgroup>
+                                <col style="width: 3rem">
+                                <col style="width:100%">
+                            </colgroup>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width: 3rem"></th>
+                                <th>Chi tiết</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-product
+                                     let-expanded="expanded">
+                            <tr>
+                                <td>
+                                    <button type="button" pButton pRipple [pRowToggler]="product"
+                                            class="p-button-text p-button-rounded p-button-plain"
+                                            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+                                    </button>
+                                </td>
+                                <td>
+                                    {{product.label}}
+                                </td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="rowexpansion" let-product>
+                            <tr>
+                                <!--                                <td></td>-->
+                                <td colspan="2">
+                                    <div  class="p-p-3">
+                                        <p-table [value]="product.key!=='3' ? product.childrenChungChiKinhNghiem : product.childrenNN "
+                                                 editMode="row"
+                                                 dataKey="id"
+                                                 >
+
+                        <ng-template pTemplate="header">
+                            <tr *ngIf="product.key !=='3'">
+                                <th style="width:4rem"> STT</th>
+                                <th >Từ ngày</th>
+                                <th >Đến ngày</th>
+                                <th>Nội dung</th>
+                                <th style="width:8rem"></th>
+
+                            </tr>
+                            <tr *ngIf="product.key ==='3'">
+                                <th style="width:4rem">STT</th>
+                                <th >Tên Ngoại ngữ</th>
+                                <th style="width:8rem"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template
+                                pTemplate="body"
+                                     let-order
+                                     let-editing="editing"
+                                     let-index="rowIndex">
+                            <tr [pEditableRow]="order" *ngIf="product.key !=='3'">
+                                <td style="width:4rem">{{index}}</td>
+                                <td pEditableColumn>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input" >
+                                            <ng-template [ngIf]="editing">
+                                                <p-calendar  styleClass="widthInput50 "
+                                                            [(ngModel)]="order.tuNgay"
+                                                            [dateFormat]="'dd/mm/yy'"
+                                                            [touchUI]="true"
+                                                             showButtonBar="true"
+                                                             [readonlyInput]="true"
+                                                             [monthNavigator]="true"
+                                                             [yearNavigator]="true"
+                                                             yearRange="1960:2030"
+                                                             inputId="touchui"></p-calendar>
+<!--                                                <input pInputText type="text"-->
+<!--                                                       [(ngModel)]="order.tuNgay">-->
+                                            </ng-template>
+                                            <ng-template [ngIf]="!editing">
+                                                {{order.tuNgay?.toString().includes('/') ?  order.tuNgay : (order.tuNgay | date: 'dd/MM/yyyy') }}
+                                            </ng-template>
+
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{order.tuNgay?.toString().includes('/') ? order.tuNgay : (order.tuNgay | date: 'dd/MM/yyyy')}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <td pEditableColumn>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input" >
+                                            <ng-template [ngIf]="editing">
+                                                <p-calendar  styleClass="widthInput50"
+                                                             [(ngModel)]="order.denNgay"
+                                                             [dateFormat]="'dd/mm/yy'"
+                                                             [touchUI]="true"
+                                                             showButtonBar="true"
+                                                             [readonlyInput]="true"
+                                                             [monthNavigator]="true"
+                                                             [yearNavigator]="true"
+                                                             yearRange="1960:2030"></p-calendar>
+<!--                                                <input pInputText type="text"-->
+<!--                                                       [(ngModel)]="order.denNgay">-->
+                                            </ng-template>
+                                            <ng-template [ngIf]="!editing">
+                                                {{order.denNgay?.toString().includes('/') ? order.denNgay :  order.denNgay | date: 'dd/MM/yyyy'}}
+                                            </ng-template>
+
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{order.denNgay?.toString().includes('/') ? order.denNgay :  order.denNgay | date: 'dd/MM/yyyy'}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <td pEditableColumn>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input" >
+                                            <ng-template [ngIf]="editing">
+                                                <textarea inputId="textarea" rows="3" cols="45"
+                                                          pInputTextarea
+                                                          [(ngModel)]="order.noiDung"
+                                                          style="width: 80%"></textarea>
+<!--                                                <input pInputText type="text">-->
+                                            </ng-template>
+                                            <ng-template [ngIf]="!editing">
+                                                {{order.noiDung}}
+                                            </ng-template>
+
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{order.noiDung}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <td style="text-align:center;width:8rem">
+                                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(order)" class="p-button-rounded p-button-text"></button>
+                                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(order)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(index,product.key)" class="p-button-rounded p-button-text p-button-danger"></button>
+                                </td>
+
+                            </tr>
+
+                            <!------------------------------------------------------------->
+                            <tr [pEditableRow]="order" *ngIf="product.key ==='3'">
+                                <td style="width:4rem">{{index}}</td>
+                                <td pEditableColumn>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input" >
+                                            <ng-template [ngIf]="editing">
+
+                                                <p-dropdown [options]="ngoaiNgus"
+                                                            styleClass="widthInput40"
+                                                            [(ngModel)]="order.ngoaiNguId"
+                                                            placeholder="Chọn Ngôn ngữ"
+                                                            optionLabel="tenNgoaiNgu"
+                                                            optionValue="id"
+                                                            [showClear]="true"></p-dropdown>
+
+<!--                                                <input pInputText type="text"-->
+<!--                                                       [(ngModel)]="order.tenNgoaiNgu">-->
+                                            </ng-template>
+                                            <ng-template [ngIf]="!editing">
+                                                {{getNameEnglish(order.ngoaiNguId)}}
+                                            </ng-template>
+
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{getNameEnglish(order.ngoaiNguId)}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <td style="text-align:center;width:8rem">
+                                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(order)" class="p-button-rounded p-button-text"></button>
+                                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(order)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(index,product.key )" class="p-button-rounded p-button-text p-button-danger"></button>
+                                </td>
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="summary">
+                            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" (onClick)="addNeweRow(product.key)"></p-button>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="5">Không có dữ liệu</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
                 </div>
+                </td>
+                </tr>
+                </ng-template>
+                </p-table>
+
+
+                    <!-------------------------------------------------------------------------------------------------->
+
+
+<!--                    <p-table [value]="products"-->
+<!--                             styleClass="p-datatable-gridlines p-datatable-sm"-->
+
+<!--                             [paginator]="true"-->
+<!--                             [rows]="10"-->
+<!--                             [showCurrentPageReport]="true"-->
+<!--                             currentPageReportTemplate="Hiển thị {first} to {last} of {totalRecords} entries"-->
+<!--                             [rowsPerPageOptions]="[10,25,50]"-->
+
+
+<!--                             [lazy]="true"-->
+<!--                             (onLazyLoad)="loadCustomers($event)"-->
+<!--                             [loading]="loading"-->
+
+
+<!--                             [scrollable]="true"-->
+<!--                             scrollHeight="200px"-->
+
+<!--                             dataKey="key"-->
+
+<!--                             editMode="row"-->
+
+<!--                    >-->
+<!--                        <ng-template pTemplate="colgroup" let-columns>-->
+<!--                            <colgroup>-->
+<!--                                <col style="width: 3rem">-->
+<!--                                <col style="width:250px">-->
+<!--                                <col style="width:250px">-->
+<!--                                <col style="width:250px">-->
+<!--                                <col style="width:250px">-->
+<!--                                <col style="width:8rem">-->
+<!--                            </colgroup>-->
+<!--                        </ng-template>-->
+<!--                        <ng-template pTemplate="header">-->
+<!--                            <tr>-->
+<!--                                <th style="width: 3rem"></th>-->
+<!--                                <th pSortableColumn="key">Key-->
+<!--                                    <p-sortIcon field="key"></p-sortIcon>-->
+<!--                                </th>-->
+<!--                                <th pSortableColumn="name">Name-->
+<!--                                    <p-sortIcon field="name"></p-sortIcon>-->
+<!--                                </th>-->
+<!--                                <th pSortableColumn="age">age-->
+<!--                                    <p-sortIcon field="age"></p-sortIcon>-->
+<!--                                </th>-->
+<!--                                <th pSortableColumn="address">address-->
+<!--                                    <p-sortIcon field="address"></p-sortIcon>-->
+<!--                                </th>-->
+<!--                                <th style="width:8rem"></th>-->
+<!--                            </tr>-->
+<!--                        </ng-template>-->
+<!--                        <ng-template pTemplate="body" let-product-->
+<!--                                     let-expanded="expanded"-->
+<!--                                     let-editing="editing" >-->
+<!--                            <tr [pEditableRow]="product" >-->
+<!--                                <td>-->
+<!--                                    <button type="button" pButton pRipple [pRowToggler]="product"-->
+<!--                                            class="p-button-text p-button-rounded p-button-plain"-->
+<!--                                            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>-->
+<!--                                </td>-->
+<!--                                <td pEditableColumn>-->
+<!--                                    <p-cellEditor>-->
+<!--                                        <ng-template pTemplate="input">-->
+<!--                                            <input pInputText type="text" [(ngModel)]="product.key">-->
+<!--                                        </ng-template>-->
+<!--                                        <ng-template pTemplate="output">-->
+<!--                                            {{product.key}}-->
+<!--                                        </ng-template>-->
+<!--                                    </p-cellEditor>-->
+<!--                                </td>-->
+<!--                                <td pEditableColumn>-->
+<!--                                    <p-cellEditor>-->
+<!--                                        <ng-template pTemplate="input">-->
+<!--                                            <input pInputText type="text" [(ngModel)]="product.name">-->
+<!--                                        </ng-template>-->
+<!--                                        <ng-template pTemplate="output">-->
+<!--                                            {{product.name}}-->
+<!--                                        </ng-template>-->
+<!--                                    </p-cellEditor>-->
+<!--                                </td>-->
+<!--                                <td pEditableColumn>-->
+<!--                                    <p-cellEditor>-->
+<!--                                        <ng-template pTemplate="input">-->
+<!--                                            <input pInputText type="text" [(ngModel)]="product.age">-->
+<!--                                        </ng-template>-->
+<!--                                        <ng-template pTemplate="output">-->
+<!--                                            {{product.age}}-->
+<!--                                        </ng-template>-->
+<!--                                    </p-cellEditor>-->
+<!--                                </td>-->
+<!--                                <td pEditableColumn>-->
+<!--                                    <p-cellEditor>-->
+<!--                                        <ng-template pTemplate="input" >-->
+<!--                                            <ng-template [ngIf]="editing">-->
+<!--                                                <input pInputText type="text"-->
+<!--                                                       [(ngModel)]="product.address">-->
+<!--                                            </ng-template>-->
+<!--                                            <ng-template [ngIf]="!editing">-->
+<!--                                                {{product.address}}-->
+<!--                                            </ng-template>-->
+
+<!--                                        </ng-template>-->
+<!--                                        <ng-template pTemplate="output">-->
+<!--                                            {{product.address}}-->
+<!--                                        </ng-template>-->
+<!--                                    </p-cellEditor>-->
+<!--                                </td>-->
+<!--                                <td style="text-align:center">-->
+<!--                                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>-->
+<!--                                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(product)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>-->
+<!--                                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(product, ri)" class="p-button-rounded p-button-text p-button-danger"></button>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </ng-template>-->
+
+<!--                        <ng-template pTemplate="rowexpansion" let-product>-->
+<!--                            <tr>-->
+<!--&lt;!&ndash;                                <td></td>&ndash;&gt;-->
+<!--                                <td colspan="5">-->
+<!--                                    <div  class="p-p-3">-->
+<!--                                        <p-table [value]="product.children" dataKey="key">-->
+<!--                                            <ng-template pTemplate="header">-->
+<!--                                                <tr>-->
+<!--                                                    <th pSortableColumn="key">key-->
+<!--                                                        <p-sortIcon field="key"></p-sortIcon>-->
+<!--                                                    </th>-->
+<!--                                                    <th pSortableColumn="name">name-->
+<!--                                                        <p-sortIcon field="name"></p-sortIcon>-->
+<!--                                                    </th>-->
+<!--                                                    <th pSortableColumn="age">age-->
+<!--                                                        <p-sortIcon field="age"></p-sortIcon>-->
+<!--                                                    </th>-->
+<!--                                                    <th pSortableColumn="address">address-->
+<!--                                                        <p-sortIcon field="address"></p-sortIcon>-->
+<!--                                                    </th>-->
+
+<!--                                                </tr>-->
+<!--                                            </ng-template>-->
+<!--                                            <ng-template pTemplate="body" let-order>-->
+<!--                                                <tr>-->
+<!--                                                    <td>{{order.key}}</td>-->
+<!--                                                    <td>{{order.name}}</td>-->
+<!--                                                    <td>{{order.age}}</td>-->
+<!--                                                    <td>{{order.address }}</td>-->
+
+<!--                                                </tr>-->
+<!--                                            </ng-template>-->
+<!--                                            <ng-template pTemplate="emptymessage">-->
+<!--                                                <tr>-->
+<!--                                                    <td colspan="6">There are no order for this product yet.</td>-->
+<!--                                                </tr>-->
+<!--                                            </ng-template>-->
+<!--                                        </p-table>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </ng-template>-->
+<!--                    </p-table>-->
+
+
+                                        <div class="row">
+                                            <div class="card-footer">
+                                                <button mat-raised-button class="btn btn-rose btn-fill" (click)="back()">Quay Lại</button>
+                                            </div>
+                                            <div class="card-footer text-right col-md-3 ml-auto">
+                                                <button mat-raised-button type="submit" class="btn btn-rose btn-fill" (click)="onSubmit($event)">Lưu</button>
+                                            </div>
+                                        </div>
+
+
             </div>
         </div>
     </div>
 </div>
+</div>
+
+
+<!--<div style="width: 100%">-->
+<!--    <p-table [value]="product.children" dataKey="key">-->
+<!--        <ng-template pTemplate="header">-->
+<!--            <tr>-->
+<!--                <th pSortableColumn="key">key <p-sortIcon field="key"></p-sortIcon></th>-->
+<!--                <th pSortableColumn="name">name <p-sortIcon field="name"></p-sortIcon></th>-->
+<!--                <th pSortableColumn="age">age <p-sortIcon field="age"></p-sortIcon></th>-->
+<!--                <th pSortableColumn="address">address <p-sortIcon field="address"></p-sortIcon></th>-->
+
+<!--            </tr>-->
+<!--        </ng-template>-->
+<!--        <ng-template pTemplate="body" let-order>-->
+<!--            <tr>-->
+<!--                <td>{{order.key}}</td>-->
+<!--                <td>{{order.name}}</td>-->
+<!--                <td>{{order.age}}</td>-->
+<!--                <td>{{order.address }}</td>-->
+
+<!--            </tr>-->
+<!--        </ng-template>-->
+<!--        <ng-template pTemplate="emptymessage">-->
+<!--            <tr>-->
+<!--                <td colspan="6">There are no order for this product yet.</td>-->
+<!--            </tr>-->
+<!--        </ng-template>-->
+<!--    </p-table>-->
+<!--</div>-->

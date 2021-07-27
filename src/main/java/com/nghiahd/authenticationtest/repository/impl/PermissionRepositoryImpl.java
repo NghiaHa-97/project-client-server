@@ -101,7 +101,7 @@ public class PermissionRepositoryImpl implements PermissionRepositoryCustom {
                 "                 pd.id permissionDetailId, " +
                 "                pd.Code permissionDetailCode, " +
                 "                 pd.Name permissionDetailName    " +
-                " FROM dbo.PermissionDetail pd LEFT JOIN dbo.Permission p ON p.id = pd.PermissionId ");
+                "  FROM  dbo.Permission p  LEFT JOIN  dbo.PermissionDetail pd  ON p.id = pd.PermissionId ");
         Query query = entityManager.createNativeQuery(sql.toString(), "PermissionDetailDTO");
 
         permissionDetailDTOS = query.getResultList();
