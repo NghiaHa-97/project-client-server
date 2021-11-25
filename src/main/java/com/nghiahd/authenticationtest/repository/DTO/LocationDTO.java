@@ -1,44 +1,24 @@
-package com.nghiahd.authenticationtest.domain;
+package com.nghiahd.authenticationtest.repository.DTO;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.math.BigDecimal;
-import java.util.UUID;
 
-@Entity
-@Table(name = "Location")
-public class Location {
+public class LocationDTO {
 
-    @Id
-    @Column(name = "Id")
-    private UUID id;
-
-    @Column(name = "TypeObjId")
     private int typeObjId;
-
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "Longitude")
     private BigDecimal longitude;
-
-    @Column(name = "Latitude")
     private BigDecimal latitude;
-
-    @Column(name = "Description")
     private String description;
 
-    public Location() {
+    public LocationDTO() {
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
+    public LocationDTO(int typeObjId, String name, BigDecimal longitude, BigDecimal latitude, String description) {
+        this.typeObjId = typeObjId;
+        this.name = name;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.description = description;
     }
 
     public int getTypeObjId() {
