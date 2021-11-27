@@ -37,41 +37,41 @@ export const ROUTES: RouteInfo[] = [
     //     type: 'link',
     //     icontype: 'dashboard'
     // },
-    {
-        path: '/quanlybacsi',
-        title: 'Quản lý bác sĩ',
-        type: 'sub',
-        icontype: 'dashboard',
-        collapse: 'quanlygiangvien',
-        children: [
-            {path: 'bacsi', title: 'Bác sĩ', ab:'BS'}
-            // {path: 'extended', title: 'Extended Tables', ab:'ET'},
-            // {path: 'datatables.net', title: 'Danh sách giảng viên', ab:'DT'}
-        ]
-    },
-    {
-        path: '/quanlynguoidung',
-        title: 'Quản lý người dùng',
-        type: 'sub',
-        collapse: 'quanlynguoidung',
-        icontype: 'dashboard',
-        children: [
-            {path: 'nguoidung', title: 'Người dùng', ab:'ND'},
-            {path: 'quyenhan', title: 'Quyền hạn', ab:'QH'}
-        ]
-    },
-    {
-        path: '/qlmonhocphancong',
-        title: 'Hệ chuyên gia',
-        type: 'sub',
-        icontype: 'apps',
-        collapse: 'monhocphancong',
-        children: [
-            {path: 'monhocphancong', title: 'Chẩn đoán bệnh', ab:'CD'}
-            // {path: 'extended', title: 'Extended Tables', ab:'ET'},
-            // {path: 'datatables.net', title: 'Danh sách giảng viên', ab:'DT'}
-        ]
-    }
+    // {
+    //     path: '/quanlybacsi',
+    //     title: 'Quản lý bác sĩ',
+    //     type: 'sub',
+    //     icontype: 'dashboard',
+    //     collapse: 'quanlygiangvien',
+    //     children: [
+    //         {path: 'bacsi', title: 'Bác sĩ', ab:'BS'}
+    //         // {path: 'extended', title: 'Extended Tables', ab:'ET'},
+    //         // {path: 'datatables.net', title: 'Danh sách giảng viên', ab:'DT'}
+    //     ]
+    // },
+    // {
+    //     path: '/quanlynguoidung',
+    //     title: 'Quản lý người dùng',
+    //     type: 'sub',
+    //     collapse: 'quanlynguoidung',
+    //     icontype: 'dashboard',
+    //     children: [
+    //         {path: 'nguoidung', title: 'Người dùng', ab:'ND'},
+    //         {path: 'quyenhan', title: 'Quyền hạn', ab:'QH'}
+    //     ]
+    // },
+    // {
+    //     path: '/qlmonhocphancong',
+    //     title: 'Hệ chuyên gia',
+    //     type: 'sub',
+    //     icontype: 'apps',
+    //     collapse: 'monhocphancong',
+    //     children: [
+    //         {path: 'monhocphancong', title: 'Chẩn đoán bệnh', ab:'CD'}
+    //         // {path: 'extended', title: 'Extended Tables', ab:'ET'},
+    //         // {path: 'datatables.net', title: 'Danh sách giảng viên', ab:'DT'}
+    //     ]
+    // }
     // ,{
     //     path: '/thongke/nhom-tuoi',
     //     title: 'Thống kê',

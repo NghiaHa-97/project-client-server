@@ -22,7 +22,6 @@ public class BacSiServiceImpl implements BacSiService {
         this.bacSiRepository = bacSiRepository;
     }
 
-
     @Override
     public List<BacSi> getAllBacSi() {
         return bacSiRepository.getAllBacSi();

@@ -1,8 +1,7 @@
 package com.nghiahd.authenticationtest.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+
 
 import javax.persistence.*;
 import java.util.List;

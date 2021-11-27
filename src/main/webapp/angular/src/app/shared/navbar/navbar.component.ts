@@ -119,96 +119,96 @@ export class NavbarComponent implements OnInit,OnDestroy {
                 styleClass:'font-menubar-ul',
                 routerLink:['/home']
             },
-            {
-                label:'Tìm bác sỹ',
-                styleClass:'font-menubar-ul',
-                icon:' pi pi-fw pi-search-plus',
-                routerLink:['/thong-tin-bac-si/danh-sach']
-
-            },
-            {
-                label:'Chuyên khoa',
-                styleClass:'font-menubar-ul',
-                icon:'pi pi-fw pi-user',
-                items:[
-                    // {
-                    //     label:'New',
-                    //     icon:'pi pi-fw pi-bars',
-                    //     styleClass:'font-menubar',
-                    //
-                    // },
-                    // {
-                    //     label:'Delete',
-                    //     icon:'pi pi-fw pi-bars',
-                    //     styleClass:'font-menubar',
-                    //
-                    // },
-                    // {
-                    //     label:'Search',
-                    //     icon:'pi pi-fw pi-bars',
-                    //     styleClass:'font-menubar',
-                    //     // items:[
-                    //     //     {
-                    //     //         label:'Filter',
-                    //     //         icon:'pi pi-fw pi-filter',
-                    //     //         items:[
-                    //     //             {
-                    //     //                 label:'Print',
-                    //     //                 icon:'pi pi-fw pi-print'
-                    //     //
-                    //     //             }
-                    //     //         ]
-                    //     //     },
-                    //     //     {
-                    //     //         icon:'pi pi-fw pi-bars',
-                    //     //         label:'List'
-                    //     //     }
-                    //     // ]
-                    // }
-                ]
-            },
-            {
-                label:'Sự kiện',
-                styleClass:'font-menubar-ul',
-                icon:'pi pi-fw pi-calendar',
-                // items:[
-                //     {
-                //         label:'Edit',
-                //         icon:'pi pi-fw pi-pencil',
-                //         styleClass:'font-menubar',
-                //         items:[
-                //             {
-                //                 label:'Save',
-                //                 icon:'pi pi-fw pi-calendar-plus'
-                //             },
-                //             {
-                //                 label:'Delete',
-                //                 icon:'pi pi-fw pi-calendar-minus'
-                //             },
-                //
-                //         ]
-                //     },
-                //     {
-                //         label:'Archieve',
-                //         icon:'pi pi-fw pi-calendar-times',
-                //         items:[
-                //             {
-                //                 label:'Remove',
-                //                 icon:'pi pi-fw pi-calendar-minus'
-                //             }
-                //         ]
-                //     }
-                // ]
-            },
-            {
-                label:'Đăng ký khám',
-                command:(event)=>{
-                    console.log(event);
-                    this.showModal2();
-                },
-                styleClass:'font-menubar-ul',
-                icon:'pi pi-fw pi-pencil'
-            }
+            // {
+            //     label:'Tìm bác sỹ',
+            //     styleClass:'font-menubar-ul',
+            //     icon:' pi pi-fw pi-search-plus',
+            //     routerLink:['/thong-tin-bac-si/danh-sach']
+            //
+            // },
+            // {
+            //     label:'Chuyên khoa',
+            //     styleClass:'font-menubar-ul',
+            //     icon:'pi pi-fw pi-user',
+            //     items:[
+            //         // {
+            //         //     label:'New',
+            //         //     icon:'pi pi-fw pi-bars',
+            //         //     styleClass:'font-menubar',
+            //         //
+            //         // },
+            //         // {
+            //         //     label:'Delete',
+            //         //     icon:'pi pi-fw pi-bars',
+            //         //     styleClass:'font-menubar',
+            //         //
+            //         // },
+            //         // {
+            //         //     label:'Search',
+            //         //     icon:'pi pi-fw pi-bars',
+            //         //     styleClass:'font-menubar',
+            //         //     // items:[
+            //         //     //     {
+            //         //     //         label:'Filter',
+            //         //     //         icon:'pi pi-fw pi-filter',
+            //         //     //         items:[
+            //         //     //             {
+            //         //     //                 label:'Print',
+            //         //     //                 icon:'pi pi-fw pi-print'
+            //         //     //
+            //         //     //             }
+            //         //     //         ]
+            //         //     //     },
+            //         //     //     {
+            //         //     //         icon:'pi pi-fw pi-bars',
+            //         //     //         label:'List'
+            //         //     //     }
+            //         //     // ]
+            //         // }
+            //     ]
+            // },
+            // {
+            //     label:'Sự kiện',
+            //     styleClass:'font-menubar-ul',
+            //     icon:'pi pi-fw pi-calendar',
+            //     // items:[
+            //     //     {
+            //     //         label:'Edit',
+            //     //         icon:'pi pi-fw pi-pencil',
+            //     //         styleClass:'font-menubar',
+            //     //         items:[
+            //     //             {
+            //     //                 label:'Save',
+            //     //                 icon:'pi pi-fw pi-calendar-plus'
+            //     //             },
+            //     //             {
+            //     //                 label:'Delete',
+            //     //                 icon:'pi pi-fw pi-calendar-minus'
+            //     //             },
+            //     //
+            //     //         ]
+            //     //     },
+            //     //     {
+            //     //         label:'Archieve',
+            //     //         icon:'pi pi-fw pi-calendar-times',
+            //     //         items:[
+            //     //             {
+            //     //                 label:'Remove',
+            //     //                 icon:'pi pi-fw pi-calendar-minus'
+            //     //             }
+            //     //         ]
+            //     //     }
+            //     // ]
+            // },
+            // {
+            //     label:'',
+            //     command:(event)=>{
+            //         console.log(event);
+            //         this.showModal2();
+            //     },
+            //     styleClass:'font-menubar-ul',
+            //     icon:'pi pi-fw pi-pencil'
+            // }
         ];
         this.dangKyKhamService.getAllKhoa().subscribe((resp)=>{
             this.khoas=resp.body;

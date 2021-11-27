@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Service
@@ -22,6 +23,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
+
 
     @Override
     public boolean checkUser(UserDTO userDTO) {

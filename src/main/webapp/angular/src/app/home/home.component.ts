@@ -1,110 +1,101 @@
-import {AfterViewInit, Component, OnInit} from "@angular/core";
-import {HomService} from "./hom.service";
-import {SanPhamDTO} from "../model/SanPhamDTO.model";
-import {ShoppingCart} from "../model/ShoppingCart.model";
-import {ToastrService} from "ngx-toastr";
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormControlName, FormGroup } from '@angular/forms';
+import { HomService } from './hom.service';
+import { SanPhamDTO } from '../model/SanPhamDTO.model';
+import { ShoppingCart } from '../model/ShoppingCart.model';
+import { ToastrService } from 'ngx-toastr';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+
+import 'leaflet';
+
+
+declare let L: any;
+const iconDefault = L.icon({
+  iconUrl: './marker-icon.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+});
+L.Marker.prototype.options.icon = iconDefault;
 
 @Component({
-    selector:'app-home',
-    templateUrl:'home.component.html',
-    styleUrls:['home.component.css']
+  selector: 'app-home',
+  templateUrl: 'home.component.html',
+  styleUrls: ['home.component.css']
 })
-export class HomeComponent implements OnInit,AfterViewInit{
-    // simpleSlider = 40;
-    // doubleSlider = [20, 60];
-    //
-    // regularItems = ['Pizza', 'Pasta', 'Parmesan'];
-    // touch: boolean;
-    //
-    // selectedValue: string;
-    shoppingCarts:ShoppingCart[]=[];
-    currentCity: string[];
+export class HomeComponent implements OnInit, AfterViewInit {
+  map: any;
+  currentCity: string[];
 
-    cities = [
-        {value: 'paris-0', viewValue: 'Paris'},
-        {value: 'miami-1', viewValue: 'Miami'},
-        {value: 'bucharest-2', viewValue: 'Bucharest'},
-        {value: 'new-york-3', viewValue: 'New York'},
-        {value: 'london-4', viewValue: 'London'},
-        {value: 'barcelona-5', viewValue: 'Barcelona'},
-        {value: 'moscow-6', viewValue: 'Moscow'},
-    ];
-    totalItems:number= 50;
-    itemsPerPage: number=10;
-    page: number=1;
-    sanPhamDTOs:SanPhamDTO[]=[];
-    search:string;
-    events1=[];
+  cities = [
+    { value: 'paris-0', viewValue: 'Paris' },
+    { value: 'miami-1', viewValue: 'Miami' },
+    { value: 'bucharest-2', viewValue: 'Bucharest' },
+    { value: 'new-york-3', viewValue: 'New York' },
+    { value: 'london-4', viewValue: 'London' },
+    { value: 'barcelona-5', viewValue: 'Barcelona' },
+    { value: 'moscow-6', viewValue: 'Moscow' }
+  ];
+
+  formSearch=this.fb.group({
+    search:""
+  });
+  formUpdate=this.fb.group({
+
+  })
 
 
-    constructor(private homeService:HomService,
-                private toastrService:ToastrService) {}
+  constructor(private homeService: HomService,
+              private toastrService: ToastrService,
+              private fb: FormBuilder) {
+  }
 
-    ngOnInit(): void {
-        // this.getPageSanPham(this.search);
-        this.events1 = [
-            {status: 'Ordered', date: '15/10/2020 10:30', color: '#9C27B0', image: 'game-controller.jpg'},
-            {status: 'Processing', date: '15/10/2020 14:00', color: '#673AB7'},
-            {status: 'Shipped', date: '15/10/2020 16:15', color: '#FF9800'},
-            {status: 'Delivered', date: '16/10/2020 10:00', color: '#607D8B'}
-        ];
-    }
+  ngOnInit(): void {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const { latitude, longitude } = pos.coords;
 
-    ngAfterViewInit() {
-
-    }
-
-    getPageSanPham(search?:string){
-        this.homeService.getPageSanPham({
-            page:this.page-1,
-            size:this.itemsPerPage,
-            sort:[['idsp','asc'],['tensanpham','asc']],
-            search:search?search:''
-        }).subscribe(resp=>{
-            this.totalItems=parseInt(resp.headers.get('X-Total-Count'), 10);
-            this.sanPhamDTOs=resp.body;
-            console.log(this.sanPhamDTOs);
-
-        })
-    }
-
-    selectedItemPerPage() {
-        this.getPageSanPham(this.search);
-    }
-
-    loadPage(page: any) {
-        this.getPageSanPham(this.search);
-    }
-
-    addShoppingCart(idSp: number) {
-        // const item=new ShoppingCart(idSp,1);
+      this.map = this.initMap(latitude, longitude);
+      this.markerMap(latitude, longitude, this.map);
+    });
+  }
 
 
-        if(sessionStorage.getItem('gio-hang')){
-            this.shoppingCarts=JSON.parse(sessionStorage.getItem('gio-hang'));
-            console.log(this.shoppingCarts);
-            let isExist=false;
-            this.shoppingCarts.forEach(x=>{
-                if(x.idSp===idSp){
-                    x.soLuong+=1;
-                    isExist=true;
-                }
-            });
+  initMap(latitude: number, longitude: number): any {
 
-            if(!isExist){
-                const item=new ShoppingCart(idSp,1);
-                this.shoppingCarts.push(item);
-            }
-            sessionStorage.setItem('gio-hang',JSON.stringify(this.shoppingCarts));
-            this.toastrService.success("Thêm vào giỏ hàng thành công")
+    const map = L.map('map').setView([latitude, longitude], 13);
 
-        }else{
-            const item=new ShoppingCart(idSp,1);
-            this.shoppingCarts.push(item);
-            sessionStorage.setItem('gio-hang',JSON.stringify(this.shoppingCarts));
-            console.log(sessionStorage.getItem('gio-hang'));
-            this.toastrService.success("Thêm vào giỏ hàng thành công");
-        }
-    }
+    const wmsLayer = L.tileLayer.wms('http://localhost:8081/geoserver/wms', {
+      service: 'WMS',
+      version: '1.1.0',
+      request: 'GetMap',
+      layers: ['osm-vn-1'],
+      transparent: true
+    });
+    map.addLayer(wmsLayer);
+    return map;
+  }
+
+  markerMap(lat: number, lng: number, map: any) {
+    L.marker([lat, lng])
+      .addTo(map)
+      .bindPopup(`vĩ độ : ${lat}| kinh độ : ${lng}`)
+      .openPopup();
+  }
+
+  formSearchSubmit(){
+
+  }
+
+  formUpdateSubmit(){
+
+  }
+
+  ngAfterViewInit() {
+
+  }
+
 
 }
